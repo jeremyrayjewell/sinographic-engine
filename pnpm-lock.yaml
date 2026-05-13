@@ -62,6 +62,9 @@ importers:
       '@sinographic-engine/shared-types':
         specifier: workspace:*
         version: link:../../packages/shared-types
+      '@sinographic-engine/speech-engine':
+        specifier: workspace:*
+        version: link:../../packages/speech-engine
       '@sinographic-engine/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -95,6 +98,8 @@ importers:
         version: link:../shared-types
 
   packages/shared-types: {}
+
+  packages/speech-engine: {}
 
   packages/ui:
     dependencies:
