@@ -1,0 +1,43 @@
+{
+  "id": "tong",
+  "hanzi": "筒",
+  "pinyin": {
+    "surface": "tǒng",
+    "bopomofo": "ㄊㄨㄥˇ"
+  },
+  "meanings": [
+    "classifier for cylindrical containers or tubes"
+  ],
+  "usage": "Used for rolled, tubular, or cylinder-contained items.",
+  "semanticTags": [
+    "cylinders",
+    "containers"
+  ],
+  "compatibleNouns": [
+    "衛生紙",
+    "海報",
+    "麵"
+  ],
+  "relatedClassifiers": [
+    "guan-tube",
+    "he"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 13,
+  "examples": [
+    {
+      "id": "tong-example-001",
+      "hanzi": "一筒衛生紙",
+      "pinyin": {
+        "surface": "yì tǒng wèishēngzhǐ",
+        "bopomofo": "ㄧˋ ㄊㄨㄥˇ ㄨㄟˋ ㄕㄥ ㄓˇ"
+      },
+      "english": "a roll of toilet paper"
+    }
+  ]
+}

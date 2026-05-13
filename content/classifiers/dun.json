@@ -1,0 +1,43 @@
+{
+  "id": "dun",
+  "hanzi": "頓",
+  "pinyin": {
+    "surface": "dùn",
+    "bopomofo": "ㄉㄨㄣˋ"
+  },
+  "meanings": [
+    "classifier for meals or blows"
+  ],
+  "usage": "Used for meals, scoldings, and strikes counted as bounded episodes.",
+  "semanticTags": [
+    "meals",
+    "events"
+  ],
+  "compatibleNouns": [
+    "飯",
+    "打",
+    "罵"
+  ],
+  "relatedClassifiers": [
+    "ci",
+    "chang"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 19,
+  "examples": [
+    {
+      "id": "dun-example-001",
+      "hanzi": "一頓飯",
+      "pinyin": {
+        "surface": "yí dùn fàn",
+        "bopomofo": "ㄧˊ ㄉㄨㄣˋ ㄈㄢˋ"
+      },
+      "english": "a meal"
+    }
+  ]
+}

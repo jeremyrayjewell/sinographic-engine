@@ -1,0 +1,43 @@
+{
+  "id": "nian",
+  "hanzi": "年",
+  "pinyin": {
+    "surface": "nián",
+    "bopomofo": "ㄋㄧㄢˊ"
+  },
+  "meanings": [
+    "classifier for years"
+  ],
+  "usage": "Used to count years in age, duration, and calendrical reference.",
+  "semanticTags": [
+    "time",
+    "calendar"
+  ],
+  "compatibleNouns": [
+    "時間",
+    "經驗",
+    "歷史"
+  ],
+  "relatedClassifiers": [
+    "tian",
+    "ci"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 1,
+  "taiwanFrequency": 77,
+  "examples": [
+    {
+      "id": "nian-example-001",
+      "hanzi": "兩年時間",
+      "pinyin": {
+        "surface": "liǎng nián shíjiān",
+        "bopomofo": "ㄌㄧㄤˇ ㄋㄧㄢˊ ㄕˊ ㄐㄧㄢ"
+      },
+      "english": "two years of time"
+    }
+  ]
+}

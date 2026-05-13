@@ -1,0 +1,56 @@
+{
+  "id": "ci",
+  "hanzi": "次",
+  "pinyin": {
+    "surface": "cì",
+    "bopomofo": "ㄘˋ"
+  },
+  "meanings": [
+    "classifier for occurrences",
+    "classifier for repeated events"
+  ],
+  "usage": "Used for repeated events, attempts, visits, or incidents counted by occurrence.",
+  "semanticTags": [
+    "events",
+    "occurrences",
+    "time"
+  ],
+  "compatibleNouns": [
+    "旅行",
+    "考試",
+    "會議",
+    "機會"
+  ],
+  "relatedClassifiers": [
+    "chang",
+    "jian-item"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 1,
+  "taiwanFrequency": 87,
+  "examples": [
+    {
+      "id": "ci-example-001",
+      "hanzi": "一次旅行",
+      "pinyin": {
+        "surface": "yí cì lǚxíng",
+        "underlying": "yī cì lǚxíng",
+        "bopomofo": "ㄧˊ ㄘˋ ㄌㄩˇ ㄒㄧㄥˊ"
+      },
+      "english": "one trip"
+    },
+    {
+      "id": "ci-example-002",
+      "hanzi": "兩次考試",
+      "pinyin": {
+        "surface": "liǎng cì kǎoshì",
+        "bopomofo": "ㄌㄧㄤˇ ㄘˋ ㄎㄠˇ ㄕˋ"
+      },
+      "english": "two exams"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "id": "zuo",
+  "hanzi": "座",
+  "pinyin": {
+    "surface": "zuò",
+    "bopomofo": "ㄗㄨㄛˋ"
+  },
+  "meanings": [
+    "classifier for large immovable objects"
+  ],
+  "usage": "Used for mountains, bridges, buildings, and other large fixed structures.",
+  "semanticTags": [
+    "structures",
+    "landforms"
+  ],
+  "compatibleNouns": [
+    "山",
+    "橋",
+    "寺廟"
+  ],
+  "relatedClassifiers": [
+    "jian-room",
+    "jia"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 2,
+  "taiwanFrequency": 43,
+  "examples": [
+    {
+      "id": "zuo-example-001",
+      "hanzi": "一座橋",
+      "pinyin": {
+        "surface": "yí zuò qiáo",
+        "bopomofo": "ㄧˊ ㄗㄨㄛˋ ㄑㄧㄠˊ"
+      },
+      "english": "a bridge"
+    }
+  ]
+}

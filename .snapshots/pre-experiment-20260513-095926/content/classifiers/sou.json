@@ -1,0 +1,43 @@
+{
+  "id": "sou",
+  "hanzi": "艘",
+  "pinyin": {
+    "surface": "sōu",
+    "bopomofo": "ㄙㄡ"
+  },
+  "meanings": [
+    "classifier for ships"
+  ],
+  "usage": "Used for boats, ships, and larger seafaring vessels.",
+  "semanticTags": [
+    "ships",
+    "transport"
+  ],
+  "compatibleNouns": [
+    "船",
+    "遊艇",
+    "軍艦"
+  ],
+  "relatedClassifiers": [
+    "liang",
+    "tai"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 15,
+  "examples": [
+    {
+      "id": "sou-example-001",
+      "hanzi": "一艘船",
+      "pinyin": {
+        "surface": "yì sōu chuán",
+        "bopomofo": "ㄧˋ ㄙㄡ ㄔㄨㄢˊ"
+      },
+      "english": "a boat"
+    }
+  ]
+}

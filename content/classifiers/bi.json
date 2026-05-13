@@ -1,0 +1,43 @@
+{
+  "id": "bi",
+  "hanzi": "筆",
+  "pinyin": {
+    "surface": "bǐ",
+    "bopomofo": "ㄅㄧˇ"
+  },
+  "meanings": [
+    "classifier for sums of money or transactions"
+  ],
+  "usage": "Used for sums of money, accounts, and transactions as separate entries.",
+  "semanticTags": [
+    "money",
+    "accounts"
+  ],
+  "compatibleNouns": [
+    "錢",
+    "交易",
+    "費用"
+  ],
+  "relatedClassifiers": [
+    "fen",
+    "kuai"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 23,
+  "examples": [
+    {
+      "id": "bi-example-001",
+      "hanzi": "一筆錢",
+      "pinyin": {
+        "surface": "yì bǐ qián",
+        "bopomofo": "ㄧˋ ㄅㄧˇ ㄑㄧㄢˊ"
+      },
+      "english": "a sum of money"
+    }
+  ]
+}

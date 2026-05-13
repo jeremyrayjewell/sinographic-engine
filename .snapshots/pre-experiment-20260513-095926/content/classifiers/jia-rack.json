@@ -1,0 +1,43 @@
+{
+  "id": "jia-rack",
+  "hanzi": "架",
+  "pinyin": {
+    "surface": "jià",
+    "bopomofo": "ㄐㄧㄚˋ"
+  },
+  "meanings": [
+    "classifier for machines or framed structures"
+  ],
+  "usage": "Used for aircraft, pianos, cameras, and things conceived as framed installations.",
+  "semanticTags": [
+    "machines",
+    "structures"
+  ],
+  "compatibleNouns": [
+    "飛機",
+    "鋼琴",
+    "相機"
+  ],
+  "relatedClassifiers": [
+    "tai",
+    "bu"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 20,
+  "examples": [
+    {
+      "id": "jia-rack-example-001",
+      "hanzi": "一架飛機",
+      "pinyin": {
+        "surface": "yí jià fēijī",
+        "bopomofo": "ㄧˊ ㄐㄧㄚˋ ㄈㄟ ㄐㄧ"
+      },
+      "english": "an airplane"
+    }
+  ]
+}

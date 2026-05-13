@@ -1,0 +1,43 @@
+{
+  "id": "yang",
+  "hanzi": "樣",
+  "pinyin": {
+    "surface": "yàng",
+    "bopomofo": "ㄧㄤˋ"
+  },
+  "meanings": [
+    "classifier for kinds and styles"
+  ],
+  "usage": "Used for kinds, styles, and outwardly differentiated forms.",
+  "semanticTags": [
+    "styles",
+    "types"
+  ],
+  "compatibleNouns": [
+    "東西",
+    "菜",
+    "顏色"
+  ],
+  "relatedClassifiers": [
+    "zhong",
+    "kuan"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 22,
+  "examples": [
+    {
+      "id": "yang-example-001",
+      "hanzi": "一樣東西",
+      "pinyin": {
+        "surface": "yí yàng dōngxi",
+        "bopomofo": "ㄧˊ ㄧㄤˋ ㄉㄨㄥ ˙ㄒㄧ"
+      },
+      "english": "one thing"
+    }
+  ]
+}

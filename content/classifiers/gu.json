@@ -1,0 +1,44 @@
+{
+  "id": "gu",
+  "hanzi": "股",
+  "pinyin": {
+    "surface": "gǔ",
+    "bopomofo": "ㄍㄨˇ"
+  },
+  "meanings": [
+    "classifier for streams, smells, or forces"
+  ],
+  "usage": "Used for currents, smells, and abstract forces moving like a stream.",
+  "semanticTags": [
+    "streams",
+    "smells",
+    "forces"
+  ],
+  "compatibleNouns": [
+    "味道",
+    "力量",
+    "風"
+  ],
+  "relatedClassifiers": [
+    "bo",
+    "di"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 13,
+  "examples": [
+    {
+      "id": "gu-example-001",
+      "hanzi": "一股味道",
+      "pinyin": {
+        "surface": "yì gǔ wèidào",
+        "bopomofo": "ㄧˋ ㄍㄨˇ ㄨㄟˋ ㄉㄠˋ"
+      },
+      "english": "a smell"
+    }
+  ]
+}

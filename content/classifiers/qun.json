@@ -1,0 +1,44 @@
+{
+  "id": "qun",
+  "hanzi": "群",
+  "pinyin": {
+    "surface": "qún",
+    "bopomofo": "ㄑㄩㄣˊ"
+  },
+  "meanings": [
+    "classifier for groups of people or animals"
+  ],
+  "usage": "Used for crowds, flocks, and groups acting collectively.",
+  "semanticTags": [
+    "groups",
+    "animals",
+    "people"
+  ],
+  "compatibleNouns": [
+    "人",
+    "羊",
+    "鳥"
+  ],
+  "relatedClassifiers": [
+    "tuan",
+    "zhi-animal"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 21,
+  "examples": [
+    {
+      "id": "qun-example-001",
+      "hanzi": "一群鳥",
+      "pinyin": {
+        "surface": "yì qún niǎo",
+        "bopomofo": "ㄧˋ ㄑㄩㄣˊ ㄋㄧㄠˇ"
+      },
+      "english": "a flock of birds"
+    }
+  ]
+}

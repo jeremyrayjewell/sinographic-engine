@@ -1,0 +1,43 @@
+{
+  "id": "ye",
+  "hanzi": "頁",
+  "pinyin": {
+    "surface": "yè",
+    "bopomofo": "ㄧㄝˋ"
+  },
+  "meanings": [
+    "classifier for pages"
+  ],
+  "usage": "Used for pages in books, websites, and bound materials.",
+  "semanticTags": [
+    "pages",
+    "books"
+  ],
+  "compatibleNouns": [
+    "書",
+    "資料",
+    "網站"
+  ],
+  "relatedClassifiers": [
+    "ben",
+    "zhang"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 2,
+  "taiwanFrequency": 25,
+  "examples": [
+    {
+      "id": "ye-example-001",
+      "hanzi": "一頁書",
+      "pinyin": {
+        "surface": "yí yè shū",
+        "bopomofo": "ㄧˊ ㄧㄝˋ ㄕㄨ"
+      },
+      "english": "a page of a book"
+    }
+  ]
+}

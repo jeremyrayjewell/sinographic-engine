@@ -1,0 +1,44 @@
+{
+  "id": "ban",
+  "hanzi": "班",
+  "pinyin": {
+    "surface": "bān",
+    "bopomofo": "ㄅㄢ"
+  },
+  "meanings": [
+    "classifier for scheduled services or shifts"
+  ],
+  "usage": "Used for classes, transport departures, and work shifts.",
+  "semanticTags": [
+    "schedules",
+    "transport",
+    "classes"
+  ],
+  "compatibleNouns": [
+    "公車",
+    "飛機",
+    "課"
+  ],
+  "relatedClassifiers": [
+    "tang",
+    "ci"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 2,
+  "taiwanFrequency": 30,
+  "examples": [
+    {
+      "id": "ban-example-001",
+      "hanzi": "一班公車",
+      "pinyin": {
+        "surface": "yì bān gōngchē",
+        "bopomofo": "ㄧˋ ㄅㄢ ㄍㄨㄥ ㄔㄜ"
+      },
+      "english": "a bus run"
+    }
+  ]
+}

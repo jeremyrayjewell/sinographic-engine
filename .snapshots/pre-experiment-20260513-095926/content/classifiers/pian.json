@@ -1,0 +1,43 @@
+{
+  "id": "pian",
+  "hanzi": "片",
+  "pinyin": {
+    "surface": "piàn",
+    "bopomofo": "ㄆㄧㄢˋ"
+  },
+  "meanings": [
+    "classifier for slices or flat pieces"
+  ],
+  "usage": "Used for slices, tablets, and flat fragments.",
+  "semanticTags": [
+    "slices",
+    "flat"
+  ],
+  "compatibleNouns": [
+    "麵包",
+    "葉子",
+    "藥"
+  ],
+  "relatedClassifiers": [
+    "zhang",
+    "kuai"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 2,
+  "taiwanFrequency": 49,
+  "examples": [
+    {
+      "id": "pian-example-001",
+      "hanzi": "一片麵包",
+      "pinyin": {
+        "surface": "yí piàn miànbāo",
+        "bopomofo": "ㄧˊ ㄆㄧㄢˋ ㄇㄧㄢˋ ㄅㄠ"
+      },
+      "english": "a slice of bread"
+    }
+  ]
+}

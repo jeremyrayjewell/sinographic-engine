@@ -1,0 +1,43 @@
+{
+  "id": "tuan",
+  "hanzi": "團",
+  "pinyin": {
+    "surface": "tuán",
+    "bopomofo": "ㄊㄨㄢˊ"
+  },
+  "meanings": [
+    "classifier for groups or masses"
+  ],
+  "usage": "Used for groups, clumps, and masses gathered into one unit.",
+  "semanticTags": [
+    "groups",
+    "masses"
+  ],
+  "compatibleNouns": [
+    "人",
+    "線",
+    "霧"
+  ],
+  "relatedClassifiers": [
+    "qun",
+    "dui"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 20,
+  "examples": [
+    {
+      "id": "tuan-example-001",
+      "hanzi": "一團人",
+      "pinyin": {
+        "surface": "yì tuán rén",
+        "bopomofo": "ㄧˋ ㄊㄨㄢˊ ㄖㄣˊ"
+      },
+      "english": "a cluster of people"
+    }
+  ]
+}

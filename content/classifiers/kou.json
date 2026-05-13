@@ -1,0 +1,45 @@
+{
+  "id": "kou",
+  "hanzi": "口",
+  "pinyin": {
+    "surface": "kǒu",
+    "bopomofo": "ㄎㄡˇ"
+  },
+  "meanings": [
+    "classifier for people in a household",
+    "classifier for mouths or bites"
+  ],
+  "usage": "Used for family members counted by household registration and for mouthfuls in some expressions.",
+  "semanticTags": [
+    "households",
+    "people",
+    "mouthfuls"
+  ],
+  "compatibleNouns": [
+    "人家",
+    "井",
+    "氣"
+  ],
+  "relatedClassifiers": [
+    "hu",
+    "jia"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 2,
+  "taiwanFrequency": 42,
+  "examples": [
+    {
+      "id": "kou-example-001",
+      "hanzi": "三口人",
+      "pinyin": {
+        "surface": "sān kǒu rén",
+        "bopomofo": "ㄙㄢ ㄎㄡˇ ㄖㄣˊ"
+      },
+      "english": "three family members"
+    }
+  ]
+}

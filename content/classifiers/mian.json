@@ -1,0 +1,43 @@
+{
+  "id": "mian",
+  "hanzi": "面",
+  "pinyin": {
+    "surface": "miàn",
+    "bopomofo": "ㄇㄧㄢˋ"
+  },
+  "meanings": [
+    "classifier for flat surfaces or sides"
+  ],
+  "usage": "Used for mirrors, flags, drums, and flat-faced or sided objects.",
+  "semanticTags": [
+    "surfaces",
+    "sides"
+  ],
+  "compatibleNouns": [
+    "鏡子",
+    "旗子",
+    "鼓"
+  ],
+  "relatedClassifiers": [
+    "zhang",
+    "fu"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 19,
+  "examples": [
+    {
+      "id": "mian-example-001",
+      "hanzi": "一面鏡子",
+      "pinyin": {
+        "surface": "yí miàn jìngzi",
+        "bopomofo": "ㄧˊ ㄇㄧㄢˋ ㄐㄧㄥˋ ˙ㄗ"
+      },
+      "english": "a mirror"
+    }
+  ]
+}

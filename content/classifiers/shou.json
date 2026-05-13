@@ -1,0 +1,43 @@
+{
+  "id": "shou",
+  "hanzi": "首",
+  "pinyin": {
+    "surface": "shǒu",
+    "bopomofo": "ㄕㄡˇ"
+  },
+  "meanings": [
+    "classifier for songs and poems"
+  ],
+  "usage": "Used for songs, poems, and lyric compositions.",
+  "semanticTags": [
+    "music",
+    "poetry"
+  ],
+  "compatibleNouns": [
+    "歌",
+    "詩",
+    "曲子"
+  ],
+  "relatedClassifiers": [
+    "pian-article",
+    "ju"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 2,
+  "taiwanFrequency": 24,
+  "examples": [
+    {
+      "id": "shou-example-001",
+      "hanzi": "一首歌",
+      "pinyin": {
+        "surface": "yì shǒu gē",
+        "bopomofo": "ㄧˋ ㄕㄡˇ ㄍㄜ"
+      },
+      "english": "a song"
+    }
+  ]
+}

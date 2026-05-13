@@ -1,0 +1,56 @@
+{
+  "id": "bei",
+  "hanzi": "杯",
+  "pinyin": {
+    "surface": "bēi",
+    "bopomofo": "ㄅㄟ"
+  },
+  "meanings": [
+    "classifier for cups",
+    "classifier for cupfuls"
+  ],
+  "usage": "Used for beverages served in cups or for the measure of one cupful.",
+  "semanticTags": [
+    "containers",
+    "drinks",
+    "measure"
+  ],
+  "compatibleNouns": [
+    "咖啡",
+    "水",
+    "茶",
+    "果汁"
+  ],
+  "relatedClassifiers": [
+    "wan",
+    "ping"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 1,
+  "taiwanFrequency": 64,
+  "examples": [
+    {
+      "id": "bei-example-001",
+      "hanzi": "一杯咖啡",
+      "pinyin": {
+        "surface": "yì bēi kāfēi",
+        "underlying": "yī bēi kāfēi",
+        "bopomofo": "ㄧˋ ㄅㄟ ㄎㄚ ㄈㄟ"
+      },
+      "english": "a cup of coffee"
+    },
+    {
+      "id": "bei-example-002",
+      "hanzi": "兩杯水",
+      "pinyin": {
+        "surface": "liǎng bēi shuǐ",
+        "bopomofo": "ㄌㄧㄤˇ ㄅㄟ ㄕㄨㄟˇ"
+      },
+      "english": "two glasses of water"
+    }
+  ]
+}

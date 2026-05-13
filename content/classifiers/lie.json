@@ -1,0 +1,43 @@
+{
+  "id": "lie",
+  "hanzi": "列",
+  "pinyin": {
+    "surface": "liè",
+    "bopomofo": "ㄌㄧㄝˋ"
+  },
+  "meanings": [
+    "classifier for lines or trains"
+  ],
+  "usage": "Used for ordered lines, columns, and trains in formal counting.",
+  "semanticTags": [
+    "lines",
+    "transport"
+  ],
+  "compatibleNouns": [
+    "火車",
+    "清單",
+    "隊伍"
+  ],
+  "relatedClassifiers": [
+    "pai",
+    "hang"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 17,
+  "examples": [
+    {
+      "id": "lie-example-001",
+      "hanzi": "一列火車",
+      "pinyin": {
+        "surface": "yí liè huǒchē",
+        "bopomofo": "ㄧˊ ㄌㄧㄝˋ ㄏㄨㄛˇ ㄔㄜ"
+      },
+      "english": "a train"
+    }
+  ]
+}

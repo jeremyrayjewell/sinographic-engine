@@ -1,0 +1,43 @@
+{
+  "id": "ke-small",
+  "hanzi": "顆",
+  "pinyin": {
+    "surface": "kē",
+    "bopomofo": "ㄎㄜ"
+  },
+  "meanings": [
+    "classifier for small round objects"
+  ],
+  "usage": "Used for pearls, teeth, stars, and other small round or bead-like objects.",
+  "semanticTags": [
+    "round",
+    "small"
+  ],
+  "compatibleNouns": [
+    "星星",
+    "牙齒",
+    "珍珠"
+  ],
+  "relatedClassifiers": [
+    "li",
+    "ke-plant"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 2,
+  "taiwanFrequency": 47,
+  "examples": [
+    {
+      "id": "ke-small-example-001",
+      "hanzi": "一顆星星",
+      "pinyin": {
+        "surface": "yì kē xīngxing",
+        "bopomofo": "ㄧˋ ㄎㄜ ㄒㄧㄥ ˙ㄒㄧㄥ"
+      },
+      "english": "a star"
+    }
+  ]
+}

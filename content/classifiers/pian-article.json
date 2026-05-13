@@ -1,0 +1,43 @@
+{
+  "id": "pian-article",
+  "hanzi": "篇",
+  "pinyin": {
+    "surface": "piān",
+    "bopomofo": "ㄆㄧㄢ"
+  },
+  "meanings": [
+    "classifier for written pieces"
+  ],
+  "usage": "Used for articles, essays, and longer written compositions.",
+  "semanticTags": [
+    "writing",
+    "texts"
+  ],
+  "compatibleNouns": [
+    "文章",
+    "報導",
+    "論文"
+  ],
+  "relatedClassifiers": [
+    "shou",
+    "ye"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 2,
+  "taiwanFrequency": 26,
+  "examples": [
+    {
+      "id": "pian-article-example-001",
+      "hanzi": "一篇文章",
+      "pinyin": {
+        "surface": "yì piān wénzhāng",
+        "bopomofo": "ㄧˋ ㄆㄧㄢ ㄨㄣˊ ㄓㄤ"
+      },
+      "english": "an article"
+    }
+  ]
+}

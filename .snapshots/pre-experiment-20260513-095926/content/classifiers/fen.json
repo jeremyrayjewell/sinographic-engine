@@ -1,0 +1,45 @@
+{
+  "id": "fen",
+  "hanzi": "份",
+  "pinyin": {
+    "surface": "fèn",
+    "bopomofo": "ㄈㄣˋ"
+  },
+  "meanings": [
+    "classifier for portions",
+    "classifier for documents or sets"
+  ],
+  "usage": "Used for portions, prepared meals, documents, and shares of something treated as a complete portion in Taiwan Mandarin.",
+  "semanticTags": [
+    "portions",
+    "documents",
+    "sets"
+  ],
+  "compatibleNouns": [
+    "早餐",
+    "報告",
+    "資料"
+  ],
+  "relatedClassifiers": [
+    "jian-item",
+    "zhong"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 1,
+  "taiwanFrequency": 63,
+  "examples": [
+    {
+      "id": "fen-example-001",
+      "hanzi": "一份早餐",
+      "pinyin": {
+        "surface": "yí fèn zǎocān",
+        "bopomofo": "ㄧˊ ㄈㄣˋ ㄗㄠˇ ㄘㄢ"
+      },
+      "english": "a breakfast set"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "id": "pai",
+  "hanzi": "排",
+  "pinyin": {
+    "surface": "pái",
+    "bopomofo": "ㄆㄞˊ"
+  },
+  "meanings": [
+    "classifier for rows"
+  ],
+  "usage": "Used for rows of seats, houses, or aligned units in a straight line.",
+  "semanticTags": [
+    "rows",
+    "alignment"
+  ],
+  "compatibleNouns": [
+    "椅子",
+    "房子",
+    "樹"
+  ],
+  "relatedClassifiers": [
+    "lie",
+    "hang"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 18,
+  "examples": [
+    {
+      "id": "pai-example-001",
+      "hanzi": "一排椅子",
+      "pinyin": {
+        "surface": "yì pái yǐzi",
+        "bopomofo": "ㄧˋ ㄆㄞˊ ㄧˇ ˙ㄗ"
+      },
+      "english": "a row of chairs"
+    }
+  ]
+}

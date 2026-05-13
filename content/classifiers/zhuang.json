@@ -1,0 +1,43 @@
+{
+  "id": "zhuang",
+  "hanzi": "樁",
+  "pinyin": {
+    "surface": "zhuāng",
+    "bopomofo": "ㄓㄨㄤ"
+  },
+  "meanings": [
+    "classifier for matters or cases"
+  ],
+  "usage": "Used for discrete incidents or matters, often in somewhat official or narrative style.",
+  "semanticTags": [
+    "cases",
+    "matters"
+  ],
+  "compatibleNouns": [
+    "生意",
+    "案件",
+    "事情"
+  ],
+  "relatedClassifiers": [
+    "jian-item",
+    "ci"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 9,
+  "examples": [
+    {
+      "id": "zhuang-example-001",
+      "hanzi": "一樁事情",
+      "pinyin": {
+        "surface": "yì zhuāng shìqing",
+        "bopomofo": "ㄧˋ ㄓㄨㄤ ㄕˋ ˙ㄑㄧㄥ"
+      },
+      "english": "a matter"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "id": "zhang",
+  "hanzi": "張",
+  "pinyin": {
+    "surface": "zhāng",
+    "bopomofo": "ㄓㄤ"
+  },
+  "meanings": [
+    "classifier for flat objects",
+    "classifier for sheets or surfaces"
+  ],
+  "usage": "Used for flat or surface-like things such as paper, tickets, tables, beds, and photographs.",
+  "semanticTags": [
+    "flat",
+    "paper",
+    "surfaces"
+  ],
+  "compatibleNouns": [
+    "票",
+    "照片",
+    "桌子",
+    "紙"
+  ],
+  "relatedClassifiers": [
+    "mian"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 1,
+  "taiwanFrequency": 83,
+  "examples": [
+    {
+      "id": "zhang-example-001",
+      "hanzi": "一張票",
+      "pinyin": {
+        "surface": "yì zhāng piào",
+        "underlying": "yī zhāng piào",
+        "bopomofo": "ㄧˋ ㄓㄤ ㄆㄧㄠˋ"
+      },
+      "english": "a ticket"
+    },
+    {
+      "id": "zhang-example-002",
+      "hanzi": "兩張照片",
+      "pinyin": {
+        "surface": "liǎng zhāng zhàopiàn",
+        "bopomofo": "ㄌㄧㄤˇ ㄓㄤ ㄓㄠˋ ㄆㄧㄢˋ"
+      },
+      "english": "two photos"
+    }
+  ]
+}

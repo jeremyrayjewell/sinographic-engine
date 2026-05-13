@@ -1,0 +1,44 @@
+{
+  "id": "zun",
+  "hanzi": "尊",
+  "pinyin": {
+    "surface": "zūn",
+    "bopomofo": "ㄗㄨㄣ"
+  },
+  "meanings": [
+    "classifier for statues or revered objects"
+  ],
+  "usage": "Used for statues, large bells, and objects accorded ceremonial respect.",
+  "semanticTags": [
+    "ceremonial",
+    "objects",
+    "statues"
+  ],
+  "compatibleNouns": [
+    "佛像",
+    "雕像",
+    "鐘"
+  ],
+  "relatedClassifiers": [
+    "zuo",
+    "ding"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 12,
+  "examples": [
+    {
+      "id": "zun-example-001",
+      "hanzi": "一尊佛像",
+      "pinyin": {
+        "surface": "yì zūn fóxiàng",
+        "bopomofo": "ㄧˋ ㄗㄨㄣ ㄈㄛˊ ㄒㄧㄤˋ"
+      },
+      "english": "a Buddha statue"
+    }
+  ]
+}

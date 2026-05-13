@@ -1,0 +1,55 @@
+{
+  "id": "ben",
+  "hanzi": "本",
+  "pinyin": {
+    "surface": "běn",
+    "bopomofo": "ㄅㄣˇ"
+  },
+  "meanings": [
+    "classifier for bound volumes",
+    "classifier for books"
+  ],
+  "usage": "Used for books, magazines, notebooks, dictionaries, and other bound printed materials.",
+  "semanticTags": [
+    "books",
+    "printed",
+    "bound"
+  ],
+  "compatibleNouns": [
+    "字典",
+    "雜誌",
+    "小說",
+    "課本"
+  ],
+  "relatedClassifiers": [
+    "ce"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 1,
+  "taiwanFrequency": 74,
+  "examples": [
+    {
+      "id": "ben-example-001",
+      "hanzi": "一本字典",
+      "pinyin": {
+        "surface": "yì běn zìdiǎn",
+        "underlying": "yī běn zìdiǎn",
+        "bopomofo": "ㄧˋ ㄅㄣˇ ㄗˋ ㄉㄧㄢˇ"
+      },
+      "english": "a dictionary"
+    },
+    {
+      "id": "ben-example-002",
+      "hanzi": "兩本雜誌",
+      "pinyin": {
+        "surface": "liǎng běn zázhì",
+        "bopomofo": "ㄌㄧㄤˇ ㄅㄣˇ ㄗㄚˊ ㄓˋ"
+      },
+      "english": "two magazines"
+    }
+  ]
+}

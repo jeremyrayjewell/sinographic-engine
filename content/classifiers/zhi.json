@@ -1,0 +1,45 @@
+{
+  "id": "zhi",
+  "hanzi": "支",
+  "pinyin": {
+    "surface": "zhī",
+    "bopomofo": "ㄓ"
+  },
+  "meanings": [
+    "classifier for long rigid objects",
+    "classifier for rods or writing instruments"
+  ],
+  "usage": "Used for pens, bottles, sticks, and long rigid objects counted as individual units.",
+  "semanticTags": [
+    "long",
+    "rigid",
+    "tools"
+  ],
+  "compatibleNouns": [
+    "筆",
+    "手機",
+    "蠟燭"
+  ],
+  "relatedClassifiers": [
+    "tiao",
+    "gen"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 1,
+  "taiwanFrequency": 60,
+  "examples": [
+    {
+      "id": "zhi-example-001",
+      "hanzi": "一支筆",
+      "pinyin": {
+        "surface": "yì zhī bǐ",
+        "bopomofo": "ㄧˋ ㄓ ㄅㄧˇ"
+      },
+      "english": "a pen"
+    }
+  ]
+}

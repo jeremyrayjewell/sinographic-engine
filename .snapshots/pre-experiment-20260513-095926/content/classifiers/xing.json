@@ -1,0 +1,44 @@
+{
+  "id": "xing",
+  "hanzi": "型",
+  "pinyin": {
+    "surface": "xíng",
+    "bopomofo": "ㄒㄧㄥˊ"
+  },
+  "meanings": [
+    "classifier for types or models"
+  ],
+  "usage": "Used for types and model classes, especially in technical or product contexts.",
+  "semanticTags": [
+    "models",
+    "types",
+    "technical"
+  ],
+  "compatibleNouns": [
+    "車",
+    "產品",
+    "設計"
+  ],
+  "relatedClassifiers": [
+    "kuan",
+    "zhong"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 15,
+  "examples": [
+    {
+      "id": "xing-example-001",
+      "hanzi": "一型產品",
+      "pinyin": {
+        "surface": "yì xíng chǎnpǐn",
+        "bopomofo": "ㄧˋ ㄒㄧㄥˊ ㄔㄢˇ ㄆㄧㄣˇ"
+      },
+      "english": "one product type"
+    }
+  ]
+}

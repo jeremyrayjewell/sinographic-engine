@@ -1,0 +1,44 @@
+{
+  "id": "ping",
+  "hanzi": "瓶",
+  "pinyin": {
+    "surface": "píng",
+    "bopomofo": "ㄆㄧㄥˊ"
+  },
+  "meanings": [
+    "classifier for bottles"
+  ],
+  "usage": "Used for bottled drinks, sauces, and other bottle containers.",
+  "semanticTags": [
+    "containers",
+    "bottles",
+    "drinks"
+  ],
+  "compatibleNouns": [
+    "水",
+    "牛奶",
+    "醬油"
+  ],
+  "relatedClassifiers": [
+    "guan-jar",
+    "bei"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 2,
+  "taiwanFrequency": 48,
+  "examples": [
+    {
+      "id": "ping-example-001",
+      "hanzi": "一瓶水",
+      "pinyin": {
+        "surface": "yì píng shuǐ",
+        "bopomofo": "ㄧˋ ㄆㄧㄥˊ ㄕㄨㄟˇ"
+      },
+      "english": "a bottle of water"
+    }
+  ]
+}

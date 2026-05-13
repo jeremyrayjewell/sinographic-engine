@@ -1,0 +1,56 @@
+{
+  "id": "bu",
+  "hanzi": "部",
+  "pinyin": {
+    "surface": "bù",
+    "bopomofo": "ㄅㄨˋ"
+  },
+  "meanings": [
+    "classifier for machines, works, or vehicles",
+    "classifier for complete media works"
+  ],
+  "usage": "Used for films, phones, machines, and vehicles when treated as complete units or productions.",
+  "semanticTags": [
+    "machines",
+    "media",
+    "vehicles"
+  ],
+  "compatibleNouns": [
+    "手機",
+    "電影",
+    "機器",
+    "電梯"
+  ],
+  "relatedClassifiers": [
+    "tai",
+    "liang"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 2,
+  "taiwanFrequency": 55,
+  "examples": [
+    {
+      "id": "bu-example-001",
+      "hanzi": "一部手機",
+      "pinyin": {
+        "surface": "yí bù shǒujī",
+        "underlying": "yī bù shǒujī",
+        "bopomofo": "ㄧˊ ㄅㄨˋ ㄕㄡˇ ㄐㄧ"
+      },
+      "english": "a mobile phone"
+    },
+    {
+      "id": "bu-example-002",
+      "hanzi": "這部電影",
+      "pinyin": {
+        "surface": "zhè bù diànyǐng",
+        "bopomofo": "ㄓㄜˋ ㄅㄨˋ ㄉㄧㄢˋ ㄧㄥˇ"
+      },
+      "english": "this film"
+    }
+  ]
+}

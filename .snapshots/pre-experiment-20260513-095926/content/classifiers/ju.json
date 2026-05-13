@@ -1,0 +1,43 @@
+{
+  "id": "ju",
+  "hanzi": "句",
+  "pinyin": {
+    "surface": "jù",
+    "bopomofo": "ㄐㄩˋ"
+  },
+  "meanings": [
+    "classifier for sentences or lines"
+  ],
+  "usage": "Used for utterances, sentences, and fixed lines of speech.",
+  "semanticTags": [
+    "sentences",
+    "speech"
+  ],
+  "compatibleNouns": [
+    "話",
+    "句子",
+    "台詞"
+  ],
+  "relatedClassifiers": [
+    "pian-article",
+    "hang"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 2,
+  "taiwanFrequency": 27,
+  "examples": [
+    {
+      "id": "ju-example-001",
+      "hanzi": "一句話",
+      "pinyin": {
+        "surface": "yí jù huà",
+        "bopomofo": "ㄧˊ ㄐㄩˋ ㄏㄨㄚˋ"
+      },
+      "english": "a sentence"
+    }
+  ]
+}

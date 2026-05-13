@@ -1,0 +1,43 @@
+{
+  "id": "fan",
+  "hanzi": "番",
+  "pinyin": {
+    "surface": "fān",
+    "bopomofo": "ㄈㄢ"
+  },
+  "meanings": [
+    "classifier for turns or rounds"
+  ],
+  "usage": "Used for rounds of argument, effort, or repeated cycles with a rhetorical flavor.",
+  "semanticTags": [
+    "rounds",
+    "cycles"
+  ],
+  "compatibleNouns": [
+    "努力",
+    "討論",
+    "功夫"
+  ],
+  "relatedClassifiers": [
+    "ci",
+    "hui"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 10,
+  "examples": [
+    {
+      "id": "fan-example-001",
+      "hanzi": "一番努力",
+      "pinyin": {
+        "surface": "yì fān nǔlì",
+        "bopomofo": "ㄧˋ ㄈㄢ ㄋㄨˇ ㄌㄧˋ"
+      },
+      "english": "a round of effort"
+    }
+  ]
+}

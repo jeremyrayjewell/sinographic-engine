@@ -1,0 +1,43 @@
+{
+  "id": "die",
+  "hanzi": "疊",
+  "pinyin": {
+    "surface": "dié",
+    "bopomofo": "ㄉㄧㄝˊ"
+  },
+  "meanings": [
+    "classifier for stacks"
+  ],
+  "usage": "Used for piles and stacked layers of thin items.",
+  "semanticTags": [
+    "stacks",
+    "layers"
+  ],
+  "compatibleNouns": [
+    "紙",
+    "衣服",
+    "盤子"
+  ],
+  "relatedClassifiers": [
+    "ceng",
+    "dui"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 14,
+  "examples": [
+    {
+      "id": "die-example-001",
+      "hanzi": "一疊紙",
+      "pinyin": {
+        "surface": "yì dié zhǐ",
+        "bopomofo": "ㄧˋ ㄉㄧㄝˊ ㄓˇ"
+      },
+      "english": "a stack of paper"
+    }
+  ]
+}

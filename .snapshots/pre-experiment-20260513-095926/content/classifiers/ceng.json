@@ -1,0 +1,43 @@
+{
+  "id": "ceng",
+  "hanzi": "層",
+  "pinyin": {
+    "surface": "céng",
+    "bopomofo": "ㄘㄥˊ"
+  },
+  "meanings": [
+    "classifier for layers and floors"
+  ],
+  "usage": "Used for layers, stories of a building, and level-like stratified units.",
+  "semanticTags": [
+    "layers",
+    "floors"
+  ],
+  "compatibleNouns": [
+    "樓",
+    "蛋糕",
+    "關係"
+  ],
+  "relatedClassifiers": [
+    "lou",
+    "zuo"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 2,
+  "taiwanFrequency": 32,
+  "examples": [
+    {
+      "id": "ceng-example-001",
+      "hanzi": "一層樓",
+      "pinyin": {
+        "surface": "yì céng lóu",
+        "bopomofo": "ㄧˋ ㄘㄥˊ ㄌㄡˊ"
+      },
+      "english": "one floor"
+    }
+  ]
+}

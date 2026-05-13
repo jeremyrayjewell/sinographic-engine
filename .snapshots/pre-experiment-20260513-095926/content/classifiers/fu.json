@@ -1,0 +1,43 @@
+{
+  "id": "fu",
+  "hanzi": "幅",
+  "pinyin": {
+    "surface": "fú",
+    "bopomofo": "ㄈㄨˊ"
+  },
+  "meanings": [
+    "classifier for flat works such as paintings"
+  ],
+  "usage": "Used for paintings, banners, and broad flat visual works.",
+  "semanticTags": [
+    "art",
+    "flat"
+  ],
+  "compatibleNouns": [
+    "畫",
+    "海報",
+    "地圖"
+  ],
+  "relatedClassifiers": [
+    "zhang",
+    "pi"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 19,
+  "examples": [
+    {
+      "id": "fu-example-001",
+      "hanzi": "一幅畫",
+      "pinyin": {
+        "surface": "yì fú huà",
+        "bopomofo": "ㄧˋ ㄈㄨˊ ㄏㄨㄚˋ"
+      },
+      "english": "a painting"
+    }
+  ]
+}

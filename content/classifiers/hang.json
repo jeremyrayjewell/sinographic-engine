@@ -1,0 +1,43 @@
+{
+  "id": "hang",
+  "hanzi": "行",
+  "pinyin": {
+    "surface": "háng",
+    "bopomofo": "ㄏㄤˊ"
+  },
+  "meanings": [
+    "classifier for rows"
+  ],
+  "usage": "Used for rows of text, seats, or aligned items.",
+  "semanticTags": [
+    "rows",
+    "alignment"
+  ],
+  "compatibleNouns": [
+    "字",
+    "椅子",
+    "樹"
+  ],
+  "relatedClassifiers": [
+    "lie",
+    "pai"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 2,
+  "taiwanFrequency": 22,
+  "examples": [
+    {
+      "id": "hang-example-001",
+      "hanzi": "一行字",
+      "pinyin": {
+        "surface": "yì háng zì",
+        "bopomofo": "ㄧˋ ㄏㄤˊ ㄗˋ"
+      },
+      "english": "a line of text"
+    }
+  ]
+}

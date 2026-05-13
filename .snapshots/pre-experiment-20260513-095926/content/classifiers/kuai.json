@@ -1,0 +1,45 @@
+{
+  "id": "kuai",
+  "hanzi": "塊",
+  "pinyin": {
+    "surface": "kuài",
+    "bopomofo": "ㄎㄨㄞˋ"
+  },
+  "meanings": [
+    "classifier for chunks or pieces",
+    "classifier for money in colloquial speech"
+  ],
+  "usage": "Used for chunks, lumps, and colloquial units of money in Taiwan Mandarin.",
+  "semanticTags": [
+    "pieces",
+    "money",
+    "chunks"
+  ],
+  "compatibleNouns": [
+    "蛋糕",
+    "豆腐",
+    "錢"
+  ],
+  "relatedClassifiers": [
+    "pian",
+    "ge"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 1,
+  "taiwanFrequency": 61,
+  "examples": [
+    {
+      "id": "kuai-example-001",
+      "hanzi": "一塊蛋糕",
+      "pinyin": {
+        "surface": "yí kuài dàngāo",
+        "bopomofo": "ㄧˊ ㄎㄨㄞˋ ㄉㄤˋ ㄠ"
+      },
+      "english": "a piece of cake"
+    }
+  ]
+}

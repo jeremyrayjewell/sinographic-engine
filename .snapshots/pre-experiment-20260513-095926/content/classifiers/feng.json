@@ -1,0 +1,43 @@
+{
+  "id": "feng",
+  "hanzi": "封",
+  "pinyin": {
+    "surface": "fēng",
+    "bopomofo": "ㄈㄥ"
+  },
+  "meanings": [
+    "classifier for letters"
+  ],
+  "usage": "Used for letters and sealed correspondence.",
+  "semanticTags": [
+    "letters",
+    "documents"
+  ],
+  "compatibleNouns": [
+    "信",
+    "郵件",
+    "邀請函"
+  ],
+  "relatedClassifiers": [
+    "fen",
+    "jian-item"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 2,
+  "taiwanFrequency": 38,
+  "examples": [
+    {
+      "id": "feng-example-001",
+      "hanzi": "一封信",
+      "pinyin": {
+        "surface": "yì fēng xìn",
+        "bopomofo": "ㄧˋ ㄈㄥ ㄒㄧㄣˋ"
+      },
+      "english": "a letter"
+    }
+  ]
+}

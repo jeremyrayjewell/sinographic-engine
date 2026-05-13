@@ -1,0 +1,43 @@
+{
+  "id": "fa",
+  "hanzi": "發",
+  "pinyin": {
+    "surface": "fā",
+    "bopomofo": "ㄈㄚ"
+  },
+  "meanings": [
+    "classifier for rounds of gunshots or artillery"
+  ],
+  "usage": "Used for shots, bullets, and some explosive discharges as counted releases.",
+  "semanticTags": [
+    "shots",
+    "bursts"
+  ],
+  "compatibleNouns": [
+    "子彈",
+    "炮彈",
+    "火箭"
+  ],
+  "relatedClassifiers": [
+    "ci",
+    "bo"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 8,
+  "examples": [
+    {
+      "id": "fa-example-001",
+      "hanzi": "一發子彈",
+      "pinyin": {
+        "surface": "yì fā zǐdàn",
+        "bopomofo": "ㄧˋ ㄈㄚ ㄗˇ ㄉㄢˋ"
+      },
+      "english": "a bullet shot"
+    }
+  ]
+}

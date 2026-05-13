@@ -1,0 +1,43 @@
+{
+  "id": "guan-tube",
+  "hanzi": "管",
+  "pinyin": {
+    "surface": "guǎn",
+    "bopomofo": "ㄍㄨㄢˇ"
+  },
+  "meanings": [
+    "classifier for tubes or slender cylindrical items"
+  ],
+  "usage": "Used for tubes, wind instruments, and long cylindrical units.",
+  "semanticTags": [
+    "tubes",
+    "instruments"
+  ],
+  "compatibleNouns": [
+    "牙膏",
+    "笛子",
+    "筆"
+  ],
+  "relatedClassifiers": [
+    "tong",
+    "zhi"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 18,
+  "examples": [
+    {
+      "id": "guan-tube-example-001",
+      "hanzi": "一管牙膏",
+      "pinyin": {
+        "surface": "yì guǎn yágāo",
+        "bopomofo": "ㄧˋ ㄍㄨㄢˇ ㄧㄚˊ ㄍㄠ"
+      },
+      "english": "a tube of toothpaste"
+    }
+  ]
+}

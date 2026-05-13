@@ -1,0 +1,56 @@
+{
+  "id": "tiao",
+  "hanzi": "條",
+  "pinyin": {
+    "surface": "tiáo",
+    "bopomofo": "ㄊㄧㄠˊ"
+  },
+  "meanings": [
+    "classifier for long flexible things",
+    "classifier for strip-like items"
+  ],
+  "usage": "Used for fish, rivers, pants, ropes, roads, and other long or strip-like items.",
+  "semanticTags": [
+    "long",
+    "flexible",
+    "animals"
+  ],
+  "compatibleNouns": [
+    "魚",
+    "褲子",
+    "河",
+    "路"
+  ],
+  "relatedClassifiers": [
+    "zhi",
+    "gen"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 2,
+  "taiwanFrequency": 67,
+  "examples": [
+    {
+      "id": "tiao-example-001",
+      "hanzi": "一條魚",
+      "pinyin": {
+        "surface": "yì tiáo yú",
+        "underlying": "yī tiáo yú",
+        "bopomofo": "ㄧˋ ㄊㄧㄠˊ ㄩˊ"
+      },
+      "english": "a fish"
+    },
+    {
+      "id": "tiao-example-002",
+      "hanzi": "兩條褲子",
+      "pinyin": {
+        "surface": "liǎng tiáo kùzi",
+        "bopomofo": "ㄌㄧㄤˇ ㄊㄧㄠˊ ㄎㄨˋ ˙ㄗ"
+      },
+      "english": "two pairs of pants"
+    }
+  ]
+}

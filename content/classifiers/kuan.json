@@ -1,0 +1,43 @@
+{
+  "id": "kuan",
+  "hanzi": "款",
+  "pinyin": {
+    "surface": "kuǎn",
+    "bopomofo": "ㄎㄨㄢˇ"
+  },
+  "meanings": [
+    "classifier for models or款式"
+  ],
+  "usage": "Used for product styles, payment sums, and itemized models in retail contexts.",
+  "semanticTags": [
+    "models",
+    "retail"
+  ],
+  "compatibleNouns": [
+    "手機",
+    "鞋子",
+    "包包"
+  ],
+  "relatedClassifiers": [
+    "yang",
+    "xing"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 17,
+  "examples": [
+    {
+      "id": "kuan-example-001",
+      "hanzi": "一款手機",
+      "pinyin": {
+        "surface": "yì kuǎn shǒujī",
+        "bopomofo": "ㄧˋ ㄎㄨㄢˇ ㄕㄡˇ ㄐㄧ"
+      },
+      "english": "a model of phone"
+    }
+  ]
+}

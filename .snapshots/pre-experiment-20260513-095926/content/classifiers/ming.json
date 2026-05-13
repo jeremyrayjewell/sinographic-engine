@@ -1,0 +1,43 @@
+{
+  "id": "ming",
+  "hanzi": "名",
+  "pinyin": {
+    "surface": "míng",
+    "bopomofo": "ㄇㄧㄥˊ"
+  },
+  "meanings": [
+    "classifier for people in formal counting"
+  ],
+  "usage": "Used in formal or administrative contexts to count people, staff, or participants.",
+  "semanticTags": [
+    "people",
+    "formal"
+  ],
+  "compatibleNouns": [
+    "學生",
+    "員工",
+    "旅客"
+  ],
+  "relatedClassifiers": [
+    "wei",
+    "ge"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 2,
+  "taiwanFrequency": 39,
+  "examples": [
+    {
+      "id": "ming-example-001",
+      "hanzi": "三名學生",
+      "pinyin": {
+        "surface": "sān míng xuéshēng",
+        "bopomofo": "ㄙㄢ ㄇㄧㄥˊ ㄒㄩㄝˊ ㄕㄥ"
+      },
+      "english": "three students"
+    }
+  ]
+}

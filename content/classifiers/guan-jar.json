@@ -1,0 +1,44 @@
+{
+  "id": "guan-jar",
+  "hanzi": "罐",
+  "pinyin": {
+    "surface": "guàn",
+    "bopomofo": "ㄍㄨㄢˋ"
+  },
+  "meanings": [
+    "classifier for cans and jars"
+  ],
+  "usage": "Used for canned drinks, jars, and lidded containers.",
+  "semanticTags": [
+    "containers",
+    "cans",
+    "jars"
+  ],
+  "compatibleNouns": [
+    "可樂",
+    "咖啡",
+    "醬"
+  ],
+  "relatedClassifiers": [
+    "ping",
+    "he"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 2,
+  "taiwanFrequency": 35,
+  "examples": [
+    {
+      "id": "guan-jar-example-001",
+      "hanzi": "一罐可樂",
+      "pinyin": {
+        "surface": "yí guàn kělè",
+        "bopomofo": "ㄧˊ ㄍㄨㄢˋ ㄎㄜˇ ㄌㄜˋ"
+      },
+      "english": "a can of cola"
+    }
+  ]
+}

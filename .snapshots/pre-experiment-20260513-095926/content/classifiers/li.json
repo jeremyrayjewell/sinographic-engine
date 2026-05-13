@@ -1,0 +1,44 @@
+{
+  "id": "li",
+  "hanzi": "粒",
+  "pinyin": {
+    "surface": "lì",
+    "bopomofo": "ㄌㄧˋ"
+  },
+  "meanings": [
+    "classifier for grains and tiny particles"
+  ],
+  "usage": "Used for grains, pills, beads, and very small discrete particles.",
+  "semanticTags": [
+    "tiny",
+    "particles",
+    "food"
+  ],
+  "compatibleNouns": [
+    "米",
+    "藥",
+    "珍珠"
+  ],
+  "relatedClassifiers": [
+    "ke-small",
+    "di"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 2,
+  "taiwanFrequency": 44,
+  "examples": [
+    {
+      "id": "li-example-001",
+      "hanzi": "一粒米",
+      "pinyin": {
+        "surface": "yí lì mǐ",
+        "bopomofo": "ㄧˊ ㄌㄧˋ ㄇㄧˇ"
+      },
+      "english": "a grain of rice"
+    }
+  ]
+}

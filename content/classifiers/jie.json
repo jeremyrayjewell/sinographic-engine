@@ -1,0 +1,43 @@
+{
+  "id": "jie",
+  "hanzi": "節",
+  "pinyin": {
+    "surface": "jié",
+    "bopomofo": "ㄐㄧㄝˊ"
+  },
+  "meanings": [
+    "classifier for segments or class periods"
+  ],
+  "usage": "Used for lessons, joints, sections, and segmented units.",
+  "semanticTags": [
+    "segments",
+    "classes"
+  ],
+  "compatibleNouns": [
+    "課",
+    "車廂",
+    "電池"
+  ],
+  "relatedClassifiers": [
+    "tang",
+    "duan"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 2,
+  "taiwanFrequency": 31,
+  "examples": [
+    {
+      "id": "jie-example-001",
+      "hanzi": "一節課",
+      "pinyin": {
+        "surface": "yì jié kè",
+        "bopomofo": "ㄧˋ ㄐㄧㄝˊ ㄎㄜˋ"
+      },
+      "english": "one lesson period"
+    }
+  ]
+}

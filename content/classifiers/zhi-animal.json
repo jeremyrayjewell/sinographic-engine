@@ -1,0 +1,43 @@
+{
+  "id": "zhi-animal",
+  "hanzi": "隻",
+  "pinyin": {
+    "surface": "zhī",
+    "bopomofo": "ㄓ"
+  },
+  "meanings": [
+    "classifier for animals and one of a pair"
+  ],
+  "usage": "Used for many animals and for one member of a naturally paired set.",
+  "semanticTags": [
+    "animals",
+    "single-from-pair"
+  ],
+  "compatibleNouns": [
+    "狗",
+    "鳥",
+    "手套"
+  ],
+  "relatedClassifiers": [
+    "zhi",
+    "shuang"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 2,
+  "taiwanFrequency": 57,
+  "examples": [
+    {
+      "id": "zhi-animal-example-001",
+      "hanzi": "一隻狗",
+      "pinyin": {
+        "surface": "yì zhī gǒu",
+        "bopomofo": "ㄧˋ ㄓ ㄍㄡˇ"
+      },
+      "english": "a dog"
+    }
+  ]
+}

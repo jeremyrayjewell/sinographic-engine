@@ -1,0 +1,43 @@
+{
+  "id": "pi-batch",
+  "hanzi": "批",
+  "pinyin": {
+    "surface": "pī",
+    "bopomofo": "ㄆㄧ"
+  },
+  "meanings": [
+    "classifier for batches"
+  ],
+  "usage": "Used for batches of goods, groups processed together, or waves of approvals.",
+  "semanticTags": [
+    "batches",
+    "goods"
+  ],
+  "compatibleNouns": [
+    "貨",
+    "文件",
+    "客人"
+  ],
+  "relatedClassifiers": [
+    "dui",
+    "fen"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 18,
+  "examples": [
+    {
+      "id": "pi-batch-example-001",
+      "hanzi": "一批貨",
+      "pinyin": {
+        "surface": "yì pī huò",
+        "bopomofo": "ㄧˋ ㄆㄧ ㄏㄨㄛˋ"
+      },
+      "english": "a batch of goods"
+    }
+  ]
+}

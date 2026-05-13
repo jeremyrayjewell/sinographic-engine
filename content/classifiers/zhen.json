@@ -1,0 +1,44 @@
+{
+  "id": "zhen",
+  "hanzi": "陣",
+  "pinyin": {
+    "surface": "zhèn",
+    "bopomofo": "ㄓㄣˋ"
+  },
+  "meanings": [
+    "classifier for bursts or spells"
+  ],
+  "usage": "Used for spells of weather, pain, laughter, or other wave-like episodes.",
+  "semanticTags": [
+    "bursts",
+    "weather",
+    "episodes"
+  ],
+  "compatibleNouns": [
+    "風",
+    "雨",
+    "笑聲"
+  ],
+  "relatedClassifiers": [
+    "bo",
+    "chang"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 18,
+  "examples": [
+    {
+      "id": "zhen-example-001",
+      "hanzi": "一陣風",
+      "pinyin": {
+        "surface": "yí zhèn fēng",
+        "bopomofo": "ㄧˊ ㄓㄣˋ ㄈㄥ"
+      },
+      "english": "a gust of wind"
+    }
+  ]
+}

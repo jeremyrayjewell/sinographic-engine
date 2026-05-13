@@ -1,0 +1,43 @@
+{
+  "id": "tou",
+  "hanzi": "頭",
+  "pinyin": {
+    "surface": "tóu",
+    "bopomofo": "ㄊㄡˊ"
+  },
+  "meanings": [
+    "classifier for large livestock"
+  ],
+  "usage": "Used for larger domesticated animals such as cows or pigs.",
+  "semanticTags": [
+    "animals",
+    "livestock"
+  ],
+  "compatibleNouns": [
+    "牛",
+    "豬",
+    "鹿"
+  ],
+  "relatedClassifiers": [
+    "zhi-animal",
+    "pi"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 2,
+  "taiwanFrequency": 21,
+  "examples": [
+    {
+      "id": "tou-example-001",
+      "hanzi": "一頭牛",
+      "pinyin": {
+        "surface": "yì tóu niú",
+        "bopomofo": "ㄧˋ ㄊㄡˊ ㄋㄧㄡˊ"
+      },
+      "english": "a cow"
+    }
+  ]
+}

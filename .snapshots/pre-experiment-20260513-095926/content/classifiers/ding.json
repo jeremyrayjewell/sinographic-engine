@@ -1,0 +1,43 @@
+{
+  "id": "ding",
+  "hanzi": "頂",
+  "pinyin": {
+    "surface": "dǐng",
+    "bopomofo": "ㄉㄧㄥˇ"
+  },
+  "meanings": [
+    "classifier for hats and top-mounted items"
+  ],
+  "usage": "Used for hats, sedan chairs, and things conceived from the top or cap.",
+  "semanticTags": [
+    "headwear",
+    "tops"
+  ],
+  "compatibleNouns": [
+    "帽子",
+    "帳篷",
+    "轎子"
+  ],
+  "relatedClassifiers": [
+    "zun",
+    "ba"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 16,
+  "examples": [
+    {
+      "id": "ding-example-001",
+      "hanzi": "一頂帽子",
+      "pinyin": {
+        "surface": "yì dǐng màozi",
+        "bopomofo": "ㄧˋ ㄉㄧㄥˇ ㄇㄠˋ ˙ㄗ"
+      },
+      "english": "a hat"
+    }
+  ]
+}

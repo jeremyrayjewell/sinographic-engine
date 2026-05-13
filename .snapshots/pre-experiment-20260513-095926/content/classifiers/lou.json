@@ -1,0 +1,43 @@
+{
+  "id": "lou",
+  "hanzi": "樓",
+  "pinyin": {
+    "surface": "lóu",
+    "bopomofo": "ㄌㄡˊ"
+  },
+  "meanings": [
+    "classifier for stories of a building in colloquial use"
+  ],
+  "usage": "Colloquially used for storeys and building levels, especially in addresses and directions.",
+  "semanticTags": [
+    "floors",
+    "buildings"
+  ],
+  "compatibleNouns": [
+    "房子",
+    "公寓",
+    "大樓"
+  ],
+  "relatedClassifiers": [
+    "ceng",
+    "jian-room"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 18,
+  "examples": [
+    {
+      "id": "lou-example-001",
+      "hanzi": "三樓",
+      "pinyin": {
+        "surface": "sān lóu",
+        "bopomofo": "ㄙㄢ ㄌㄡˊ"
+      },
+      "english": "the third floor"
+    }
+  ]
+}

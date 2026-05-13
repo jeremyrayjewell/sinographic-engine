@@ -1,0 +1,43 @@
+{
+  "id": "men",
+  "hanzi": "門",
+  "pinyin": {
+    "surface": "mén",
+    "bopomofo": "ㄇㄣˊ"
+  },
+  "meanings": [
+    "classifier for academic subjects or categories"
+  ],
+  "usage": "Used for school subjects, artillery pieces, and some classified categories.",
+  "semanticTags": [
+    "subjects",
+    "categories"
+  ],
+  "compatibleNouns": [
+    "課",
+    "語言",
+    "學問"
+  ],
+  "relatedClassifiers": [
+    "jie",
+    "zhong"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 2,
+  "taiwanFrequency": 29,
+  "examples": [
+    {
+      "id": "men-example-001",
+      "hanzi": "一門課",
+      "pinyin": {
+        "surface": "yì mén kè",
+        "bopomofo": "ㄧˋ ㄇㄣˊ ㄎㄜˋ"
+      },
+      "english": "a course"
+    }
+  ]
+}

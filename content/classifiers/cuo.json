@@ -1,0 +1,43 @@
+{
+  "id": "cuo",
+  "hanzi": "撮",
+  "pinyin": {
+    "surface": "cuō",
+    "bopomofo": "ㄘㄨㄛ"
+  },
+  "meanings": [
+    "classifier for pinches or tiny bunches"
+  ],
+  "usage": "Used for pinches of powder, herbs, or tiny gathered amounts.",
+  "semanticTags": [
+    "pinches",
+    "small amounts"
+  ],
+  "compatibleNouns": [
+    "鹽",
+    "茶葉",
+    "土"
+  ],
+  "relatedClassifiers": [
+    "chi",
+    "li"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 7,
+  "examples": [
+    {
+      "id": "cuo-example-001",
+      "hanzi": "一撮鹽",
+      "pinyin": {
+        "surface": "yì cuō yán",
+        "bopomofo": "ㄧˋ ㄘㄨㄛ ㄧㄢˊ"
+      },
+      "english": "a pinch of salt"
+    }
+  ]
+}

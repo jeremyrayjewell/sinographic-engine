@@ -1,0 +1,43 @@
+{
+  "id": "zhong",
+  "hanzi": "種",
+  "pinyin": {
+    "surface": "zhǒng",
+    "bopomofo": "ㄓㄨㄥˇ"
+  },
+  "meanings": [
+    "classifier for kinds or types"
+  ],
+  "usage": "Used for kinds, varieties, and taxonomic groupings.",
+  "semanticTags": [
+    "types",
+    "varieties"
+  ],
+  "compatibleNouns": [
+    "方法",
+    "水果",
+    "問題"
+  ],
+  "relatedClassifiers": [
+    "yang",
+    "kuan"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 2,
+  "taiwanFrequency": 54,
+  "examples": [
+    {
+      "id": "zhong-example-001",
+      "hanzi": "一種方法",
+      "pinyin": {
+        "surface": "yì zhǒng fāngfǎ",
+        "bopomofo": "ㄧˋ ㄓㄨㄥˇ ㄈㄤ ㄈㄚˇ"
+      },
+      "english": "a kind of method"
+    }
+  ]
+}

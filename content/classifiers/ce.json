@@ -1,0 +1,44 @@
+{
+  "id": "ce",
+  "hanzi": "冊",
+  "pinyin": {
+    "surface": "cè",
+    "bopomofo": "ㄘㄜˋ"
+  },
+  "meanings": [
+    "classifier for bound books or volumes in formal style"
+  ],
+  "usage": "A more formal or archival classifier for volumes, registers, and bound records.",
+  "semanticTags": [
+    "books",
+    "formal",
+    "archives"
+  ],
+  "compatibleNouns": [
+    "名冊",
+    "畫冊",
+    "手冊"
+  ],
+  "relatedClassifiers": [
+    "ben",
+    "ye"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 18,
+  "examples": [
+    {
+      "id": "ce-example-001",
+      "hanzi": "一冊畫冊",
+      "pinyin": {
+        "surface": "yí cè huàcè",
+        "bopomofo": "ㄧˊ ㄘㄜˋ ㄏㄨㄚˋ ㄘㄜˋ"
+      },
+      "english": "an art album"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "id": "hu",
+  "hanzi": "戶",
+  "pinyin": {
+    "surface": "hù",
+    "bopomofo": "ㄏㄨˋ"
+  },
+  "meanings": [
+    "classifier for households"
+  ],
+  "usage": "Used to count households, registered families, or business households.",
+  "semanticTags": [
+    "households",
+    "families"
+  ],
+  "compatibleNouns": [
+    "人家",
+    "住戶",
+    "商家"
+  ],
+  "relatedClassifiers": [
+    "kou",
+    "jia"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 2,
+  "taiwanFrequency": 28,
+  "examples": [
+    {
+      "id": "hu-example-001",
+      "hanzi": "一戶人家",
+      "pinyin": {
+        "surface": "yí hù rénjiā",
+        "bopomofo": "ㄧˊ ㄏㄨˋ ㄖㄣˊ ㄐㄧㄚ"
+      },
+      "english": "a household"
+    }
+  ]
+}

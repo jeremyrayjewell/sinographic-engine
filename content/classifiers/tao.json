@@ -1,0 +1,43 @@
+{
+  "id": "tao",
+  "hanzi": "套",
+  "pinyin": {
+    "surface": "tào",
+    "bopomofo": "ㄊㄠˋ"
+  },
+  "meanings": [
+    "classifier for sets"
+  ],
+  "usage": "Used for complete sets of clothes, furniture, or systems treated as matching units.",
+  "semanticTags": [
+    "sets",
+    "systems"
+  ],
+  "compatibleNouns": [
+    "衣服",
+    "家具",
+    "教材"
+  ],
+  "relatedClassifiers": [
+    "fen",
+    "jian-item"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 2,
+  "taiwanFrequency": 36,
+  "examples": [
+    {
+      "id": "tao-example-001",
+      "hanzi": "一套衣服",
+      "pinyin": {
+        "surface": "yí tào yīfú",
+        "bopomofo": "ㄧˊ ㄊㄠˋ ㄧ ㄈㄨˊ"
+      },
+      "english": "a set of clothes"
+    }
+  ]
+}

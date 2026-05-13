@@ -1,0 +1,43 @@
+{
+  "id": "bian",
+  "hanzi": "遍",
+  "pinyin": {
+    "surface": "biàn",
+    "bopomofo": "ㄅㄧㄢˋ"
+  },
+  "meanings": [
+    "classifier for complete repetitions"
+  ],
+  "usage": "Used when something is done through from beginning to end one full time.",
+  "semanticTags": [
+    "repetition",
+    "completion"
+  ],
+  "compatibleNouns": [
+    "課文",
+    "電影",
+    "歌"
+  ],
+  "relatedClassifiers": [
+    "ci",
+    "hui"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 20,
+  "examples": [
+    {
+      "id": "bian-example-001",
+      "hanzi": "看一遍",
+      "pinyin": {
+        "surface": "kàn yí biàn",
+        "bopomofo": "ㄎㄢˋ ㄧˊ ㄅㄧㄢˋ"
+      },
+      "english": "watch once all the way through"
+    }
+  ]
+}

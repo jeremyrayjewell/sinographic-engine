@@ -1,0 +1,56 @@
+{
+  "id": "wan",
+  "hanzi": "碗",
+  "pinyin": {
+    "surface": "wǎn",
+    "bopomofo": "ㄨㄢˇ"
+  },
+  "meanings": [
+    "classifier for bowls",
+    "classifier for bowlfuls"
+  ],
+  "usage": "Used for food or liquid served by the bowl and for the bowl container itself in counting contexts.",
+  "semanticTags": [
+    "containers",
+    "food",
+    "measure"
+  ],
+  "compatibleNouns": [
+    "麵",
+    "飯",
+    "湯",
+    "豆花"
+  ],
+  "relatedClassifiers": [
+    "bei",
+    "pan"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 1,
+  "taiwanFrequency": 58,
+  "examples": [
+    {
+      "id": "wan-example-001",
+      "hanzi": "一碗麵",
+      "pinyin": {
+        "surface": "yì wǎn miàn",
+        "underlying": "yī wǎn miàn",
+        "bopomofo": "ㄧˋ ㄨㄢˇ ㄇㄧㄢˋ"
+      },
+      "english": "a bowl of noodles"
+    },
+    {
+      "id": "wan-example-002",
+      "hanzi": "三碗飯",
+      "pinyin": {
+        "surface": "sān wǎn fàn",
+        "bopomofo": "ㄙㄢ ㄨㄢˇ ㄈㄢˋ"
+      },
+      "english": "three bowls of rice"
+    }
+  ]
+}

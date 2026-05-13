@@ -1,0 +1,44 @@
+{
+  "id": "tang",
+  "hanzi": "堂",
+  "pinyin": {
+    "surface": "táng",
+    "bopomofo": "ㄊㄤˊ"
+  },
+  "meanings": [
+    "classifier for classes or sessions"
+  ],
+  "usage": "Used for lessons, hearings, and formal sessions, especially class periods.",
+  "semanticTags": [
+    "classes",
+    "sessions",
+    "formal"
+  ],
+  "compatibleNouns": [
+    "課",
+    "會審",
+    "講座"
+  ],
+  "relatedClassifiers": [
+    "jie",
+    "chang"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 1,
+  "taiwanFrequency": 46,
+  "examples": [
+    {
+      "id": "tang-example-001",
+      "hanzi": "一堂課",
+      "pinyin": {
+        "surface": "yì táng kè",
+        "bopomofo": "ㄧˋ ㄊㄤˊ ㄎㄜˋ"
+      },
+      "english": "a class period"
+    }
+  ]
+}

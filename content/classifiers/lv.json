@@ -1,0 +1,43 @@
+{
+  "id": "lv",
+  "hanzi": "縷",
+  "pinyin": {
+    "surface": "lǚ",
+    "bopomofo": "ㄌㄩˇ"
+  },
+  "meanings": [
+    "classifier for wisps or strands"
+  ],
+  "usage": "Used for wisps of smoke, threads of scent, or delicate strand-like traces.",
+  "semanticTags": [
+    "strands",
+    "wisps"
+  ],
+  "compatibleNouns": [
+    "煙",
+    "香氣",
+    "頭髮"
+  ],
+  "relatedClassifiers": [
+    "gen",
+    "di"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 7,
+  "examples": [
+    {
+      "id": "lv-example-001",
+      "hanzi": "一縷煙",
+      "pinyin": {
+        "surface": "yì lǚ yān",
+        "bopomofo": "ㄧˋ ㄌㄩˇ ㄧㄢ"
+      },
+      "english": "a wisp of smoke"
+    }
+  ]
+}

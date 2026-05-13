@@ -1,0 +1,43 @@
+{
+  "id": "gen",
+  "hanzi": "根",
+  "pinyin": {
+    "surface": "gēn",
+    "bopomofo": "ㄍㄣ"
+  },
+  "meanings": [
+    "classifier for long thin rigid things"
+  ],
+  "usage": "Used for hairs, poles, banana stems, and elongated rigid items.",
+  "semanticTags": [
+    "long",
+    "rigid"
+  ],
+  "compatibleNouns": [
+    "頭髮",
+    "香蕉",
+    "電線桿"
+  ],
+  "relatedClassifiers": [
+    "zhi",
+    "tiao"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 22,
+  "examples": [
+    {
+      "id": "gen-example-001",
+      "hanzi": "一根香蕉",
+      "pinyin": {
+        "surface": "yì gēn xiāngjiāo",
+        "bopomofo": "ㄧˋ ㄍㄣ ㄒㄧㄤ ㄐㄧㄠ"
+      },
+      "english": "a banana"
+    }
+  ]
+}

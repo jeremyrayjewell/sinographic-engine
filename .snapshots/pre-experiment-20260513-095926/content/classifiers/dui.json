@@ -1,0 +1,43 @@
+{
+  "id": "dui",
+  "hanzi": "堆",
+  "pinyin": {
+    "surface": "duī",
+    "bopomofo": "ㄉㄨㄟ"
+  },
+  "meanings": [
+    "classifier for heaps or piles"
+  ],
+  "usage": "Used for piles of objects or abstract complaints presented as a heap.",
+  "semanticTags": [
+    "piles",
+    "heaps"
+  ],
+  "compatibleNouns": [
+    "衣服",
+    "書",
+    "問題"
+  ],
+  "relatedClassifiers": [
+    "die",
+    "tuan"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 13,
+  "examples": [
+    {
+      "id": "dui-example-001",
+      "hanzi": "一堆書",
+      "pinyin": {
+        "surface": "yì duī shū",
+        "bopomofo": "ㄧˋ ㄉㄨㄟ ㄕㄨ"
+      },
+      "english": "a pile of books"
+    }
+  ]
+}

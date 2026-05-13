@@ -1,0 +1,44 @@
+{
+  "id": "zhan",
+  "hanzi": "盞",
+  "pinyin": {
+    "surface": "zhǎn",
+    "bopomofo": "ㄓㄢˇ"
+  },
+  "meanings": [
+    "classifier for small lamps or cups"
+  ],
+  "usage": "Used for lamps, teacups, and some small vessel-like objects in literary or refined style.",
+  "semanticTags": [
+    "lamps",
+    "cups",
+    "literary"
+  ],
+  "compatibleNouns": [
+    "燈",
+    "茶",
+    "酒"
+  ],
+  "relatedClassifiers": [
+    "bei",
+    "wan"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 11,
+  "examples": [
+    {
+      "id": "zhan-example-001",
+      "hanzi": "一盞燈",
+      "pinyin": {
+        "surface": "yì zhǎn dēng",
+        "bopomofo": "ㄧˋ ㄓㄢˇ ㄉㄥ"
+      },
+      "english": "a lamp"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "id": "ze",
+  "hanzi": "則",
+  "pinyin": {
+    "surface": "zé",
+    "bopomofo": "ㄗㄜˊ"
+  },
+  "meanings": [
+    "classifier for news items or short written pieces"
+  ],
+  "usage": "Used for reports, notices, and discrete written items in media style.",
+  "semanticTags": [
+    "writing",
+    "media"
+  ],
+  "compatibleNouns": [
+    "新聞",
+    "故事",
+    "公告"
+  ],
+  "relatedClassifiers": [
+    "pian-article",
+    "ju"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 14,
+  "examples": [
+    {
+      "id": "ze-example-001",
+      "hanzi": "一則新聞",
+      "pinyin": {
+        "surface": "yì zé xīnwén",
+        "bopomofo": "ㄧˋ ㄗㄜˊ ㄒㄧㄣ ㄨㄣˊ"
+      },
+      "english": "a news item"
+    }
+  ]
+}

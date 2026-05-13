@@ -1,0 +1,43 @@
+{
+  "id": "ke-plant",
+  "hanzi": "棵",
+  "pinyin": {
+    "surface": "kē",
+    "bopomofo": "ㄎㄜ"
+  },
+  "meanings": [
+    "classifier for plants and trees"
+  ],
+  "usage": "Used for trees, shrubs, and plant-like rooted organisms counted as individuals.",
+  "semanticTags": [
+    "plants",
+    "trees"
+  ],
+  "compatibleNouns": [
+    "樹",
+    "草",
+    "花"
+  ],
+  "relatedClassifiers": [
+    "ke-small",
+    "gen"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 2,
+  "taiwanFrequency": 33,
+  "examples": [
+    {
+      "id": "ke-plant-example-001",
+      "hanzi": "一棵樹",
+      "pinyin": {
+        "surface": "yì kē shù",
+        "bopomofo": "ㄧˋ ㄎㄜ ㄕㄨˋ"
+      },
+      "english": "a tree"
+    }
+  ]
+}

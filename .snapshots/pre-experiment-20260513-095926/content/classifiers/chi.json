@@ -1,0 +1,43 @@
+{
+  "id": "chi",
+  "hanzi": "匙",
+  "pinyin": {
+    "surface": "chí",
+    "bopomofo": "ㄔˊ"
+  },
+  "meanings": [
+    "classifier for spoonfuls"
+  ],
+  "usage": "Used for spoonful measures of medicine, sugar, and food.",
+  "semanticTags": [
+    "measure",
+    "food"
+  ],
+  "compatibleNouns": [
+    "糖",
+    "藥",
+    "醬油"
+  ],
+  "relatedClassifiers": [
+    "bei",
+    "wan"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 11,
+  "examples": [
+    {
+      "id": "chi-example-001",
+      "hanzi": "一匙糖",
+      "pinyin": {
+        "surface": "yì chí táng",
+        "bopomofo": "ㄧˋ ㄔˊ ㄊㄤˊ"
+      },
+      "english": "a spoonful of sugar"
+    }
+  ]
+}

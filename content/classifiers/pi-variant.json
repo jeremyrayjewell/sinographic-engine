@@ -1,0 +1,43 @@
+{
+  "id": "pi-variant",
+  "hanzi": "疋",
+  "pinyin": {
+    "surface": "pǐ",
+    "bopomofo": "ㄆㄧˇ"
+  },
+  "meanings": [
+    "variant classifier for bolts of cloth"
+  ],
+  "usage": "Traditional variant form seen in older or specialized writing for cloth measure.",
+  "semanticTags": [
+    "cloth",
+    "variant"
+  ],
+  "compatibleNouns": [
+    "布",
+    "綢緞",
+    "布料"
+  ],
+  "relatedClassifiers": [
+    "pi",
+    "fu"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 8,
+  "examples": [
+    {
+      "id": "pi-variant-example-001",
+      "hanzi": "一疋布",
+      "pinyin": {
+        "surface": "yì pǐ bù",
+        "bopomofo": "ㄧˋ ㄆㄧˇ ㄅㄨˋ"
+      },
+      "english": "a bolt of cloth"
+    }
+  ]
+}

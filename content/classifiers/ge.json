@@ -1,0 +1,55 @@
+{
+  "id": "ge",
+  "hanzi": "個",
+  "pinyin": {
+    "surface": "gè",
+    "bopomofo": "ㄍㄜˋ"
+  },
+  "meanings": [
+    "general classifier",
+    "default classifier"
+  ],
+  "usage": "Default classifier for many people and everyday objects when no more specific classifier is preferred. In Taiwan Mandarin it is also common in speech as a fallback when a more semantically precise classifier is not selected.",
+  "semanticTags": [
+    "general",
+    "people",
+    "objects"
+  ],
+  "compatibleNouns": [
+    "學生",
+    "問題",
+    "人",
+    "蘋果"
+  ],
+  "relatedClassifiers": [
+    "wei"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 1,
+  "taiwanFrequency": 100,
+  "examples": [
+    {
+      "id": "ge-example-001",
+      "hanzi": "一個學生",
+      "pinyin": {
+        "surface": "yí gè xuéshēng",
+        "underlying": "yī gè xuéshēng",
+        "bopomofo": "ㄧˊ ㄍㄜˋ ㄒㄩㄝˊ ㄕㄥ"
+      },
+      "english": "a student"
+    },
+    {
+      "id": "ge-example-002",
+      "hanzi": "三個問題",
+      "pinyin": {
+        "surface": "sān gè wèntí",
+        "bopomofo": "ㄙㄢ ㄍㄜˋ ㄨㄣˋ ㄊㄧˊ"
+      },
+      "english": "three questions"
+    }
+  ]
+}

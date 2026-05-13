@@ -1,0 +1,43 @@
+{
+  "id": "bo",
+  "hanzi": "波",
+  "pinyin": {
+    "surface": "bō",
+    "bopomofo": "ㄅㄛ"
+  },
+  "meanings": [
+    "classifier for waves or surges"
+  ],
+  "usage": "Used for waves, trends, and surges arriving in a noticeable sequence.",
+  "semanticTags": [
+    "waves",
+    "surges"
+  ],
+  "compatibleNouns": [
+    "海浪",
+    "人潮",
+    "操作"
+  ],
+  "relatedClassifiers": [
+    "zhen",
+    "gu"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 14,
+  "examples": [
+    {
+      "id": "bo-example-001",
+      "hanzi": "一波人潮",
+      "pinyin": {
+        "surface": "yì bō réncháo",
+        "bopomofo": "ㄧˋ ㄅㄛ ㄖㄣˊ ㄔㄠˊ"
+      },
+      "english": "a wave of people"
+    }
+  ]
+}

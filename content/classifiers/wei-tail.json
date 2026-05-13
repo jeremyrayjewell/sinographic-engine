@@ -1,0 +1,43 @@
+{
+  "id": "wei-tail",
+  "hanzi": "尾",
+  "pinyin": {
+    "surface": "wěi",
+    "bopomofo": "ㄨㄟˇ"
+  },
+  "meanings": [
+    "classifier for fish"
+  ],
+  "usage": "Used especially for fish and some tail-bearing animals in counting.",
+  "semanticTags": [
+    "animals",
+    "fish"
+  ],
+  "compatibleNouns": [
+    "魚",
+    "金魚",
+    "鯨魚"
+  ],
+  "relatedClassifiers": [
+    "tiao",
+    "zhi-animal"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 10,
+  "examples": [
+    {
+      "id": "wei-tail-example-001",
+      "hanzi": "一尾魚",
+      "pinyin": {
+        "surface": "yì wěi yú",
+        "bopomofo": "ㄧˋ ㄨㄟˇ ㄩˊ"
+      },
+      "english": "a fish"
+    }
+  ]
+}

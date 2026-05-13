@@ -1,0 +1,43 @@
+{
+  "id": "pi",
+  "hanzi": "匹",
+  "pinyin": {
+    "surface": "pǐ",
+    "bopomofo": "ㄆㄧˇ"
+  },
+  "meanings": [
+    "classifier for horses and bolts of cloth"
+  ],
+  "usage": "Traditionally used for horses and, by extension, bolts of cloth.",
+  "semanticTags": [
+    "animals",
+    "cloth"
+  ],
+  "compatibleNouns": [
+    "馬",
+    "布",
+    "絲綢"
+  ],
+  "relatedClassifiers": [
+    "pi-variant",
+    "fu"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 17,
+  "examples": [
+    {
+      "id": "pi-example-001",
+      "hanzi": "一匹馬",
+      "pinyin": {
+        "surface": "yì pǐ mǎ",
+        "bopomofo": "ㄧˋ ㄆㄧˇ ㄇㄚˇ"
+      },
+      "english": "a horse"
+    }
+  ]
+}

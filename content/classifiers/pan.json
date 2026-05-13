@@ -1,0 +1,44 @@
+{
+  "id": "pan",
+  "hanzi": "盤",
+  "pinyin": {
+    "surface": "pán",
+    "bopomofo": "ㄆㄢˊ"
+  },
+  "meanings": [
+    "classifier for plates or dishes"
+  ],
+  "usage": "Used for plated dishes, trays, and rounds of a game or activity in some contexts.",
+  "semanticTags": [
+    "containers",
+    "food",
+    "servings"
+  ],
+  "compatibleNouns": [
+    "水果",
+    "菜",
+    "棋"
+  ],
+  "relatedClassifiers": [
+    "wan",
+    "bei"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 2,
+  "taiwanFrequency": 34,
+  "examples": [
+    {
+      "id": "pan-example-001",
+      "hanzi": "一盤水果",
+      "pinyin": {
+        "surface": "yì pán shuǐguǒ",
+        "bopomofo": "ㄧˋ ㄆㄢˊ ㄕㄨㄟˇ ㄍㄨㄛˇ"
+      },
+      "english": "a plate of fruit"
+    }
+  ]
+}

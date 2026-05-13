@@ -1,0 +1,43 @@
+{
+  "id": "he",
+  "hanzi": "盒",
+  "pinyin": {
+    "surface": "hé",
+    "bopomofo": "ㄏㄜˊ"
+  },
+  "meanings": [
+    "classifier for boxes"
+  ],
+  "usage": "Used for boxed items and boxfuls.",
+  "semanticTags": [
+    "containers",
+    "boxes"
+  ],
+  "compatibleNouns": [
+    "餅乾",
+    "便當",
+    "藥"
+  ],
+  "relatedClassifiers": [
+    "ping",
+    "guan-jar"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 2,
+  "taiwanFrequency": 37,
+  "examples": [
+    {
+      "id": "he-example-001",
+      "hanzi": "一盒餅乾",
+      "pinyin": {
+        "surface": "yì hé bǐnggān",
+        "bopomofo": "ㄧˋ ㄏㄜˊ ㄅㄧㄥˇ ㄍㄢ"
+      },
+      "english": "a box of cookies"
+    }
+  ]
+}

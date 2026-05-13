@@ -1,0 +1,43 @@
+{
+  "id": "chuan",
+  "hanzi": "串",
+  "pinyin": {
+    "surface": "chuàn",
+    "bopomofo": "ㄔㄨㄢˋ"
+  },
+  "meanings": [
+    "classifier for strings or clusters linked together"
+  ],
+  "usage": "Used for things threaded or linked in a string such as keys, beads, or numbers.",
+  "semanticTags": [
+    "linked",
+    "strings"
+  ],
+  "compatibleNouns": [
+    "鑰匙",
+    "葡萄",
+    "號碼"
+  ],
+  "relatedClassifiers": [
+    "tuan",
+    "qun"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 16,
+  "examples": [
+    {
+      "id": "chuan-example-001",
+      "hanzi": "一串鑰匙",
+      "pinyin": {
+        "surface": "yí chuàn yàoshi",
+        "bopomofo": "ㄧˊ ㄔㄨㄢˋ ㄧㄠˋ ˙ㄕ"
+      },
+      "english": "a bunch of keys"
+    }
+  ]
+}

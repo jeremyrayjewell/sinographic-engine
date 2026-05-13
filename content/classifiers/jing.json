@@ -1,0 +1,43 @@
+{
+  "id": "jing",
+  "hanzi": "莖",
+  "pinyin": {
+    "surface": "jīng",
+    "bopomofo": "ㄐㄧㄥ"
+  },
+  "meanings": [
+    "classifier for stalks"
+  ],
+  "usage": "Used for flowers and plants counted by stem or stalk.",
+  "semanticTags": [
+    "plants",
+    "stems"
+  ],
+  "compatibleNouns": [
+    "花",
+    "草",
+    "蔥"
+  ],
+  "relatedClassifiers": [
+    "gen",
+    "ke-plant"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 9,
+  "examples": [
+    {
+      "id": "jing-example-001",
+      "hanzi": "一莖花",
+      "pinyin": {
+        "surface": "yì jīng huā",
+        "bopomofo": "ㄧˋ ㄐㄧㄥ ㄏㄨㄚ"
+      },
+      "english": "a flower stalk"
+    }
+  ]
+}

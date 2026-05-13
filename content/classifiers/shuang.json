@@ -1,0 +1,43 @@
+{
+  "id": "shuang",
+  "hanzi": "雙",
+  "pinyin": {
+    "surface": "shuāng",
+    "bopomofo": "ㄕㄨㄤ"
+  },
+  "meanings": [
+    "classifier for pairs"
+  ],
+  "usage": "Used for natural or functional pairs such as shoes, chopsticks, and hands.",
+  "semanticTags": [
+    "pairs",
+    "clothing"
+  ],
+  "compatibleNouns": [
+    "鞋",
+    "筷子",
+    "手"
+  ],
+  "relatedClassifiers": [
+    "zhi-animal",
+    "liang"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 2,
+  "taiwanFrequency": 51,
+  "examples": [
+    {
+      "id": "shuang-example-001",
+      "hanzi": "一雙鞋",
+      "pinyin": {
+        "surface": "yì shuāng xié",
+        "bopomofo": "ㄧˋ ㄕㄨㄤ ㄒㄧㄝˊ"
+      },
+      "english": "a pair of shoes"
+    }
+  ]
+}

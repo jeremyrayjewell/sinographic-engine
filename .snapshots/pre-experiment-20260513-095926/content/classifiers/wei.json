@@ -1,0 +1,55 @@
+{
+  "id": "wei",
+  "hanzi": "位",
+  "pinyin": {
+    "surface": "wèi",
+    "bopomofo": "ㄨㄟˋ"
+  },
+  "meanings": [
+    "polite classifier for people",
+    "honorific people classifier"
+  ],
+  "usage": "Respectful classifier for people, common in service, formal introductions, and polite conversation in Taiwan Mandarin.",
+  "semanticTags": [
+    "people",
+    "polite",
+    "formal"
+  ],
+  "compatibleNouns": [
+    "老師",
+    "客人",
+    "醫生",
+    "同學"
+  ],
+  "relatedClassifiers": [
+    "ge"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 1,
+  "taiwanFrequency": 76,
+  "examples": [
+    {
+      "id": "wei-example-001",
+      "hanzi": "一位老師",
+      "pinyin": {
+        "surface": "yí wèi lǎoshī",
+        "underlying": "yī wèi lǎoshī",
+        "bopomofo": "ㄧˊ ㄨㄟˋ ㄌㄠˇ ㄕ"
+      },
+      "english": "a teacher"
+    },
+    {
+      "id": "wei-example-002",
+      "hanzi": "兩位客人",
+      "pinyin": {
+        "surface": "liǎng wèi kèrén",
+        "bopomofo": "ㄌㄧㄤˇ ㄨㄟˋ ㄎㄦˋ ㄣˊ"
+      },
+      "english": "two guests"
+    }
+  ]
+}

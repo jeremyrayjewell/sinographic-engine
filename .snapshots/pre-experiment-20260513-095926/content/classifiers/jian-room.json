@@ -1,0 +1,55 @@
+{
+  "id": "jian-room",
+  "hanzi": "間",
+  "pinyin": {
+    "surface": "jiān",
+    "bopomofo": "ㄐㄧㄢ"
+  },
+  "meanings": [
+    "classifier for rooms",
+    "classifier for establishments"
+  ],
+  "usage": "Used for rooms, houses, offices, shops, and businesses as discrete enclosed spaces.",
+  "semanticTags": [
+    "rooms",
+    "buildings",
+    "spaces"
+  ],
+  "compatibleNouns": [
+    "教室",
+    "店",
+    "房間",
+    "公司"
+  ],
+  "relatedClassifiers": [
+    "jia"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 1,
+  "taiwanFrequency": 71,
+  "examples": [
+    {
+      "id": "jian-room-example-001",
+      "hanzi": "一間教室",
+      "pinyin": {
+        "surface": "yì jiān jiàoshì",
+        "underlying": "yī jiān jiàoshì",
+        "bopomofo": "ㄧˋ ㄐㄧㄢ ㄐㄧㄠˋ ㄕˋ"
+      },
+      "english": "a classroom"
+    },
+    {
+      "id": "jian-room-example-002",
+      "hanzi": "那間店",
+      "pinyin": {
+        "surface": "nà jiān diàn",
+        "bopomofo": "ㄋㄚˋ ㄐㄧㄢ ㄉㄧㄢˋ"
+      },
+      "english": "that shop"
+    }
+  ]
+}

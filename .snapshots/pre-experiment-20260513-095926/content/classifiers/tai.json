@@ -1,0 +1,56 @@
+{
+  "id": "tai",
+  "hanzi": "台",
+  "pinyin": {
+    "surface": "tái",
+    "bopomofo": "ㄊㄞˊ"
+  },
+  "meanings": [
+    "classifier for machines",
+    "classifier for equipment"
+  ],
+  "usage": "Used for machines and equipment such as computers, televisions, and air conditioners.",
+  "semanticTags": [
+    "machines",
+    "technology",
+    "equipment"
+  ],
+  "compatibleNouns": [
+    "電腦",
+    "冷氣",
+    "電視",
+    "印表機"
+  ],
+  "relatedClassifiers": [
+    "bu",
+    "liang"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 1,
+  "taiwanFrequency": 81,
+  "examples": [
+    {
+      "id": "tai-example-001",
+      "hanzi": "一台電腦",
+      "pinyin": {
+        "surface": "yì tái diànnǎo",
+        "underlying": "yī tái diànnǎo",
+        "bopomofo": "ㄧˋ ㄊㄞˊ ㄉㄧㄢˋ ㄋㄠˇ"
+      },
+      "english": "a computer"
+    },
+    {
+      "id": "tai-example-002",
+      "hanzi": "三台冷氣",
+      "pinyin": {
+        "surface": "sān tái lěngqì",
+        "bopomofo": "ㄙㄢ ㄊㄞˊ ㄌㄥˇ ㄑㄧˋ"
+      },
+      "english": "three air conditioners"
+    }
+  ]
+}

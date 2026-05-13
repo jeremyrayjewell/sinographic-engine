@@ -1,0 +1,56 @@
+{
+  "id": "jian-item",
+  "hanzi": "件",
+  "pinyin": {
+    "surface": "jiàn",
+    "bopomofo": "ㄐㄧㄢˋ"
+  },
+  "meanings": [
+    "classifier for events",
+    "classifier for clothing items"
+  ],
+  "usage": "Often used for articles of clothing, matters, cases, and discrete items treated as units.",
+  "semanticTags": [
+    "clothing",
+    "events",
+    "items"
+  ],
+  "compatibleNouns": [
+    "外套",
+    "事情",
+    "襯衫",
+    "案件"
+  ],
+  "relatedClassifiers": [
+    "ci",
+    "chang"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 2,
+  "taiwanFrequency": 73,
+  "examples": [
+    {
+      "id": "jian-item-example-001",
+      "hanzi": "一件外套",
+      "pinyin": {
+        "surface": "yí jiàn wàitào",
+        "underlying": "yī jiàn wàitào",
+        "bopomofo": "ㄧˊ ㄐㄧㄢˋ ㄨㄞˋ ㄊㄠˋ"
+      },
+      "english": "a coat"
+    },
+    {
+      "id": "jian-item-example-002",
+      "hanzi": "這件事情",
+      "pinyin": {
+        "surface": "zhè jiàn shìqing",
+        "bopomofo": "ㄓㄜˋ ㄐㄧㄢˋ ㄕˋ ˙ㄑㄧㄥ"
+      },
+      "english": "this matter"
+    }
+  ]
+}

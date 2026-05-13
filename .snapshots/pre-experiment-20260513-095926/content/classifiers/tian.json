@@ -1,0 +1,43 @@
+{
+  "id": "tian",
+  "hanzi": "天",
+  "pinyin": {
+    "surface": "tiān",
+    "bopomofo": "ㄊㄧㄢ"
+  },
+  "meanings": [
+    "classifier for days"
+  ],
+  "usage": "Used to count days as calendrical or experiential units.",
+  "semanticTags": [
+    "time",
+    "calendar"
+  ],
+  "compatibleNouns": [
+    "假",
+    "課",
+    "時間"
+  ],
+  "relatedClassifiers": [
+    "nian",
+    "ci"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 1,
+  "taiwanFrequency": 78,
+  "examples": [
+    {
+      "id": "tian-example-001",
+      "hanzi": "三天假",
+      "pinyin": {
+        "surface": "sān tiān jià",
+        "bopomofo": "ㄙㄢ ㄊㄧㄢ ㄐㄧㄚˋ"
+      },
+      "english": "three days off"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "id": "cong",
+  "hanzi": "叢",
+  "pinyin": {
+    "surface": "cóng",
+    "bopomofo": "ㄘㄨㄥˊ"
+  },
+  "meanings": [
+    "classifier for clumps or thickets"
+  ],
+  "usage": "Used for bushes, flowers, and things growing or clustered densely together.",
+  "semanticTags": [
+    "plants",
+    "clusters"
+  ],
+  "compatibleNouns": [
+    "花",
+    "草",
+    "樹"
+  ],
+  "relatedClassifiers": [
+    "qun",
+    "ke-plant"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 12,
+  "examples": [
+    {
+      "id": "cong-example-001",
+      "hanzi": "一叢花",
+      "pinyin": {
+        "surface": "yì cóng huā",
+        "bopomofo": "ㄧˋ ㄘㄨㄥˊ ㄏㄨㄚ"
+      },
+      "english": "a cluster of flowers"
+    }
+  ]
+}

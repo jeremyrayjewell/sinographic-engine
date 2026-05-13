@@ -1,0 +1,43 @@
+{
+  "id": "di",
+  "hanzi": "滴",
+  "pinyin": {
+    "surface": "dī",
+    "bopomofo": "ㄉㄧ"
+  },
+  "meanings": [
+    "classifier for drops"
+  ],
+  "usage": "Used for drops of liquid and tiny falling amounts.",
+  "semanticTags": [
+    "liquid",
+    "tiny"
+  ],
+  "compatibleNouns": [
+    "水",
+    "眼淚",
+    "油"
+  ],
+  "relatedClassifiers": [
+    "li",
+    "gu"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 16,
+  "examples": [
+    {
+      "id": "di-example-001",
+      "hanzi": "一滴水",
+      "pinyin": {
+        "surface": "yì dī shuǐ",
+        "bopomofo": "ㄧˋ ㄉㄧ ㄕㄨㄟˇ"
+      },
+      "english": "a drop of water"
+    }
+  ]
+}

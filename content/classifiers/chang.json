@@ -1,0 +1,56 @@
+{
+  "id": "chang",
+  "hanzi": "場",
+  "pinyin": {
+    "surface": "chǎng",
+    "bopomofo": "ㄔㄤˇ"
+  },
+  "meanings": [
+    "classifier for events or performances",
+    "classifier for bounded happenings"
+  ],
+  "usage": "Used for performances, games, storms, arguments, and other bounded happenings or scenes.",
+  "semanticTags": [
+    "events",
+    "performances",
+    "bounded"
+  ],
+  "compatibleNouns": [
+    "電影",
+    "比賽",
+    "演唱會",
+    "雨"
+  ],
+  "relatedClassifiers": [
+    "ci",
+    "jian-item"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 2,
+  "taiwanFrequency": 62,
+  "examples": [
+    {
+      "id": "chang-example-001",
+      "hanzi": "一場電影",
+      "pinyin": {
+        "surface": "yì chǎng diànyǐng",
+        "underlying": "yī chǎng diànyǐng",
+        "bopomofo": "ㄧˋ ㄔㄤˇ ㄉㄧㄢˋ ㄧㄥˇ"
+      },
+      "english": "a movie showing"
+    },
+    {
+      "id": "chang-example-002",
+      "hanzi": "那場比賽",
+      "pinyin": {
+        "surface": "nà chǎng bǐsài",
+        "bopomofo": "ㄋㄚˋ ㄔㄤˇ ㄅㄧˇ ㄙㄞˋ"
+      },
+      "english": "that match"
+    }
+  ]
+}

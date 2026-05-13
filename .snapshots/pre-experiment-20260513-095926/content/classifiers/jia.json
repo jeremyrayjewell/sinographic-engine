@@ -1,0 +1,55 @@
+{
+  "id": "jia",
+  "hanzi": "家",
+  "pinyin": {
+    "surface": "jiā",
+    "bopomofo": "ㄐㄧㄚ"
+  },
+  "meanings": [
+    "classifier for families",
+    "classifier for businesses or establishments"
+  ],
+  "usage": "Used for households, stores, restaurants, companies, and similar establishments.",
+  "semanticTags": [
+    "businesses",
+    "families",
+    "establishments"
+  ],
+  "compatibleNouns": [
+    "餐廳",
+    "公司",
+    "店",
+    "銀行"
+  ],
+  "relatedClassifiers": [
+    "jian-room"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 2,
+  "taiwanFrequency": 69,
+  "examples": [
+    {
+      "id": "jia-example-001",
+      "hanzi": "一家餐廳",
+      "pinyin": {
+        "surface": "yì jiā cāntīng",
+        "underlying": "yī jiā cāntīng",
+        "bopomofo": "ㄧˋ ㄐㄧㄚ ㄘㄢ ㄊㄧㄥ"
+      },
+      "english": "a restaurant"
+    },
+    {
+      "id": "jia-example-002",
+      "hanzi": "這家公司",
+      "pinyin": {
+        "surface": "zhè jiā gōngsī",
+        "bopomofo": "ㄓㄜˋ ㄐㄧㄚ ㄍㄨㄥ ㄙ"
+      },
+      "english": "this company"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "id": "ba",
+  "hanzi": "把",
+  "pinyin": {
+    "surface": "bǎ",
+    "bopomofo": "ㄅㄚˇ"
+  },
+  "meanings": [
+    "classifier for objects with handles",
+    "classifier for handfuls or graspable items"
+  ],
+  "usage": "Used for chairs, umbrellas, knives, and objects understood through grip or handle.",
+  "semanticTags": [
+    "handled",
+    "tools",
+    "grip"
+  ],
+  "compatibleNouns": [
+    "椅子",
+    "雨傘",
+    "刀"
+  ],
+  "relatedClassifiers": [
+    "zhi",
+    "jian-item"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 1,
+  "taiwanFrequency": 59,
+  "examples": [
+    {
+      "id": "ba-example-001",
+      "hanzi": "一把椅子",
+      "pinyin": {
+        "surface": "yì bǎ yǐzi",
+        "bopomofo": "ㄧˋ ㄅㄚˇ ㄧˇ ˙ㄗ"
+      },
+      "english": "a chair"
+    }
+  ]
+}

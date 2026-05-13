@@ -1,0 +1,43 @@
+{
+  "id": "hui",
+  "hanzi": "回",
+  "pinyin": {
+    "surface": "huí",
+    "bopomofo": "ㄏㄨㄟˊ"
+  },
+  "meanings": [
+    "classifier for times or chapters"
+  ],
+  "usage": "Used for occurrences in colloquial style and for chapter turns in classical narratives.",
+  "semanticTags": [
+    "occurrences",
+    "chapters"
+  ],
+  "compatibleNouns": [
+    "電話",
+    "故事",
+    "比賽"
+  ],
+  "relatedClassifiers": [
+    "ci",
+    "bian"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 3,
+  "taiwanFrequency": 23,
+  "examples": [
+    {
+      "id": "hui-example-001",
+      "hanzi": "一回電話",
+      "pinyin": {
+        "surface": "yì huí diànhuà",
+        "bopomofo": "ㄧˋ ㄏㄨㄟˊ ㄉㄧㄢˋ ㄏㄨㄚˋ"
+      },
+      "english": "one phone call"
+    }
+  ]
+}

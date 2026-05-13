@@ -1,0 +1,56 @@
+{
+  "id": "liang",
+  "hanzi": "輛",
+  "pinyin": {
+    "surface": "liàng",
+    "bopomofo": "ㄌㄧㄤˋ"
+  },
+  "meanings": [
+    "classifier for vehicles",
+    "classifier for wheeled transport"
+  ],
+  "usage": "Used specifically for wheeled vehicles such as cars, buses, bicycles, and trucks.",
+  "semanticTags": [
+    "vehicles",
+    "transport",
+    "machines"
+  ],
+  "compatibleNouns": [
+    "車",
+    "公車",
+    "腳踏車",
+    "卡車"
+  ],
+  "relatedClassifiers": [
+    "tai",
+    "bu"
+  ],
+  "regionalUsage": {
+    "taiwan": true,
+    "mainland": true,
+    "hongkong": true
+  },
+  "difficulty": 2,
+  "taiwanFrequency": 52,
+  "examples": [
+    {
+      "id": "liang-example-001",
+      "hanzi": "一輛車",
+      "pinyin": {
+        "surface": "yí liàng chē",
+        "underlying": "yī liàng chē",
+        "bopomofo": "ㄧˊ ㄌㄧㄤˋ ㄔㄜ"
+      },
+      "english": "a car"
+    },
+    {
+      "id": "liang-example-002",
+      "hanzi": "兩輛公車",
+      "pinyin": {
+        "surface": "liǎng liàng gōngchē",
+        "bopomofo": "ㄌㄧㄤˇ ㄌㄧㄤˋ ㄍㄨㄥ ㄔㄜ"
+      },
+      "english": "two buses"
+    }
+  ]
+}
