@@ -19,6 +19,7 @@
       "@/*": ["apps/web/src/*"],
       "@sinographic-engine/shared-types": ["packages/shared-types/src/index.ts"],
       "@sinographic-engine/learning-engine": ["packages/learning-engine/src/index.ts"],
+      "@sinographic-engine/number-engine": ["packages/number-engine/src/index.ts"],
       "@sinographic-engine/classifier-content": ["packages/classifier-content/src/index.ts"],
       "@sinographic-engine/speech-engine": ["packages/speech-engine/src/index.ts"],
       "@sinographic-engine/ui": ["packages/ui/src/index.ts"]

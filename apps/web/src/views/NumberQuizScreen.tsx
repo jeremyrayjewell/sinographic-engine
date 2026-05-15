@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react'
-import { getLocalizedClassifierById } from '@sinographic-engine/classifier-content'
+import { useRef } from 'react'
+import type { NumbersSetId } from '@sinographic-engine/shared-types'
 import barImage from '../../../../content/bar.png'
 import { ActionButton, Panel, ScreenShell } from '@sinographic-engine/ui'
 import { LanguageToggle } from '@/components/LanguageToggle'
@@ -8,27 +8,37 @@ import { getAppCopy } from '@/lib/i18n'
 import { useSpeech } from '@/hooks/useSpeech'
 import { useQuizStore } from '@/store/quiz-store'
 
-const simplifyClassifierMeaning = (meaning: string) => {
-  return meaning
-    .replace(/^polite classifier for\s+/i, 'for ')
-    .replace(/^honorific people classifier$/i, 'for people')
-    .replace(/^general classifier$/i, 'general')
-    .replace(/^default classifier$/i, 'default')
-    .replace(/^classifier for\s+/i, 'for ')
+const getNumbersSetDisplay = (
+  setId: NumbersSetId,
+  copy: ReturnType<typeof getAppCopy>
+) => {
+  switch (setId) {
+    case 'simple-numbers':
+      return { label: copy.numbersSetSimpleLabel }
+    case 'hundreds':
+      return { label: copy.numbersSetHundredsLabel }
+    case 'numbers':
+      return { label: copy.numbersSetCommonLabel }
+    case 'currency':
+      return { label: copy.numbersSetCurrencyLabel }
+    case 'math':
+      return { label: copy.numbersSetMathLabel }
+  }
 }
 
-export const QuizScreen = () => {
+export const NumberQuizScreen = () => {
   const language = useQuizStore((state) => state.language)
   const copy = getAppCopy(language)
-  const currentQuestion = useQuizStore((state) => state.currentQuestion)
-  const currentResult = useQuizStore((state) => state.currentResult)
+  const selectedNumbersSet = useQuizStore((state) => state.selectedNumbersSet)
+  const currentQuestion = useQuizStore((state) => state.currentNumberQuestion)
+  const currentResult = useQuizStore((state) => state.currentNumberResult)
   const score = useQuizStore((state) => state.score)
   const completedQuestions = useQuizStore((state) => state.completedQuestions)
   const totalQuestions = useQuizStore((state) => state.totalQuestions)
   const resetSession = useQuizStore((state) => state.resetSession)
-  const submitAnswer = useQuizStore((state) => state.submitAnswer)
-  const nextQuestion = useQuizStore((state) => state.nextQuestion)
-  const { autoplayEnabled, rate, speak } = useSpeech()
+  const submitNumberAnswer = useQuizStore((state) => state.submitNumberAnswer)
+  const nextNumberQuestion = useQuizStore((state) => state.nextNumberQuestion)
+  const { rate, speak } = useSpeech()
   const slowRate = Math.max(0.6, rate - 0.25)
   const lastReplayRef = useRef<{ key: string; at: number } | null>(null)
 
@@ -42,23 +52,11 @@ export const QuizScreen = () => {
     return speak(text, useSlowReplay ? { rate: slowRate } : undefined)
   }
 
-  useEffect(() => {
-    if (!autoplayEnabled || !currentQuestion) {
-      return
-    }
-
-    const maskedPrompt = currentQuestion.prompt.replace('___', '……')
-    void speak(maskedPrompt)
-  }, [autoplayEnabled, currentQuestion, speak])
-
   if (!currentQuestion) {
     return null
   }
 
-  const correctClassifier = getLocalizedClassifierById(
-    currentQuestion.correctClassifierId,
-    language
-  )
+  const setDisplay = getNumbersSetDisplay(selectedNumbersSet, copy)
 
   return (
     <ScreenShell>
@@ -67,11 +65,11 @@ export const QuizScreen = () => {
           <div className="flex items-start justify-between gap-4">
             <div className="flex flex-wrap items-start gap-3">
               <h1 className="inline-flex border border-[#1f2f44] bg-[#1f2f44] px-3 py-2 text-2xl font-semibold tracking-[0.04em] text-[#f7eedf]">
-                {copy.classifierPracticeHanzi}
+                {copy.numbersMenuHanzi}
               </h1>
               <div className="flex flex-col gap-2">
                 <p className="pt-1 text-[11px] uppercase tracking-[0.35em] text-[#5b6f84]">
-                  {copy.classifierPracticeLabel}
+                  {setDisplay.label}
                 </p>
                 <img
                   src={barImage}
@@ -120,46 +118,16 @@ export const QuizScreen = () => {
         </div>
 
         <Panel className="p-4 sm:p-5 lg:p-6">
-          <div className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
-            <div className="flex items-center justify-center">
-              <p className="text-center text-5xl font-semibold uppercase leading-none text-[#1f2f44] sm:text-6xl">
-                {currentQuestion.prompt}
-              </p>
-            </div>
-            <div className="flex flex-col justify-center gap-2 border-t border-[#30455f] pt-4 lg:border-l lg:border-t-0 lg:pl-5 lg:pt-0">
-              {currentQuestion.promptBopomofo ? (
-                <p className="text-base tracking-[0.12em] text-[#1f2f44]">
-                  {currentQuestion.promptBopomofo}
-                </p>
-              ) : null}
-              <p className="text-xs uppercase tracking-[0.18em] text-[#8c2f22]">
-                {currentQuestion.promptPinyin}
-              </p>
-              <p className="max-w-2xl text-base text-[#3e352c]">
-                {currentQuestion.promptEnglish}
-              </p>
-              <div className="flex flex-wrap gap-2 pt-2">
-                <SpeakButton
-                  label={copy.speakLabel}
-                  icon="speak"
-                  iconOnly
-                  onClick={() =>
-                    void replayText(
-                      `prompt:${currentQuestion.id}`,
-                      currentQuestion.prompt.replace('___', '……')
-                    )
-                  }
-                />
-              </div>
-            </div>
+          <div className="flex items-center justify-center py-2 sm:py-4">
+            <p className="text-center text-5xl font-semibold leading-none text-[#1f2f44] sm:text-6xl">
+              {currentQuestion.prompt}
+            </p>
           </div>
 
           <div className="mt-6 grid gap-px border border-[#30455f] bg-[#30455f] sm:grid-cols-2">
             {currentQuestion.options.map((option) => {
-              const wasSelected =
-                currentResult?.selectedClassifierId === option.id
-              const isCorrect =
-                currentResult?.correctClassifierId === option.id
+              const wasSelected = currentResult?.selectedValue === option.value
+              const isCorrect = currentResult?.correctValue === option.value
               const showState = currentResult !== null
 
               return (
@@ -176,7 +144,7 @@ export const QuizScreen = () => {
                   <div className="flex items-start justify-between gap-3">
                     <button
                       type="button"
-                      onClick={() => submitAnswer(option.id)}
+                      onClick={() => submitNumberAnswer(option.value)}
                       disabled={showState}
                       className="min-w-0 flex-1 text-left"
                     >
@@ -193,9 +161,6 @@ export const QuizScreen = () => {
                           </p>
                         </div>
                       </div>
-                      <p className="mt-3 text-sm uppercase tracking-[0.12em]">
-                        {simplifyClassifierMeaning(option.meaning)}
-                      </p>
                     </button>
                     <div className="flex shrink-0 gap-2">
                       <SpeakButton
@@ -203,7 +168,12 @@ export const QuizScreen = () => {
                         icon="speak"
                         iconOnly
                         className="px-2 py-2"
-                        onClick={() => void replayText(`option:${option.id}`, option.hanzi)}
+                        onClick={() =>
+                          void replayText(
+                            `number-option:${option.id}`,
+                            option.speechText ?? option.hanzi
+                          )
+                        }
                       />
                     </div>
                   </div>
@@ -212,7 +182,7 @@ export const QuizScreen = () => {
             })}
           </div>
 
-          {currentResult && correctClassifier ? (
+          {currentResult ? (
             <div className="mt-6 border border-[#30455f] bg-[#f3e6d1] p-4 sm:p-5">
               <div className="flex flex-wrap items-center gap-3">
                 <p
@@ -235,45 +205,25 @@ export const QuizScreen = () => {
               <div className="mt-4 grid gap-5 lg:grid-cols-[1.25fr_0.75fr]">
                 <div>
                   <p className="text-xl font-medium text-[#1f2f44]">
-                    {correctClassifier.hanzi}{' '}
-                    {correctClassifier.pinyin.bopomofo ? (
-                      <>
-                        ({correctClassifier.pinyin.bopomofo}
-                        {correctClassifier.pinyin.surface
-                          ? ` / ${correctClassifier.pinyin.surface}`
-                          : ''}
-                        )
-                      </>
-                    ) : correctClassifier.pinyin.surface ? (
-                      <>({correctClassifier.pinyin.surface})</>
-                    ) : null}{' '}
-                    {copy.usedHereFor}{' '}
-                    {simplifyClassifierMeaning(correctClassifier.meanings[0] ?? '')}.
-                  </p>
-                  <p className="mt-3 text-sm leading-7 text-[#3e352c]">
-                    {correctClassifier.usage}
+                    {currentQuestion.prompt} is {currentQuestion.correctHanzi} (
+                    {currentQuestion.correctBopomofo} / {currentQuestion.correctPinyin}).
                   </p>
                   <div className="mt-4 flex flex-wrap gap-2">
                     <SpeakButton
-                      label={`${copy.speakLabel}: ${correctClassifier.hanzi}`}
+                      label={`${copy.speakLabel}: ${currentQuestion.correctHanzi}`}
                       icon="speak"
                       iconOnly
                       onClick={() =>
-                        void replayText(`correct:${correctClassifier.id}`, correctClassifier.hanzi)
+                        void replayText(
+                          `number-correct:${currentQuestion.id}`,
+                          currentQuestion.correctSpeechText ?? currentQuestion.correctHanzi
+                        )
                       }
                     />
                   </div>
                 </div>
-
-                <div className="flex flex-col justify-between gap-5 border-t border-[#30455f] pt-4 lg:border-l lg:border-t-0 lg:pl-5 lg:pt-0">
-                  {correctClassifier.compatibleNouns?.length ? (
-                    <p className="text-sm uppercase tracking-[0.12em] text-[#7b4d32]">
-                      {copy.oftenUsedWith}: {correctClassifier.compatibleNouns.join(' / ')}
-                    </p>
-                  ) : (
-                    <div />
-                  )}
-                  <ActionButton onClick={nextQuestion} className="w-full">
+                <div className="flex flex-col justify-end gap-5 border-t border-[#30455f] pt-4 lg:border-l lg:border-t-0 lg:pl-5 lg:pt-0">
+                  <ActionButton onClick={nextNumberQuestion} className="w-full">
                     <span className="flex items-center gap-3">
                       <span>
                         {completedQuestions >= totalQuestions
@@ -288,37 +238,6 @@ export const QuizScreen = () => {
                     </span>
                   </ActionButton>
                 </div>
-              </div>
-              <div className="mt-5 grid gap-px border border-[#30455f] bg-[#30455f]">
-                {correctClassifier.examples.map((example) => (
-                  <div
-                    key={example.id}
-                    className="flex flex-col gap-3 bg-[#f7eedf] px-3 py-3 sm:flex-row sm:items-start sm:justify-between"
-                  >
-                    <div>
-                      <p className="text-2xl font-semibold text-[#1f2f44]">
-                        {example.hanzi}
-                      </p>
-                      {example.pinyin.bopomofo ? (
-                        <p className="mt-2 text-sm tracking-[0.12em] text-[#1f2f44]">
-                          {example.pinyin.bopomofo}
-                        </p>
-                      ) : null}
-                      <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-[#8c2f22]">
-                        {example.pinyin.surface}
-                      </p>
-                      <p className="mt-2 text-sm text-[#3e352c]">{example.english}</p>
-                    </div>
-                    <div className="flex gap-2">
-                      <SpeakButton
-                        label={`${copy.speakLabel}: ${example.hanzi}`}
-                        icon="speak"
-                        iconOnly
-                        onClick={() => void replayText(`example:${example.id}`, example.hanzi)}
-                      />
-                    </div>
-                  </div>
-                ))}
               </div>
             </div>
           ) : null}

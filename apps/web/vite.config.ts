@@ -15,6 +15,10 @@ export default defineConfig({
         __dirname,
         '../../packages/learning-engine/src/index.ts'
       ),
+      '@sinographic-engine/number-engine': path.resolve(
+        __dirname,
+        '../../packages/number-engine/src/index.ts'
+      ),
       '@sinographic-engine/classifier-content': path.resolve(
         __dirname,
         '../../packages/classifier-content/src/index.ts'

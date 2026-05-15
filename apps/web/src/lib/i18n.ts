@@ -14,6 +14,41 @@ type AppCopy = {
   subsystemIntro: string
   grammarMenuHanzi: string
   grammarMenuLabel: string
+  vocabularyMenuHanzi: string
+  vocabularyMenuLabel: string
+  vocabularyPlaceholder: string
+  numbersMenuHanzi: string
+  numbersMenuLabel: string
+  numbersPlaceholder: string
+  peopleMenuHanzi: string
+  peopleMenuLabel: string
+  peoplePlaceholder: string
+  placesMenuHanzi: string
+  placesMenuLabel: string
+  placesPlaceholder: string
+  objectsMenuHanzi: string
+  objectsMenuLabel: string
+  objectsPlaceholder: string
+  ideasMenuHanzi: string
+  ideasMenuLabel: string
+  ideasPlaceholder: string
+  numbersSetSimpleHanzi: string
+  numbersSetSimpleLabel: string
+  numbersSetSimpleDescription: string
+  numbersSetHundredsHanzi: string
+  numbersSetHundredsLabel: string
+  numbersSetHundredsDescription: string
+  numbersSetCommonHanzi: string
+  numbersSetCommonLabel: string
+  numbersSetCommonDescription: string
+  numbersSetCurrencyHanzi: string
+  numbersSetCurrencyLabel: string
+  numbersSetCurrencyDescription: string
+  numbersSetMathHanzi: string
+  numbersSetMathLabel: string
+  numbersSetMathDescription: string
+  comingSoonHanzi: string
+  comingSoonLabel: string
   classifierPracticeHanzi: string
   classifierPracticeLabel: string
   lengthLabelHanzi: string
@@ -86,6 +121,42 @@ const appCopy: Record<AppLocale, AppCopy> = {
       'This subsystem stays deliberately spare. It should feel like a working linguistic instrument, not a study toy.',
     grammarMenuHanzi: '語法',
     grammarMenuLabel: 'Grammar',
+    vocabularyMenuHanzi: '詞彙',
+    vocabularyMenuLabel: 'Vocabulary',
+    vocabularyPlaceholder: 'Vocabulary modules will appear here.',
+    numbersMenuHanzi: '數字',
+    numbersMenuLabel: 'Numbers',
+    numbersPlaceholder: 'Number-based vocabulary modules will appear here.',
+    peopleMenuHanzi: '人物',
+    peopleMenuLabel: 'People',
+    peoplePlaceholder: 'People vocabulary modules will appear here.',
+    placesMenuHanzi: '地點',
+    placesMenuLabel: 'Places',
+    placesPlaceholder: 'Places vocabulary modules will appear here.',
+    objectsMenuHanzi: '物件',
+    objectsMenuLabel: 'Objects',
+    objectsPlaceholder: 'Object vocabulary modules will appear here.',
+    ideasMenuHanzi: '觀念',
+    ideasMenuLabel: 'Ideas',
+    ideasPlaceholder: 'Idea and abstract vocabulary modules will appear here.',
+    numbersSetSimpleHanzi: '基數',
+    numbersSetSimpleLabel: 'Simple Numbers',
+    numbersSetSimpleDescription: 'Basic counting and everyday numeral recognition.',
+    numbersSetHundredsHanzi: '百數',
+    numbersSetHundredsLabel: 'Hundreds',
+    numbersSetHundredsDescription: 'Focused work on numbers from 100 to 999.',
+    numbersSetCommonHanzi: '大數',
+    numbersSetCommonLabel: 'Big Numbers',
+    numbersSetCommonDescription: 'Anything from 1 to 1 million.',
+    numbersSetCurrencyHanzi: '貨幣',
+    numbersSetCurrencyLabel: 'Currency',
+    numbersSetCurrencyDescription:
+      'Focused on NTD in brief phrases, plus future coin and bill identification practice.',
+    numbersSetMathHanzi: '算術',
+    numbersSetMathLabel: 'Math',
+    numbersSetMathDescription: 'The four main operations.',
+    comingSoonHanzi: '即將',
+    comingSoonLabel: 'Coming Soon',
     classifierPracticeHanzi: '量詞',
     classifierPracticeLabel: 'Classifiers',
     lengthLabelHanzi: '長度',
@@ -139,9 +210,9 @@ const appCopy: Record<AppLocale, AppCopy> = {
     accuracyHanzi: '準',
     dataset: 'Dataset',
     datasetHanzi: '庫',
-    runAnotherSession: 'Run Another Session',
+    runAnotherSession: 'Repeat',
     runAnotherSessionHanzi: '再來',
-    returnHome: 'Return Home',
+    returnHome: 'Home',
     returnHomeHanzi: '返回',
     attemptHistory: 'Attempt History',
     attemptHistoryHanzi: '記錄',
@@ -161,6 +232,42 @@ const appCopy: Record<AppLocale, AppCopy> = {
       'Este subsistema se mantiene deliberadamente sobrio. Debe sentirse como un instrumento lingüístico de trabajo, no como un juguete de estudio.',
     grammarMenuHanzi: '語法',
     grammarMenuLabel: 'Gramática',
+    vocabularyMenuHanzi: '詞彙',
+    vocabularyMenuLabel: 'Vocabulario',
+    vocabularyPlaceholder: 'Los módulos de vocabulario aparecerán aquí.',
+    numbersMenuHanzi: '數字',
+    numbersMenuLabel: 'Números',
+    numbersPlaceholder: 'Los módulos de vocabulario numérico aparecerán aquí.',
+    peopleMenuHanzi: '人物',
+    peopleMenuLabel: 'Personas',
+    peoplePlaceholder: 'Los módulos de vocabulario sobre personas aparecerán aquí.',
+    placesMenuHanzi: '地點',
+    placesMenuLabel: 'Lugares',
+    placesPlaceholder: 'Los módulos de vocabulario sobre lugares aparecerán aquí.',
+    objectsMenuHanzi: '物件',
+    objectsMenuLabel: 'Objetos',
+    objectsPlaceholder: 'Los módulos de vocabulario sobre objetos aparecerán aquí.',
+    ideasMenuHanzi: '觀念',
+    ideasMenuLabel: 'Ideas',
+    ideasPlaceholder: 'Los módulos de vocabulario abstracto y de ideas aparecerán aquí.',
+    numbersSetSimpleHanzi: '基數',
+    numbersSetSimpleLabel: 'Números básicos',
+    numbersSetSimpleDescription: 'Conteo básico y reconocimiento de numerales de uso diario.',
+    numbersSetHundredsHanzi: '百數',
+    numbersSetHundredsLabel: 'Centenas',
+    numbersSetHundredsDescription: 'Trabajo enfocado en números del 100 al 999.',
+    numbersSetCommonHanzi: '大數',
+    numbersSetCommonLabel: 'Números grandes',
+    numbersSetCommonDescription: 'Cualquier cosa desde 1 hasta 1 millón.',
+    numbersSetCurrencyHanzi: '貨幣',
+    numbersSetCurrencyLabel: 'Moneda',
+    numbersSetCurrencyDescription:
+      'Enfocado en TWD en frases breves, más futura práctica de identificación de monedas y billetes.',
+    numbersSetMathHanzi: '算術',
+    numbersSetMathLabel: 'Matemáticas',
+    numbersSetMathDescription: 'Las cuatro operaciones principales.',
+    comingSoonHanzi: '即將',
+    comingSoonLabel: 'Próximamente',
     classifierPracticeHanzi: '量詞',
     classifierPracticeLabel: 'Clasificadores',
     lengthLabelHanzi: '長度',
@@ -214,9 +321,9 @@ const appCopy: Record<AppLocale, AppCopy> = {
     accuracyHanzi: '準',
     dataset: 'Conjunto',
     datasetHanzi: '庫',
-    runAnotherSession: 'Iniciar otra sesión',
+    runAnotherSession: 'Repetir',
     runAnotherSessionHanzi: '再來',
-    returnHome: 'Volver al inicio',
+    returnHome: 'Inicio',
     returnHomeHanzi: '返回',
     attemptHistory: 'Historial de intentos',
     attemptHistoryHanzi: '記錄',

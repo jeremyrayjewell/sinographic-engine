@@ -49,7 +49,7 @@ export const SpeakButton = ({
       onClick={onClick}
       aria-label={iconOnly ? label : undefined}
       title={label}
-      className={`inline-flex items-center justify-center border border-[#30455f] bg-[#f7eedf] px-3 py-2 text-[11px] uppercase tracking-[0.22em] text-[#24384f] transition hover:bg-[#24384f] hover:text-[#f5ead9] ${className ?? ''}`}
+      className={`inline-flex items-center justify-center text-[11px] uppercase tracking-[0.22em] text-[#24384f] transition ${iconOnly ? 'bg-transparent px-1.5 py-1.5 hover:text-[#8c2f22]' : 'border border-[#30455f] bg-[#f7eedf] px-3 py-2 hover:bg-[#24384f] hover:text-[#f5ead9]'} ${className ?? ''}`}
     >
       {iconOnly ? (
         <SpeakerIcon slow={icon === 'slow'} />

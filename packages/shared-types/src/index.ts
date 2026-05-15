@@ -1,4 +1,12 @@
 export type AppLocale = 'en' | 'es-419'
+export type AppModule = 'classifiers' | 'numbers'
+export type NumbersSetId =
+  | 'simple-numbers'
+  | 'hundreds'
+  | 'numbers'
+  | 'currency'
+  | 'math'
+export type NumberQuizAnswerValue = number | string
 
 export interface PinyinReading {
   surface: string
@@ -70,4 +78,40 @@ export interface QuizResult {
   correctClassifierId: string
   isCorrect: boolean
   prompt: string
+}
+
+export interface NumberQuizOption {
+  id: string
+  value: NumberQuizAnswerValue
+  hanzi: string
+  pinyin: string
+  bopomofo?: string
+  speechText?: string
+}
+
+export interface NumberQuizQuestion {
+  id: string
+  prompt: string
+  correctValue: NumberQuizAnswerValue
+  correctHanzi: string
+  correctPinyin: string
+  correctBopomofo?: string
+  correctSpeechText?: string
+  options: NumberQuizOption[]
+}
+
+export interface NumberQuizResult {
+  questionId: string
+  selectedValue: NumberQuizAnswerValue
+  correctValue: NumberQuizAnswerValue
+  isCorrect: boolean
+  prompt: string
+  correctHanzi: string
+  correctPinyin: string
+  correctBopomofo?: string
+  correctSpeechText?: string
+  selectedHanzi: string
+  selectedPinyin: string
+  selectedBopomofo?: string
+  selectedSpeechText?: string
 }

@@ -5,7 +5,7 @@
   "packageManager": "pnpm@9.12.0",
   "scripts": {
     "dev": "corepack pnpm --filter @sinographic-engine/web dev",
-    "build": "corepack pnpm -r --filter @sinographic-engine/shared-types --filter @sinographic-engine/learning-engine --filter @sinographic-engine/classifier-content --filter @sinographic-engine/speech-engine --filter @sinographic-engine/ui build && corepack pnpm --filter @sinographic-engine/web build",
+    "build": "corepack pnpm -r --filter @sinographic-engine/shared-types --filter @sinographic-engine/learning-engine --filter @sinographic-engine/number-engine --filter @sinographic-engine/classifier-content --filter @sinographic-engine/speech-engine --filter @sinographic-engine/ui build && corepack pnpm --filter @sinographic-engine/web build",
     "lint": "corepack pnpm -r lint"
   },
   "devDependencies": {

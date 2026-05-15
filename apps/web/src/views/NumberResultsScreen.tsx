@@ -1,8 +1,5 @@
 import { useRef } from 'react'
-import {
-  classifiers,
-  getLocalizedClassifierById
-} from '@sinographic-engine/classifier-content'
+import type { NumbersSetId } from '@sinographic-engine/shared-types'
 import { ActionButton, Panel, ScreenShell } from '@sinographic-engine/ui'
 import { LanguageToggle } from '@/components/LanguageToggle'
 import { SpeakButton } from '@/components/SpeakButton'
@@ -10,19 +7,59 @@ import { useSpeech } from '@/hooks/useSpeech'
 import { getAppCopy } from '@/lib/i18n'
 import { useQuizStore } from '@/store/quiz-store'
 
-export const ResultsScreen = () => {
+const getNumbersSetDisplay = (
+  setId: NumbersSetId,
+  copy: ReturnType<typeof getAppCopy>
+) => {
+  switch (setId) {
+    case 'simple-numbers':
+      return {
+        hanzi: copy.numbersSetSimpleHanzi,
+        label: copy.numbersSetSimpleLabel,
+        detail: '1-100'
+      }
+    case 'hundreds':
+      return {
+        hanzi: copy.numbersSetHundredsHanzi,
+        label: copy.numbersSetHundredsLabel,
+        detail: '100-999'
+      }
+    case 'numbers':
+      return {
+        hanzi: copy.numbersSetCommonHanzi,
+        label: copy.numbersSetCommonLabel,
+        detail: '1-1,000,000'
+      }
+    case 'currency':
+      return {
+        hanzi: copy.numbersSetCurrencyHanzi,
+        label: copy.numbersSetCurrencyLabel,
+        detail: 'NTD'
+      }
+    case 'math':
+      return {
+        hanzi: copy.numbersSetMathHanzi,
+        label: copy.numbersSetMathLabel,
+        detail: '+ - x /'
+      }
+  }
+}
+
+export const NumberResultsScreen = () => {
   const language = useQuizStore((state) => state.language)
   const copy = getAppCopy(language)
+  const selectedNumbersSet = useQuizStore((state) => state.selectedNumbersSet)
   const score = useQuizStore((state) => state.score)
   const totalQuestions = useQuizStore((state) => state.totalQuestions)
-  const sessionHistory = useQuizStore((state) => state.sessionHistory)
+  const sessionHistory = useQuizStore((state) => state.numberSessionHistory)
   const resetSession = useQuizStore((state) => state.resetSession)
-  const startSession = useQuizStore((state) => state.startSession)
+  const startNumbersSession = useQuizStore((state) => state.startNumbersSession)
   const { rate, speak } = useSpeech()
   const slowRate = Math.max(0.6, rate - 0.25)
   const lastReplayRef = useRef<{ key: string; at: number } | null>(null)
 
   const accuracy = Math.round((score / totalQuestions) * 100)
+  const setDisplay = getNumbersSetDisplay(selectedNumbersSet, copy)
 
   const replayText = (key: string, text: string) => {
     const now = Date.now()
@@ -50,7 +87,7 @@ export const ResultsScreen = () => {
             <LanguageToggle />
           </div>
           <p className="mt-4 text-3xl font-semibold uppercase leading-none text-[#1f2f44] sm:text-4xl">
-            {copy.classifierReview}
+            {setDisplay.label}
           </p>
           <div className="mt-4 grid gap-px border border-[#30455f] bg-[#30455f] sm:grid-cols-3">
             <div className="bg-[#f7eedf] px-3 py-2">
@@ -76,16 +113,16 @@ export const ResultsScreen = () => {
             <div className="bg-[#f7eedf] px-3 py-2">
               <div className="flex flex-wrap items-center gap-3">
                 <p className="inline-flex border border-[#1f2f44] bg-[#1f2f44] px-2 py-1 text-sm font-semibold tracking-[0.04em] text-[#f7eedf]">
-                  {copy.datasetHanzi}
+                  {setDisplay.hanzi}
                 </p>
                 <p className="text-[11px] uppercase tracking-[0.35em] text-[#5b6f84]">
-                  {copy.dataset}: {classifiers.length}
+                  {setDisplay.detail}
                 </p>
               </div>
             </div>
           </div>
           <div className="mt-6 flex flex-wrap gap-3">
-            <ActionButton onClick={startSession}>
+            <ActionButton onClick={startNumbersSession}>
               <span className="flex items-center gap-3">
                 <span>{copy.runAnotherSessionHanzi}</span>
                 <span className="text-[11px] uppercase tracking-[0.28em]">
@@ -118,23 +155,6 @@ export const ResultsScreen = () => {
           </div>
           <div className="mt-4 grid gap-px border border-[#30455f] bg-[#30455f]">
             {sessionHistory.map((result, index) => {
-              const correctClassifier = getLocalizedClassifierById(
-                result.correctClassifierId,
-                language
-              )
-              const selectedClassifier = getLocalizedClassifierById(
-                result.selectedClassifierId,
-                language
-              )
-              const exampleId = result.questionId.replace(
-                `${result.correctClassifierId}-`,
-                ''
-              )
-              const sourceExample = correctClassifier?.examples.find(
-                (example) => example.id === exampleId
-              )
-              const replayTextValue = sourceExample?.hanzi ?? result.prompt
-
               return (
                 <div
                   key={`${result.questionId}-${index}`}
@@ -147,20 +167,17 @@ export const ResultsScreen = () => {
                       </p>
                       <div className="mt-2 flex flex-wrap items-start gap-2">
                         <p className="text-sm uppercase tracking-[0.14em] text-[#7b4d32]">
-                          {copy.correct}: {correctClassifier?.hanzi} ({correctClassifier?.pinyin.surface}
-                          {correctClassifier?.pinyin.bopomofo
-                            ? ` / ${correctClassifier.pinyin.bopomofo}`
-                            : ''}
-                          )
+                          {copy.correct}: {result.correctHanzi} ({result.correctBopomofo} /{' '}
+                          {result.correctPinyin})
                         </p>
                         <SpeakButton
-                          label={`${copy.speakLabel}: ${replayTextValue}`}
+                          label={`${copy.speakLabel}: ${result.correctHanzi}`}
                           icon="speak"
                           iconOnly
                           onClick={() =>
                             void replayText(
-                              `classifier-result:${result.questionId}`,
-                              replayTextValue
+                              `number-result:${result.questionId}`,
+                              result.correctSpeechText ?? result.correctHanzi
                             )
                           }
                         />
@@ -175,7 +192,7 @@ export const ResultsScreen = () => {
                     >
                       {result.isCorrect
                         ? copy.correct
-                        : copy.selectedAnswer(selectedClassifier?.hanzi ?? '?')}
+                        : copy.selectedAnswer(result.selectedHanzi)}
                     </span>
                   </div>
                 </div>

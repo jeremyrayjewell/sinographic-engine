@@ -11,32 +11,56 @@ import {
   generateQuestion,
   recordResult
 } from '@sinographic-engine/learning-engine'
+import {
+  createNumberSessionState,
+  evaluateNumberAnswer,
+  generateMathQuestion,
+  generateNumberQuestion,
+  recordNumberResult
+} from '@sinographic-engine/number-engine'
 import type {
   AppLocale,
+  AppModule,
+  NumberQuizAnswerValue,
+  NumberQuizQuestion,
+  NumberQuizResult,
+  NumbersSetId,
   QuizQuestion,
   QuizResult
 } from '@sinographic-engine/shared-types'
 
 type ScreenStatus = 'home' | 'quiz' | 'results'
 export type SessionLengthOption = 20 | 30 | 40 | 'max'
+type NumbersRange = { min: number; max: number; maxSessionLength: number }
 
 interface QuizStore {
   status: ScreenStatus
+  activeModule: AppModule
   language: AppLocale
   currentQuestion: QuizQuestion | null
   currentResult: QuizResult | null
+  currentNumberQuestion: NumberQuizQuestion | null
+  currentNumberResult: NumberQuizResult | null
   score: number
   completedQuestions: number
   selectedDeckId: string
   selectedSessionLength: SessionLengthOption
+  selectedNumbersSet: NumbersSetId
+  selectedNumbersSessionLength: SessionLengthOption
   sessionHistory: QuizResult[]
+  numberSessionHistory: NumberQuizResult[]
   totalQuestions: number
   setLanguage: (language: AppLocale) => void
   startSession: () => void
+  startNumbersSession: () => void
   setDeck: (deckId: string) => void
   setSessionLength: (length: SessionLengthOption) => void
+  setNumbersSet: (setId: NumbersSetId) => void
+  setNumbersSessionLength: (length: SessionLengthOption) => void
   submitAnswer: (classifierId: string) => void
+  submitNumberAnswer: (value: NumberQuizAnswerValue) => void
   nextQuestion: () => void
+  nextNumberQuestion: () => void
   resetSession: () => void
 }
 
@@ -107,16 +131,70 @@ const resolveSessionLength = (
   return getLocalizedClassifiers(language).length
 }
 
+const resolveNumbersSessionLength = (
+  setId: NumbersSetId,
+  selectedSessionLength: SessionLengthOption
+) => {
+  if (selectedSessionLength !== 'max') {
+    return selectedSessionLength
+  }
+
+  return getNumbersRange(setId).maxSessionLength
+}
+
+const getNumbersRange = (setId: NumbersSetId): NumbersRange => {
+  switch (setId) {
+    case 'simple-numbers':
+      return { min: 1, max: 100, maxSessionLength: 100 }
+    case 'hundreds':
+      return { min: 100, max: 999, maxSessionLength: 100 }
+    case 'numbers':
+      return { min: 1, max: 1_000_000, maxSessionLength: 50 }
+    case 'currency':
+    case 'math':
+      return { min: 1, max: 100, maxSessionLength: 20 }
+  }
+}
+
+const buildNumbersQuestion = (
+  setId: NumbersSetId,
+  excludedValues: NumberQuizAnswerValue[]
+): NumberQuizQuestion => {
+  const range = getNumbersRange(setId)
+
+  if (setId === 'math') {
+    return generateMathQuestion({
+      excludeValues: excludedValues,
+      minResult: range.min,
+      maxResult: range.max
+    })
+  }
+
+  return generateNumberQuestion({
+    excludeValues: excludedValues.filter(
+      (value): value is number => typeof value === 'number'
+    ),
+    min: range.min,
+    max: range.max
+  })
+}
+
 export const useQuizStore = create<QuizStore>((set, get) => ({
   status: 'home',
+  activeModule: 'classifiers',
   language: 'en',
   currentQuestion: null,
   currentResult: null,
+  currentNumberQuestion: null,
+  currentNumberResult: null,
   score: 0,
   completedQuestions: 0,
   selectedDeckId: 'survival',
   selectedSessionLength: 'max',
+  selectedNumbersSet: 'simple-numbers',
+  selectedNumbersSessionLength: 20,
   sessionHistory: [],
+  numberSessionHistory: [],
   totalQuestions: 20,
   setLanguage: (language) => {
     const { currentQuestion } = get()
@@ -139,15 +217,44 @@ export const useQuizStore = create<QuizStore>((set, get) => ({
 
     set({
       status: 'quiz',
+      activeModule: 'classifiers',
       currentQuestion: buildQuestion(
         selectedDeckId,
         session.askedClassifierIds,
         language
       ),
       currentResult: null,
+      currentNumberQuestion: null,
+      currentNumberResult: null,
       score: 0,
       completedQuestions: 0,
       sessionHistory: [],
+      numberSessionHistory: [],
+      totalQuestions
+    })
+  },
+  startNumbersSession: () => {
+    const session = createNumberSessionState()
+    const { selectedNumbersSet, selectedNumbersSessionLength } = get()
+    const totalQuestions = resolveNumbersSessionLength(
+      selectedNumbersSet,
+      selectedNumbersSessionLength
+    )
+
+    set({
+      status: 'quiz',
+      activeModule: 'numbers',
+      currentQuestion: null,
+      currentResult: null,
+      currentNumberQuestion: buildNumbersQuestion(
+        selectedNumbersSet,
+        session.askedValues
+      ),
+      currentNumberResult: null,
+      score: 0,
+      completedQuestions: 0,
+      sessionHistory: [],
+      numberSessionHistory: [],
       totalQuestions
     })
   },
@@ -160,6 +267,22 @@ export const useQuizStore = create<QuizStore>((set, get) => ({
     set({
       selectedSessionLength: length,
       totalQuestions: resolveSessionLength(selectedDeckId, length, language)
+    })
+  },
+  setNumbersSet: (setId) => {
+    const { selectedNumbersSessionLength } = get()
+
+    set({
+      selectedNumbersSet: setId,
+      totalQuestions: resolveNumbersSessionLength(setId, selectedNumbersSessionLength)
+    })
+  },
+  setNumbersSessionLength: (length) => {
+    const { selectedNumbersSet } = get()
+
+    set({
+      selectedNumbersSessionLength: length,
+      totalQuestions: resolveNumbersSessionLength(selectedNumbersSet, length)
     })
   },
   submitAnswer: (classifierId) => {
@@ -188,6 +311,30 @@ export const useQuizStore = create<QuizStore>((set, get) => ({
       sessionHistory: session.results
     })
   },
+  submitNumberAnswer: (value) => {
+    const state = get()
+
+    if (!state.currentNumberQuestion || state.currentNumberResult) {
+      return
+    }
+
+    const result = evaluateNumberAnswer(state.currentNumberQuestion, value)
+    const session = recordNumberResult(
+      {
+        askedValues: state.numberSessionHistory.map((entry) => entry.correctValue),
+        score: state.score,
+        results: state.numberSessionHistory
+      },
+      result
+    )
+
+    set({
+      currentNumberResult: result,
+      score: session.score,
+      completedQuestions: session.results.length,
+      numberSessionHistory: session.results
+    })
+  },
   nextQuestion: () => {
     const state = get()
 
@@ -213,14 +360,41 @@ export const useQuizStore = create<QuizStore>((set, get) => ({
       currentResult: null
     })
   },
+  nextNumberQuestion: () => {
+    const state = get()
+
+    if (!state.currentNumberQuestion || !state.currentNumberResult) {
+      return
+    }
+
+    if (state.completedQuestions >= state.totalQuestions) {
+      set({
+        status: 'results',
+        currentNumberQuestion: null,
+        currentNumberResult: null
+      })
+      return
+    }
+
+    set({
+      currentNumberQuestion: buildNumbersQuestion(
+        state.selectedNumbersSet,
+        state.numberSessionHistory.map((entry) => entry.correctValue)
+      ),
+      currentNumberResult: null
+    })
+  },
   resetSession: () => {
     set({
       status: 'home',
       currentQuestion: null,
       currentResult: null,
+      currentNumberQuestion: null,
+      currentNumberResult: null,
       score: 0,
       completedQuestions: 0,
-      sessionHistory: []
+      sessionHistory: [],
+      numberSessionHistory: []
     })
   }
 }))
