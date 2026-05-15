@@ -38,10 +38,10 @@ export const HomeScreen = () => {
 
   const sessionLengthOptions: SessionLengthOption[] = [20, 30, 40, 'max']
   const deckHanziLabels: Record<string, string> = {
-    survival: 'å¸¸ç”¨',
-    'conversationally-solid': 'æœƒè©±',
-    'very-comfortable': 'ç†Ÿç·´',
-    'all-classifiers': 'å…¨éƒ¨'
+    survival: '常用',
+    'conversationally-solid': '會話',
+    'very-comfortable': '熟練',
+    'all-classifiers': '全部'
   }
 
   const numberSets = [
@@ -105,7 +105,7 @@ export const HomeScreen = () => {
           </p>
         </div>
         <span className="text-3xl leading-none text-[#7b4d32]">
-          {open ? '−' : '+'}
+          {open ? '-' : '+'}
         </span>
       </button>
 
@@ -160,7 +160,7 @@ export const HomeScreen = () => {
               </p>
             </div>
             <span className="text-3xl leading-none text-[#7b4d32]">
-              {grammarOpen ? 'âˆ’' : '+'}
+              {grammarOpen ? '-' : '+'}
             </span>
           </button>
 
@@ -181,7 +181,7 @@ export const HomeScreen = () => {
                     </p>
                   </div>
                   <span className="text-3xl leading-none text-[#7b4d32]">
-                    {classifierOpen ? 'âˆ’' : '+'}
+                    {classifierOpen ? '-' : '+'}
                   </span>
                 </button>
 
@@ -305,7 +305,7 @@ export const HomeScreen = () => {
               </p>
             </div>
             <span className="text-3xl leading-none text-[#7b4d32]">
-              {vocabularyOpen ? 'âˆ’' : '+'}
+              {vocabularyOpen ? '-' : '+'}
             </span>
           </button>
 
@@ -326,7 +326,7 @@ export const HomeScreen = () => {
                     </p>
                   </div>
                   <span className="text-3xl leading-none text-[#7b4d32]">
-                    {numbersOpen ? 'âˆ’' : '+'}
+                    {numbersOpen ? '-' : '+'}
                   </span>
                 </button>
 
