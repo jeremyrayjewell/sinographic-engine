@@ -59,6 +59,9 @@ importers:
       '@sinographic-engine/learning-engine':
         specifier: workspace:*
         version: link:../../packages/learning-engine
+      '@sinographic-engine/number-engine':
+        specifier: workspace:*
+        version: link:../../packages/number-engine
       '@sinographic-engine/shared-types':
         specifier: workspace:*
         version: link:../../packages/shared-types
@@ -92,6 +95,12 @@ importers:
         version: link:../shared-types
 
   packages/learning-engine:
+    dependencies:
+      '@sinographic-engine/shared-types':
+        specifier: workspace:*
+        version: link:../shared-types
+
+  packages/number-engine:
     dependencies:
       '@sinographic-engine/shared-types':
         specifier: workspace:*
