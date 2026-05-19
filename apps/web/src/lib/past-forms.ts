@@ -36,6 +36,7 @@ export type PastExample = {
   answerId: string
   answerIds?: string[]
   distractorAnswerIds?: string[]
+  feedbackHint?: string
   tags?: PastExampleTag[]
   incorrect?: boolean
 }
@@ -50,9 +51,24 @@ export type PastSection = {
   pinyin: string
   meaning: string
   concept: string
+  goal?: string
+  decisionPrompt?: string
+  lookFor?: string[]
+  previewExamples?: string[]
   examples: PastExample[]
   exampleTags?: PastExampleTag[]
   notes: string[]
+}
+
+type LocalizedPastSectionCopy = {
+  label: string
+  meaning: string
+  concept: string
+  notes: string[]
+  goal?: string
+  decisionPrompt?: string
+  lookFor?: string[]
+  previewExamples?: string[]
 }
 
 const pastAnswers: PastAnswer[] = [
@@ -86,28 +102,28 @@ const pastSpanish = {
     zai: 'estar haciendo'
   } as Record<string, string>,
   examples: {
-    'mei-wo-mei-qu': 'No fui.',
-    'mei-wo-meiyou-chi': 'No comí.',
-    'mei-ta-mei-lai': 'Ella no vino.',
-    'le-wo-chi-le': 'Comí / ya he comido.',
+    'mei-wo-mei-qu': 'Ayer no fui.',
+    'mei-wo-meiyou-chi': 'Ayer no comí.',
+    'mei-ta-mei-lai': 'Ella no vino ayer.',
+    'le-wo-chi-le': 'Acabo de comer / ya comí.',
     'le-wo-hui-jia-le': 'Me fui a casa / ya estoy en casa.',
     'le-jintian-xia-yu-le': 'Hoy empezó a llover.',
-    'guo-wo-qu-guo-taiwan': 'He estado en Taiwán.',
+    'guo-wo-qu-guo-taiwan': 'He estado en Taiwán varias veces.',
     'guo-ni-kan-guo-ma': '¿Lo has visto antes?',
     'guo-wo-meiyou-kan-guo': 'No lo he visto antes.',
     'guo-wo-meiyou-guo': 'Incorrecto / incompleto por sí solo.',
     'yiqian-wo-yiqian-changchang-qu-canting':
-      'Antes solía ir a este restaurante con frecuencia.',
+      'Antes solía ir a este restaurante con frecuencia, pero ahora rara vez voy.',
     'yiqian-wo-yiqian-changchang-lai-dian':
-      'Antes solía venir a esta tienda con frecuencia.',
+      'Antes solía venir a esta tienda con frecuencia, pero ahora rara vez vengo.',
     'yiqian-wo-yiqian-qu':
-      'Fui antes / solía ir, según el contexto.',
+      'Antes iba, pero ahora no.',
     'yiqian-wo-changchang-qu':
-      'Voy a menudo / iba a menudo, según el contexto.',
-    'yiqian-wo-yiqian-changchang-qu': 'Antes solía ir a menudo.',
-    'contrast-wo-bu-qu': 'No voy.',
-    'contrast-wo-mei-qu': 'No fui.',
-    'contrast-wo-chi-le': 'Comí / ya he comido.',
+      'Voy a menudo.',
+    'yiqian-wo-yiqian-changchang-qu': 'Antes solía ir a menudo, pero ahora no.',
+    'contrast-wo-bu-qu': 'No voy mañana.',
+    'contrast-wo-mei-qu': 'No fui ayer.',
+    'contrast-wo-chi-le': 'Comí ayer.',
     'contrast-wo-chi-guo': 'Lo he comido antes.',
     'contrast-wo-zai-gongzuo':
       'Estoy trabajando / estaba trabajando, según el contexto.',
@@ -126,7 +142,41 @@ const pastSpanish = {
     'mixed-wo-meiyou-chi-guo': 'No lo he comido antes.',
     'mixed-mingtian-bu-chi': 'No voy a comer mañana.',
     'mixed-zuotian-mei-chi': 'No comí ayer.',
-    'mixed-yiqian-changchang-qu': 'Antes solía ir a menudo.'
+    'mixed-yiqian-changchang-qu': 'Antes solía ir a menudo, pero ahora no.'
+  } as Record<string, string>,
+  feedbackHints: {
+    'bu-vs-mei-mingtian-bu-chi':
+      '明天 apunta hacia adelante, así que la oración habla de un plan o intención.',
+    'bu-vs-mei-zuotian-mei-chi':
+      '昨天 apunta a algo que no ocurrió en el pasado.',
+    'bu-vs-mei-ta-meiyou-lai':
+      '昨天 hace que la oración sea sobre algo que no ocurrió.',
+    'le-vs-guo-zuotian-wo-chi-le':
+      '昨天 normalmente apunta a un evento completado, no a experiencia general.',
+    'le-vs-guo-yiqian-wo-chi-guo':
+      '以前 puede apuntar a experiencia cuando preguntas si algo ha ocurrido antes.',
+    'le-vs-guo-kan-le-dianying':
+      'Esta oración enfoca ver la película como un evento completado.',
+    'le-vs-guo-kan-guo-dianying':
+      '過 enfoca si ya tienes esa experiencia antes.',
+    'negexp-wo-meiyou-chi-guo':
+      '沒有 + verbo + 過 significa que no has tenido esa experiencia.',
+    'negexp-ta-meiyou-qu-guo':
+      '沒有去過 significa que ella no ha ido allí antes.',
+    'negexp-ni-meiyou-kan-guo-ma':
+      '沒有看過 pregunta por una experiencia que no ha ocurrido antes.',
+    'mixed-zuotian-wo-chi-le':
+      '昨天 te orienta hacia un evento completado.',
+    'mixed-yiqian-wo-chi-guo':
+      '以前 aquí apunta a experiencia previa, no solo a una acción de ayer.',
+    'mixed-wo-meiyou-chi-guo':
+      '沒有 + verbo + 過 es la forma básica para experiencia negada.',
+    'mixed-mingtian-bu-chi':
+      '明天 apunta al futuro, así que no es una acción pasada que no ocurrió.',
+    'mixed-zuotian-mei-chi':
+      '昨天 apunta al pasado, así que 沒 / 沒有 encaja mejor que 不.',
+    'mixed-yiqian-changchang-qu':
+      '以前常常 presenta una rutina anterior o costumbre pasada.'
   } as Record<string, string>,
   sections: {
     mei: {
@@ -203,19 +253,15 @@ const pastSpanish = {
         'No trates 沒有過 solo como una frase completa.'
       ]
     },
-    'mixed-review': {
-      label: 'Práctica mixta del pasado',
-      meaning: 'repaso',
-      concept: 'Practica formas básicas del pasado sin una pista de familia gramatical.',
-      notes: [
-        'Lee primero la oración completa.',
-        'La respuesta depende del contexto, no del nombre del conjunto.'
-      ]
-    },
     'travel-places': {
       label: 'Viajes y lugares',
       meaning: 'lugares, ir y experiencia',
       concept: 'Practica formas relacionadas con el pasado en contextos de viajes y lugares.',
+      goal: 'Practicar oraciones cortas sobre viajes, visitas y lugares.',
+      decisionPrompt:
+        'Lee el contexto y elige la forma que hace que la oración suene natural.',
+      lookFor: ['昨天', '以前', '沒有', '過'],
+      previewExamples: ['我去過台灣', '我昨天去了台北', '我以前常常去那家店'],
       notes: [
         'Usa toda la oración para decidir si ocurrió, no ocurrió o fue una experiencia.',
         'Los lugares suelen mezclar 去, 過, 沒有 y 以前.'
@@ -225,6 +271,11 @@ const pastSpanish = {
       label: 'Comida y vida diaria',
       meaning: 'comida y acciones cotidianas',
       concept: 'Practica formas del pasado con acciones de todos los días.',
+      goal: 'Practicar oraciones sobre comida y acciones cotidianas.',
+      decisionPrompt:
+        'Usa el contexto de la oración para decidir qué forma encaja.',
+      lookFor: ['昨天', '明天', '以前', '沒有'],
+      previewExamples: ['昨天我吃了', '我以前吃過', '我沒有吃過'],
       notes: [
         'Comida y vida diaria ayudan a contrastar 了, 過, 不 y 沒.',
         'Lee la palabra de tiempo antes de elegir.'
@@ -234,33 +285,59 @@ const pastSpanish = {
       label: 'Antes y ahora',
       meaning: 'antes, ahora y rutinas que cambiaron',
       concept: 'Practica hábitos anteriores, experiencia previa y cambios de rutina.',
+      goal: 'Practicar rutinas, costumbres y cambios de situación.',
+      decisionPrompt:
+        'Observa si la oración suena como rutina, cambio o contexto anterior.',
+      lookFor: ['以前', '常常', '現在', '了'],
+      previewExamples: ['我以前常常去', '我以前去', '我常常去'],
       notes: [
         '以前, 常常 y 以前常常 pueden señalar hábitos pasados.',
         'Algunas oraciones dependen más del contexto que de una marca de tiempo verbal.'
       ]
     },
     'past-or-not': {
-      label: '¿Pasado o no?',
+      label: 'Planes vs cosas que no ocurrieron',
       meaning: 'planes, hechos y cosas que no ocurrieron',
       concept: 'Decide si la oración habla de intención, negación general o algo que no ocurrió.',
+      goal: 'Practicar planes, decisiones y cosas que no pasaron.',
+      decisionPrompt:
+        'Lee el marco temporal antes de elegir.',
+      lookFor: ['明天', '昨天', '不', '沒'],
+      previewExamples: ['我明天不吃', '我昨天沒吃', '她昨天沒有來'],
       notes: [
         '不 suele apuntar al futuro, intención o negación general.',
         '沒 y 沒有 suelen marcar acciones que no ocurrieron.'
       ]
     },
     'happened-or-experienced': {
-      label: '¿Ocurrió o experiencia?',
+      label: 'Un evento o experiencia de vida',
       meaning: 'eventos completados y experiencia previa',
       concept: 'Practica la diferencia entre algo que ocurrió y algo vivido antes.',
+      goal: 'Practicar eventos, recuerdos y experiencia personal.',
+      decisionPrompt:
+        'Elige según lo que la oración intenta comunicar.',
+      lookFor: ['昨天', '以前', '沒有', '過'],
+      previewExamples: ['昨天我吃了', '我以前吃過', '我沒有吃過'],
       notes: [
         '了 enfoca un evento o cambio.',
         '過 enfoca experiencia, incluso 沒有 + verbo + 過.'
       ]
+    },
+    'mixed-review': {
+      label: 'Sin pistas: pasado mixto',
+      meaning: 'repaso mixto',
+      concept: 'Practica formas básicas del pasado sin una pista de familia gramatical.',
+      goal: 'Repasar formas básicas relacionadas con el pasado sin pistas de categoría.',
+      decisionPrompt:
+        'Lee toda la oración y elige la forma más natural.',
+      lookFor: ['昨天', '明天', '以前', '沒有', '常常'],
+      previewExamples: ['昨天我吃了', '我明天不吃', '我以前常常去'],
+      notes: [
+        'Lee primero la oración completa.',
+        'La respuesta depende del contexto, no del nombre del conjunto.'
+      ]
     }
-  } as Record<
-    string,
-    { label: string; meaning: string; concept: string; notes: string[] }
-  >
+  } as Record<string, LocalizedPastSectionCopy>
 }
 
 const localizeAnswerMeaning = (answer: PastAnswer, locale: AppLocale) =>
@@ -268,6 +345,11 @@ const localizeAnswerMeaning = (answer: PastAnswer, locale: AppLocale) =>
 
 const localizeExampleMeaning = (example: PastExample, locale: AppLocale) =>
   locale === 'es-419' ? pastSpanish.examples[example.id] ?? example.english : example.english
+
+const localizeFeedbackHint = (example: PastExample, locale: AppLocale) =>
+  locale === 'es-419'
+    ? pastSpanish.feedbackHints[example.id] ?? example.feedbackHint
+    : example.feedbackHint
 
 export const localizePastSection = (section: PastSection, locale: AppLocale) => {
   const sectionCopy = locale === 'es-419' ? pastSpanish.sections[section.id] : null
@@ -278,10 +360,15 @@ export const localizePastSection = (section: PastSection, locale: AppLocale) => 
     label: sectionCopy?.label ?? section.label,
     meaning: sectionCopy?.meaning ?? section.meaning,
     concept: sectionCopy?.concept ?? section.concept,
+    goal: sectionCopy?.goal ?? section.goal,
+    decisionPrompt: sectionCopy?.decisionPrompt ?? section.decisionPrompt,
+    lookFor: sectionCopy?.lookFor ?? section.lookFor,
+    previewExamples: sectionCopy?.previewExamples ?? section.previewExamples,
     notes: sectionCopy?.notes ?? section.notes,
     examples: sectionExamples.map((example) => ({
       ...example,
-      english: localizeExampleMeaning(example, locale)
+      english: localizeExampleMeaning(example, locale),
+      feedbackHint: localizeFeedbackHint(example, locale)
     }))
   }
 }
@@ -298,39 +385,39 @@ export const pastSections: PastSection[] = [
     examples: [
       {
         id: 'mei-wo-mei-qu',
-        hanzi: '我沒去',
-        pinyin: 'wǒ méi qù',
-        bopomofo: 'ㄨㄛˇ ㄇㄟˊ ㄑㄩˋ',
-        english: "I didn't go.",
-        promptHanzi: '我___去',
-        promptPinyin: 'wǒ ___ qù',
-        promptBopomofo: 'ㄨㄛˇ ___ ㄑㄩˋ',
+        hanzi: '我昨天沒去',
+        pinyin: 'wǒ zuótiān méi qù',
+        bopomofo: 'ㄨㄛˇ ㄗㄨㄛˊ ㄊㄧㄢ ㄇㄟˊ ㄑㄩˋ',
+        english: "I didn't go yesterday.",
+        promptHanzi: '我昨天___去',
+        promptPinyin: 'wǒ zuótiān ___ qù',
+        promptBopomofo: 'ㄨㄛˇ ㄗㄨㄛˊ ㄊㄧㄢ ___ ㄑㄩˋ',
         answerId: 'mei',
         answerIds: ['mei', 'meiyou'],
         tags: ['negation', 'travel', 'daily-life']
       },
       {
         id: 'mei-wo-meiyou-chi',
-        hanzi: '我沒有吃',
-        pinyin: 'wǒ méiyǒu chī',
-        bopomofo: 'ㄨㄛˇ ㄇㄟˊ ㄧㄡˇ ㄔ',
-        english: "I didn't eat.",
-        promptHanzi: '我___吃',
-        promptPinyin: 'wǒ ___ chī',
-        promptBopomofo: 'ㄨㄛˇ ___ ㄔ',
+        hanzi: '我昨天沒有吃',
+        pinyin: 'wǒ zuótiān méiyǒu chī',
+        bopomofo: 'ㄨㄛˇ ㄗㄨㄛˊ ㄊㄧㄢ ㄇㄟˊ ㄧㄡˇ ㄔ',
+        english: "I didn't eat yesterday.",
+        promptHanzi: '我昨天___吃',
+        promptPinyin: 'wǒ zuótiān ___ chī',
+        promptBopomofo: 'ㄨㄛˇ ㄗㄨㄛˊ ㄊㄧㄢ ___ ㄔ',
         answerId: 'meiyou',
         answerIds: ['mei', 'meiyou'],
         tags: ['negation', 'food', 'daily-life']
       },
       {
         id: 'mei-ta-mei-lai',
-        hanzi: '她沒來',
-        pinyin: 'tā méi lái',
-        bopomofo: 'ㄊㄚ ㄇㄟˊ ㄌㄞˊ',
-        english: "She didn't come.",
-        promptHanzi: '她___來',
-        promptPinyin: 'tā ___ lái',
-        promptBopomofo: 'ㄊㄚ ___ ㄌㄞˊ',
+        hanzi: '她昨天沒來',
+        pinyin: 'tā zuótiān méi lái',
+        bopomofo: 'ㄊㄚ ㄗㄨㄛˊ ㄊㄧㄢ ㄇㄟˊ ㄌㄞˊ',
+        english: "She didn't come yesterday.",
+        promptHanzi: '她昨天___來',
+        promptPinyin: 'tā zuótiān ___ lái',
+        promptBopomofo: 'ㄊㄚ ㄗㄨㄛˊ ㄊㄧㄢ ___ ㄌㄞˊ',
         answerId: 'mei',
         answerIds: ['mei', 'meiyou'],
         tags: ['negation', 'daily-life']
@@ -352,13 +439,13 @@ export const pastSections: PastSection[] = [
     examples: [
       {
         id: 'le-wo-chi-le',
-        hanzi: '我吃了',
-        pinyin: 'wǒ chī le',
-        bopomofo: 'ㄨㄛˇ ㄔ ㄌㄜ˙',
-        english: 'I ate / I have eaten.',
-        promptHanzi: '我吃___',
-        promptPinyin: 'wǒ chī ___',
-        promptBopomofo: 'ㄨㄛˇ ㄔ ___',
+        hanzi: '我剛剛吃了',
+        pinyin: 'wǒ gānggāng chī le',
+        bopomofo: 'ㄨㄛˇ ㄍㄤ ㄍㄤ ㄔ ㄌㄜ˙',
+        english: 'I just ate / I have just eaten.',
+        promptHanzi: '我剛剛吃___',
+        promptPinyin: 'wǒ gānggāng chī ___',
+        promptBopomofo: 'ㄨㄛˇ ㄍㄤ ㄍㄤ ㄔ ___',
         answerId: 'le',
         tags: ['completed-action', 'food', 'daily-life']
       },
@@ -403,13 +490,13 @@ export const pastSections: PastSection[] = [
     examples: [
       {
         id: 'guo-wo-qu-guo-taiwan',
-        hanzi: '我去過台灣',
-        pinyin: 'wǒ qù guò táiwān',
-        bopomofo: 'ㄨㄛˇ ㄑㄩˋ ㄍㄨㄛˋ ㄊㄞˊ ㄨㄢ',
-        english: "I've been to Taiwan.",
-        promptHanzi: '我去___台灣',
-        promptPinyin: 'wǒ qù ___ táiwān',
-        promptBopomofo: 'ㄨㄛˇ ㄑㄩˋ ___ ㄊㄞˊ ㄨㄢ',
+        hanzi: '我去過台灣好幾次',
+        pinyin: 'wǒ qù guò táiwān hǎo jǐ cì',
+        bopomofo: 'ㄨㄛˇ ㄑㄩˋ ㄍㄨㄛˋ ㄊㄞˊ ㄨㄢ ㄏㄠˇ ㄐㄧˇ ㄘˋ',
+        english: "I've been to Taiwan several times.",
+        promptHanzi: '我去___台灣好幾次',
+        promptPinyin: 'wǒ qù ___ táiwān hǎo jǐ cì',
+        promptBopomofo: 'ㄨㄛˇ ㄑㄩˋ ___ ㄊㄞˊ ㄨㄢ ㄏㄠˇ ㄐㄧˇ ㄘˋ',
         answerId: 'guo',
         tags: ['experience', 'travel']
       },
@@ -419,9 +506,9 @@ export const pastSections: PastSection[] = [
         pinyin: 'nǐ kàn guò ma?',
         bopomofo: 'ㄋㄧˇ ㄎㄢˋ ㄍㄨㄛˋ ㄇㄚ˙',
         english: 'Have you seen it before?',
-        promptHanzi: '你看___嗎？',
-        promptPinyin: 'nǐ kàn ___ ma?',
-        promptBopomofo: 'ㄋㄧˇ ㄎㄢˋ ___ ㄇㄚ˙',
+        promptHanzi: '你以前看___嗎？',
+        promptPinyin: 'nǐ yǐqián kàn ___ ma?',
+        promptBopomofo: 'ㄋㄧˇ ㄧˇ ㄑㄧㄢˊ ㄎㄢˋ ___ ㄇㄚ˙',
         answerId: 'guo',
         tags: ['experience', 'daily-life']
       },
@@ -468,61 +555,65 @@ export const pastSections: PastSection[] = [
     examples: [
       {
         id: 'yiqian-wo-yiqian-changchang-qu-canting',
-        hanzi: '我以前常常去這家餐廳',
-        pinyin: 'wǒ yǐqián chángcháng qù zhè jiā cāntīng',
-        bopomofo: 'ㄨㄛˇ ㄧˇ ㄑㄧㄢˊ ㄔㄤˊ ㄔㄤˊ ㄑㄩˋ ㄓㄜˋ ㄐㄧㄚ ㄘㄢ ㄊㄧㄥ',
-        english: 'I used to go to this restaurant often.',
-        promptHanzi: '我___去這家餐廳',
-        promptPinyin: 'wǒ ___ qù zhè jiā cāntīng',
-        promptBopomofo: 'ㄨㄛˇ ___ ㄑㄩˋ ㄓㄜˋ ㄐㄧㄚ ㄘㄢ ㄊㄧㄥ',
+        hanzi: '我以前常常去這家餐廳，現在很少去',
+        pinyin: 'wǒ yǐqián chángcháng qù zhè jiā cāntīng, xiànzài hěn shǎo qù',
+        bopomofo:
+          'ㄨㄛˇ ㄧˇ ㄑㄧㄢˊ ㄔㄤˊ ㄔㄤˊ ㄑㄩˋ ㄓㄜˋ ㄐㄧㄚ ㄘㄢ ㄊㄧㄥ ㄒㄧㄢˋ ㄗㄞˋ ㄏㄣˇ ㄕㄠˇ ㄑㄩˋ',
+        english: 'I used to go to this restaurant often, but now I rarely go.',
+        promptHanzi: '我___去這家餐廳，現在很少去',
+        promptPinyin: 'wǒ ___ qù zhè jiā cāntīng, xiànzài hěn shǎo qù',
+        promptBopomofo:
+          'ㄨㄛˇ ___ ㄑㄩˋ ㄓㄜˋ ㄐㄧㄚ ㄘㄢ ㄊㄧㄥ ㄒㄧㄢˋ ㄗㄞˋ ㄏㄣˇ ㄕㄠˇ ㄑㄩˋ',
         answerId: 'yiqian-changchang',
         tags: ['habitual-past', 'travel', 'routine', 'before-vs-now']
       },
       {
         id: 'yiqian-wo-yiqian-changchang-lai-dian',
-        hanzi: '我以前常常來這家店',
-        pinyin: 'wǒ yǐqián chángcháng lái zhè jiā diàn',
-        bopomofo: 'ㄨㄛˇ ㄧˇ ㄑㄧㄢˊ ㄔㄤˊ ㄔㄤˊ ㄌㄞˊ ㄓㄜˋ ㄐㄧㄚ ㄉㄧㄢˋ',
-        english: 'I used to come to this shop often.',
-        promptHanzi: '我___來這家店',
-        promptPinyin: 'wǒ ___ lái zhè jiā diàn',
-        promptBopomofo: 'ㄨㄛˇ ___ ㄌㄞˊ ㄓㄜˋ ㄐㄧㄚ ㄉㄧㄢˋ',
+        hanzi: '我以前常常來這家店，現在很少來',
+        pinyin: 'wǒ yǐqián chángcháng lái zhè jiā diàn, xiànzài hěn shǎo lái',
+        bopomofo:
+          'ㄨㄛˇ ㄧˇ ㄑㄧㄢˊ ㄔㄤˊ ㄔㄤˊ ㄌㄞˊ ㄓㄜˋ ㄐㄧㄚ ㄉㄧㄢˋ ㄒㄧㄢˋ ㄗㄞˋ ㄏㄣˇ ㄕㄠˇ ㄌㄞˊ',
+        english: 'I used to come to this shop often, but now I rarely come.',
+        promptHanzi: '我___來這家店，現在很少來',
+        promptPinyin: 'wǒ ___ lái zhè jiā diàn, xiànzài hěn shǎo lái',
+        promptBopomofo:
+          'ㄨㄛˇ ___ ㄌㄞˊ ㄓㄜˋ ㄐㄧㄚ ㄉㄧㄢˋ ㄒㄧㄢˋ ㄗㄞˋ ㄏㄣˇ ㄕㄠˇ ㄌㄞˊ',
         answerId: 'yiqian-changchang',
         tags: ['habitual-past', 'routine', 'daily-life', 'before-vs-now']
       },
       {
         id: 'yiqian-wo-yiqian-qu',
-        hanzi: '我以前去',
-        pinyin: 'wǒ yǐqián qù',
-        bopomofo: 'ㄨㄛˇ ㄧˇ ㄑㄧㄢˊ ㄑㄩˋ',
-        english: 'I went before / I used to go, depending on context.',
-        promptHanzi: '我___去',
-        promptPinyin: 'wǒ ___ qù',
-        promptBopomofo: 'ㄨㄛˇ ___ ㄑㄩˋ',
+        hanzi: '我以前去，現在不去了',
+        pinyin: 'wǒ yǐqián qù, xiànzài bú qù le',
+        bopomofo: 'ㄨㄛˇ ㄧˇ ㄑㄧㄢˊ ㄑㄩˋ ㄒㄧㄢˋ ㄗㄞˋ ㄅㄨˊ ㄑㄩˋ ㄌㄜ˙',
+        english: "I used to go, but I don't now.",
+        promptHanzi: '我___去，現在不去了',
+        promptPinyin: 'wǒ ___ qù, xiànzài bú qù le',
+        promptBopomofo: 'ㄨㄛˇ ___ ㄑㄩˋ ㄒㄧㄢˋ ㄗㄞˋ ㄅㄨˊ ㄑㄩˋ ㄌㄜ˙',
         answerId: 'yiqian',
         tags: ['habitual-past', 'travel', 'routine', 'before-vs-now']
       },
       {
         id: 'yiqian-wo-changchang-qu',
-        hanzi: '我常常去',
-        pinyin: 'wǒ chángcháng qù',
-        bopomofo: 'ㄨㄛˇ ㄔㄤˊ ㄔㄤˊ ㄑㄩˋ',
-        english: 'I often go / I often went, depending on context.',
-        promptHanzi: '我___去',
-        promptPinyin: 'wǒ ___ qù',
-        promptBopomofo: 'ㄨㄛˇ ___ ㄑㄩˋ',
+        hanzi: '我常常去，差不多每個禮拜',
+        pinyin: 'wǒ chángcháng qù, chàbùduō měi ge lǐbài',
+        bopomofo: 'ㄨㄛˇ ㄔㄤˊ ㄔㄤˊ ㄑㄩˋ ㄔㄚˋ ㄅㄨˋ ㄉㄨㄛ ㄇㄟˇ ㄍㄜ˙ ㄌㄧˇ ㄅㄞˋ',
+        english: 'I often go.',
+        promptHanzi: '我___去，差不多每個禮拜',
+        promptPinyin: 'wǒ ___ qù, chàbùduō měi ge lǐbài',
+        promptBopomofo: 'ㄨㄛˇ ___ ㄑㄩˋ ㄔㄚˋ ㄅㄨˋ ㄉㄨㄛ ㄇㄟˇ ㄍㄜ˙ ㄌㄧˇ ㄅㄞˋ',
         answerId: 'changchang',
         tags: ['habitual-past', 'routine', 'before-vs-now']
       },
       {
         id: 'yiqian-wo-yiqian-changchang-qu',
-        hanzi: '我以前常常去',
-        pinyin: 'wǒ yǐqián chángcháng qù',
-        bopomofo: 'ㄨㄛˇ ㄧˇ ㄑㄧㄢˊ ㄔㄤˊ ㄔㄤˊ ㄑㄩˋ',
-        english: 'I used to go often.',
-        promptHanzi: '我___去',
-        promptPinyin: 'wǒ ___ qù',
-        promptBopomofo: 'ㄨㄛˇ ___ ㄑㄩˋ',
+        hanzi: '我以前常常去，現在不去了',
+        pinyin: 'wǒ yǐqián chángcháng qù, xiànzài bú qù le',
+        bopomofo: 'ㄨㄛˇ ㄧˇ ㄑㄧㄢˊ ㄔㄤˊ ㄔㄤˊ ㄑㄩˋ ㄒㄧㄢˋ ㄗㄞˋ ㄅㄨˊ ㄑㄩˋ ㄌㄜ˙',
+        english: "I used to go often, but I don't now.",
+        promptHanzi: '我___去，現在不去了',
+        promptPinyin: 'wǒ ___ qù, xiànzài bú qù le',
+        promptBopomofo: 'ㄨㄛˇ ___ ㄑㄩˋ ㄒㄧㄢˋ ㄗㄞˋ ㄅㄨˊ ㄑㄩˋ ㄌㄜ˙',
         answerId: 'yiqian-changchang',
         tags: ['habitual-past', 'routine', 'before-vs-now']
       }
@@ -552,6 +643,8 @@ export const pastSections: PastSection[] = [
         promptBopomofo: 'ㄨㄛˇ ㄇㄧㄥˊ ㄊㄧㄢ ___ ㄔ',
         answerId: 'bu',
         distractorAnswerIds: ['mei', 'meiyou'],
+        feedbackHint:
+          '明天 points forward, so this is a plan or intention rather than a past non-event.',
         tags: ['negation', 'food', 'daily-life']
       },
       {
@@ -566,6 +659,7 @@ export const pastSections: PastSection[] = [
         answerId: 'mei',
         answerIds: ['mei', 'meiyou'],
         distractorAnswerIds: ['bu'],
+        feedbackHint: '昨天 points to something that did not happen in the past.',
         tags: ['negation', 'food', 'daily-life']
       },
       {
@@ -580,6 +674,7 @@ export const pastSections: PastSection[] = [
         answerId: 'meiyou',
         answerIds: ['mei', 'meiyou'],
         distractorAnswerIds: ['bu'],
+        feedbackHint: '昨天 makes this about something that did not happen.',
         tags: ['negation', 'daily-life']
       }
     ],
@@ -608,6 +703,8 @@ export const pastSections: PastSection[] = [
         promptBopomofo: 'ㄗㄨㄛˊ ㄊㄧㄢ ㄨㄛˇ ㄔ ___',
         answerId: 'le',
         distractorAnswerIds: ['guo'],
+        feedbackHint:
+          '昨天 usually points to a completed event, not general life experience.',
         tags: ['completed-action', 'food', 'daily-life']
       },
       {
@@ -621,6 +718,8 @@ export const pastSections: PastSection[] = [
         promptBopomofo: 'ㄨㄛˇ ㄧˇ ㄑㄧㄢˊ ㄔ ___',
         answerId: 'guo',
         distractorAnswerIds: ['le'],
+        feedbackHint:
+          '以前 can point to experience when the sentence asks whether something has happened before.',
         tags: ['experience', 'food', 'daily-life', 'before-vs-now']
       },
       {
@@ -634,6 +733,7 @@ export const pastSections: PastSection[] = [
         promptBopomofo: 'ㄨㄛˇ ㄎㄢˋ ___ ㄓㄜˋ ㄅㄨˋ ㄉㄧㄢˋ ㄧㄥˇ',
         answerId: 'le',
         distractorAnswerIds: ['guo'],
+        feedbackHint: 'This sentence treats watching the movie as a completed event.',
         tags: ['completed-action', 'daily-life']
       },
       {
@@ -647,6 +747,7 @@ export const pastSections: PastSection[] = [
         promptBopomofo: 'ㄨㄛˇ ㄎㄢˋ ___ ㄓㄜˋ ㄅㄨˋ ㄉㄧㄢˋ ㄧㄥˇ',
         answerId: 'guo',
         distractorAnswerIds: ['le'],
+        feedbackHint: '過 focuses on whether you have that experience before.',
         tags: ['experience', 'daily-life']
       }
     ],
@@ -675,6 +776,8 @@ export const pastSections: PastSection[] = [
         promptBopomofo: 'ㄨㄛˇ ㄇㄟˊ ㄧㄡˇ ㄔ ___',
         answerId: 'guo',
         distractorAnswerIds: ['le'],
+        feedbackHint:
+          '沒有 + verb + 過 means you have not had that experience before.',
         tags: ['experience', 'negated-experience', 'food', 'daily-life']
       },
       {
@@ -688,6 +791,7 @@ export const pastSections: PastSection[] = [
         promptBopomofo: 'ㄊㄚ ㄇㄟˊ ㄧㄡˇ ㄑㄩˋ ___',
         answerId: 'guo',
         distractorAnswerIds: ['le'],
+        feedbackHint: '沒有去過 means she has not been there before.',
         tags: ['experience', 'negated-experience', 'travel']
       },
       {
@@ -701,6 +805,8 @@ export const pastSections: PastSection[] = [
         promptBopomofo: 'ㄋㄧˇ ㄇㄟˊ ㄧㄡˇ ㄎㄢˋ ___ ㄇㄚ˙',
         answerId: 'guo',
         distractorAnswerIds: ['le'],
+        feedbackHint:
+          '沒有看過 asks about an experience that has not happened before.',
         tags: ['experience', 'negated-experience', 'daily-life']
       }
     ],
@@ -729,6 +835,7 @@ export const pastSections: PastSection[] = [
         promptBopomofo: 'ㄗㄨㄛˊ ㄊㄧㄢ ㄨㄛˇ ㄔ ___',
         answerId: 'le',
         distractorAnswerIds: ['guo', 'mei', 'bu'],
+        feedbackHint: '昨天 orients you toward a completed event.',
         tags: ['completed-action', 'food', 'daily-life']
       },
       {
@@ -742,6 +849,8 @@ export const pastSections: PastSection[] = [
         promptBopomofo: 'ㄨㄛˇ ㄧˇ ㄑㄧㄢˊ ㄔ ___',
         answerId: 'guo',
         distractorAnswerIds: ['le', 'mei', 'bu'],
+        feedbackHint:
+          '以前 here points to prior experience, not just yesterday’s event.',
         tags: ['experience', 'food', 'daily-life', 'before-vs-now']
       },
       {
@@ -755,6 +864,8 @@ export const pastSections: PastSection[] = [
         promptBopomofo: 'ㄨㄛˇ ㄇㄟˊ ㄧㄡˇ ㄔ ___',
         answerId: 'guo',
         distractorAnswerIds: ['le', 'mei', 'bu'],
+        feedbackHint:
+          '沒有 + verb + 過 is the basic shape for negated experience.',
         tags: ['experience', 'negated-experience', 'food', 'daily-life']
       },
       {
@@ -768,6 +879,8 @@ export const pastSections: PastSection[] = [
         promptBopomofo: 'ㄨㄛˇ ㄇㄧㄥˊ ㄊㄧㄢ ___ ㄔ',
         answerId: 'bu',
         distractorAnswerIds: ['mei', 'meiyou'],
+        feedbackHint:
+          '明天 points to the future, so this is not a past action that failed to happen.',
         tags: ['negation', 'food', 'daily-life']
       },
       {
@@ -782,6 +895,8 @@ export const pastSections: PastSection[] = [
         answerId: 'mei',
         answerIds: ['mei', 'meiyou'],
         distractorAnswerIds: ['bu', 'le', 'guo'],
+        feedbackHint:
+          '昨天 points to the past, so 沒 / 沒有 fits better than 不.',
         tags: ['negation', 'food', 'daily-life']
       },
       {
@@ -789,12 +904,13 @@ export const pastSections: PastSection[] = [
         hanzi: '我以前常常去',
         pinyin: 'wǒ yǐqián chángcháng qù',
         bopomofo: 'ㄨㄛˇ ㄧˇ ㄑㄧㄢˊ ㄔㄤˊ ㄔㄤˊ ㄑㄩˋ',
-        english: 'I used to go often.',
-        promptHanzi: '我___去。',
-        promptPinyin: 'wǒ ___ qù.',
-        promptBopomofo: 'ㄨㄛˇ ___ ㄑㄩˋ',
+        english: "I used to go often, but I don't now.",
+        promptHanzi: '我___去，現在不去了。',
+        promptPinyin: 'wǒ ___ qù, xiànzài bú qù le.',
+        promptBopomofo: 'ㄨㄛˇ ___ ㄑㄩˋ ㄒㄧㄢˋ ㄗㄞˋ ㄅㄨˊ ㄑㄩˋ ㄌㄜ˙',
         answerId: 'yiqian-changchang',
         distractorAnswerIds: ['yiqian', 'changchang', 'mei'],
+        feedbackHint: '以前常常 frames an older routine or former habit.',
         tags: ['habitual-past', 'routine', 'before-vs-now']
       }
     ],
@@ -811,6 +927,11 @@ export const pastSections: PastSection[] = [
     pinyin: 'lǚxíng',
     meaning: 'places, going, and experience',
     concept: 'Practice past-related forms in travel and place contexts.',
+    goal: 'Practice short sentences about travel, visits, and places.',
+    decisionPrompt:
+      'Read the context and choose the form that makes the sentence sound natural.',
+    lookFor: ['昨天', '以前', '沒有', '過'],
+    previewExamples: ['我去過台灣', '我昨天去了台北', '我以前常常去那家店'],
     examples: [],
     exampleTags: ['travel'],
     notes: [
@@ -826,6 +947,11 @@ export const pastSections: PastSection[] = [
     pinyin: 'rìcháng',
     meaning: 'food and daily actions',
     concept: 'Practice common past-related forms through everyday actions.',
+    goal: 'Practice sentences about food and ordinary daily actions.',
+    decisionPrompt:
+      'Use the sentence context to decide which form fits.',
+    lookFor: ['昨天', '明天', '以前', '沒有'],
+    previewExamples: ['昨天我吃了', '我以前吃過', '我沒有吃過'],
     examples: [],
     exampleTags: ['food', 'daily-life'],
     notes: [
@@ -841,6 +967,11 @@ export const pastSections: PastSection[] = [
     pinyin: 'jīnxí',
     meaning: 'before, now, and changed routines',
     concept: 'Practice older habits, prior experience, and changes in routine.',
+    goal: 'Practice routines, habits, and changes in situation.',
+    decisionPrompt:
+      'Notice whether the sentence feels like routine, change, or earlier context.',
+    lookFor: ['以前', '常常', '現在', '了'],
+    previewExamples: ['我以前常常去', '我以前去', '我常常去'],
     examples: [],
     exampleTags: ['before-vs-now', 'habitual-past', 'routine'],
     notes: [
@@ -852,10 +983,15 @@ export const pastSections: PastSection[] = [
     id: 'past-or-not',
     kind: 'practice',
     hanzi: '是否',
-    label: 'Past or Not?',
+    label: "Plans vs Things That Didn't Happen",
     pinyin: 'shìfǒu',
     meaning: 'plans, facts, and things that did not happen',
     concept: 'Practice deciding whether a sentence is about intention, general negation, or a past non-event.',
+    goal: "Practice plans, decisions, and things that didn't happen.",
+    decisionPrompt:
+      'Read the time frame before choosing.',
+    lookFor: ['明天', '昨天', '不', '沒'],
+    previewExamples: ['我明天不吃', '我昨天沒吃', '她昨天沒有來'],
     examples: [],
     exampleTags: ['negation'],
     notes: [
@@ -867,10 +1003,15 @@ export const pastSections: PastSection[] = [
     id: 'happened-or-experienced',
     kind: 'practice',
     hanzi: '做過',
-    label: 'Happened or Experienced?',
+    label: 'One Event or Life Experience?',
     pinyin: 'zuòguò',
     meaning: 'completed events and prior experience',
     concept: 'Practice choosing between something that happened and something experienced before.',
+    goal: 'Practice events, memories, and personal experience.',
+    decisionPrompt:
+      'Choose based on what the sentence is trying to communicate.',
+    lookFor: ['昨天', '以前', '沒有', '過'],
+    previewExamples: ['昨天我吃了', '我以前吃過', '我沒有吃過'],
     examples: [],
     exampleTags: ['completed-action', 'experience', 'negated-experience'],
     notes: [
@@ -882,10 +1023,15 @@ export const pastSections: PastSection[] = [
     id: 'mixed-review',
     kind: 'practice',
     hanzi: '混合',
-    label: 'Mixed Past Practice',
+    label: 'No Hints: Mixed Past',
     pinyin: 'hùnhé',
     meaning: 'mixed review',
     concept: 'Practice all beginner past-related forms without an answer-family cue.',
+    goal: 'Review beginner past-related forms without category hints.',
+    decisionPrompt:
+      'Read the whole sentence and choose the most natural form.',
+    lookFor: ['昨天', '明天', '以前', '沒有', '常常'],
+    previewExamples: ['昨天我吃了', '我明天不吃', '我以前常常去'],
     examples: [],
     exampleTags: [
       'completed-action',
@@ -916,49 +1062,49 @@ export const pastSections: PastSection[] = [
     examples: [
       {
         id: 'contrast-wo-bu-qu',
-        hanzi: '我不去',
-        pinyin: 'wǒ bù qù',
-        bopomofo: 'ㄨㄛˇ ㄅㄨˋ ㄑㄩˋ',
-        english: "I'm not going.",
-        promptHanzi: '我___去',
-        promptPinyin: 'wǒ ___ qù',
-        promptBopomofo: 'ㄨㄛˇ ___ ㄑㄩˋ',
+        hanzi: '我明天不去',
+        pinyin: 'wǒ míngtiān bù qù',
+        bopomofo: 'ㄨㄛˇ ㄇㄧㄥˊ ㄊㄧㄢ ㄅㄨˋ ㄑㄩˋ',
+        english: "I'm not going tomorrow.",
+        promptHanzi: '我明天___去',
+        promptPinyin: 'wǒ míngtiān ___ qù',
+        promptBopomofo: 'ㄨㄛˇ ㄇㄧㄥˊ ㄊㄧㄢ ___ ㄑㄩˋ',
         answerId: 'bu',
         tags: ['negation', 'travel', 'daily-life']
       },
       {
         id: 'contrast-wo-mei-qu',
-        hanzi: '我沒去',
-        pinyin: 'wǒ méi qù',
-        bopomofo: 'ㄨㄛˇ ㄇㄟˊ ㄑㄩˋ',
-        english: "I didn't go.",
-        promptHanzi: '我___去',
-        promptPinyin: 'wǒ ___ qù',
-        promptBopomofo: 'ㄨㄛˇ ___ ㄑㄩˋ',
+        hanzi: '我昨天沒去',
+        pinyin: 'wǒ zuótiān méi qù',
+        bopomofo: 'ㄨㄛˇ ㄗㄨㄛˊ ㄊㄧㄢ ㄇㄟˊ ㄑㄩˋ',
+        english: "I didn't go yesterday.",
+        promptHanzi: '我昨天___去',
+        promptPinyin: 'wǒ zuótiān ___ qù',
+        promptBopomofo: 'ㄨㄛˇ ㄗㄨㄛˊ ㄊㄧㄢ ___ ㄑㄩˋ',
         answerId: 'mei',
         tags: ['negation', 'travel', 'daily-life']
       },
       {
         id: 'contrast-wo-chi-le',
-        hanzi: '我吃了',
-        pinyin: 'wǒ chī le',
-        bopomofo: 'ㄨㄛˇ ㄔ ㄌㄜ˙',
-        english: "I ate / I've eaten.",
-        promptHanzi: '我吃___',
-        promptPinyin: 'wǒ chī ___',
-        promptBopomofo: 'ㄨㄛˇ ㄔ ___',
+        hanzi: '我昨天吃了',
+        pinyin: 'wǒ zuótiān chī le',
+        bopomofo: 'ㄨㄛˇ ㄗㄨㄛˊ ㄊㄧㄢ ㄔ ㄌㄜ˙',
+        english: 'I ate yesterday.',
+        promptHanzi: '我昨天吃___',
+        promptPinyin: 'wǒ zuótiān chī ___',
+        promptBopomofo: 'ㄨㄛˇ ㄗㄨㄛˊ ㄊㄧㄢ ㄔ ___',
         answerId: 'le',
         tags: ['completed-action', 'food', 'daily-life']
       },
       {
         id: 'contrast-wo-chi-guo',
-        hanzi: '我吃過',
-        pinyin: 'wǒ chī guò',
-        bopomofo: 'ㄨㄛˇ ㄔ ㄍㄨㄛˋ',
+        hanzi: '我以前吃過',
+        pinyin: 'wǒ yǐqián chī guò',
+        bopomofo: 'ㄨㄛˇ ㄧˇ ㄑㄧㄢˊ ㄔ ㄍㄨㄛˋ',
         english: "I've eaten it before.",
-        promptHanzi: '我吃___',
-        promptPinyin: 'wǒ chī ___',
-        promptBopomofo: 'ㄨㄛˇ ㄔ ___',
+        promptHanzi: '我以前吃___',
+        promptPinyin: 'wǒ yǐqián chī ___',
+        promptBopomofo: 'ㄨㄛˇ ㄧˇ ㄑㄧㄢˊ ㄔ ___',
         answerId: 'guo',
         tags: ['experience', 'food', 'daily-life']
       },
@@ -1079,6 +1225,9 @@ export const localizePastQuestion = (
     correctEnglish: correctExample
       ? localizeExampleMeaning(correctExample, locale)
       : question.correctEnglish,
+    feedbackHint: correctExample
+      ? localizeFeedbackHint(correctExample, locale)
+      : question.feedbackHint,
     correctMeaning: localizeAnswerMeaning(correctAnswer, locale),
     concept: section.concept,
     notes: section.notes,
@@ -1105,6 +1254,9 @@ export const localizePastResult = (
     correctEnglish: correctExample
       ? localizeExampleMeaning(correctExample, locale)
       : result.correctEnglish,
+    feedbackHint: correctExample
+      ? localizeFeedbackHint(correctExample, locale)
+      : result.feedbackHint,
     correctMeaning: localizeAnswerMeaning(correctAnswer, locale)
   }
 }
@@ -1156,6 +1308,7 @@ export const generatePastQuestion = (
     correctPinyin: correct.pinyin,
     correctBopomofo: correct.bopomofo,
     correctEnglish: localizeExampleMeaning(correct, locale),
+    feedbackHint: localizeFeedbackHint(correct, locale),
     correctMeaning: localizeAnswerMeaning(correctAnswer, locale),
     concept: localizedSection.concept,
     notes: localizedSection.notes,
@@ -1190,6 +1343,7 @@ export const evaluatePastAnswer = (
     correctPinyin: question.correctPinyin,
     correctBopomofo: question.correctBopomofo,
     correctEnglish: question.correctEnglish,
+    feedbackHint: question.feedbackHint,
     correctMeaning: question.correctMeaning,
     selectedHanzi: selectedOption?.hanzi ?? '?'
   }

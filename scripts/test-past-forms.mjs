@@ -82,6 +82,14 @@ assert(
   forcedLeContrastQuestion.options.some((option) => option.id === 'guo'),
   'Expected authored 了 vs 過 distractor to appear'
 )
+assert(
+  forcedLeContrastQuestion.feedbackHint?.includes('昨天'),
+  'Expected authored feedbackHint to travel with the generated question'
+)
+assert(
+  evaluatePastAnswer(forcedLeContrastQuestion, 'guo').feedbackHint?.includes('昨天'),
+  'Expected feedbackHint to appear on incorrect results'
+)
 assertUniqueOptions(forcedLeContrastQuestion)
 
 const forcedNegationContrastQuestion = generatePastQuestion(
@@ -110,11 +118,33 @@ assertUniqueOptions(mixedReviewQuestion)
 
 const travelQuestion = generatePastQuestion('travel-places', [], 'en')
 const travelExample = getPastExampleById(travelQuestion.correctExampleId)
+const travelPool = localizePastSection(getPastSectionById('travel-places'), 'en')
+const spanishTravelPool = localizePastSection(
+  getPastSectionById('travel-places'),
+  'es-419'
+)
 
 assert.equal(travelQuestion.sectionId, 'travel-places')
 assert(
   travelExample?.example.tags?.includes('travel'),
   `Expected ${travelQuestion.correctExampleId} to come from the travel tag pool`
+)
+assert.equal(
+  travelPool.goal,
+  'Practice short sentences about travel, visits, and places.'
+)
+assert(
+  travelPool.decisionPrompt?.includes('sentence sound natural'),
+  'Expected practice pool metadata to include a semantic decision prompt'
+)
+assert.deepEqual(travelPool.lookFor, ['昨天', '以前', '沒有', '過'])
+assert(
+  travelPool.previewExamples?.slice(0, 2).includes('我去過台灣'),
+  'Expected practice pool metadata to include preview examples'
+)
+assert.equal(
+  spanishTravelPool.goal,
+  'Practicar oraciones cortas sobre viajes, visitas y lugares.'
 )
 
 const foodPool = localizePastSection(getPastSectionById('food-daily-life'), 'en')
@@ -151,18 +181,35 @@ const pastStudyScreen = readFileSync(
   'apps/web/src/views/PastStudyScreen.tsx',
   'utf8'
 )
+const homeScreen = readFileSync('apps/web/src/views/HomeScreen.tsx', 'utf8')
 
 assert(
-  pastStudyScreen.includes('genericPracticeLabel'),
-  'Expected active Past quiz to use a generic practice label'
+  !pastStudyScreen.includes('genericPracticeLabel'),
+  'Active Past quiz should not render a generic practice label near the prompt'
+)
+assert(
+  !pastStudyScreen.includes("section.kind === 'practice'"),
+  'Active Past quiz should not render selected practice pool names near the prompt'
 )
 assert(
   !pastStudyScreen.includes('{section.hanzi}\n                </p>'),
   'Active Past prompt label should not render the selected answer-family Hanzi'
 )
 assert(
-  !pastStudyScreen.includes('{section.label}\n                </p>'),
-  'Active Past prompt label should not render the selected answer-family label'
+  pastStudyScreen.includes('currentResult.feedbackHint'),
+  'Expected incorrect Past feedback to render authored feedbackHint'
+)
+assert(
+  pastStudyScreen.includes('!currentResult.isCorrect'),
+  'Expected feedbackHint to be gated behind incorrect answers'
+)
+assert(
+  !homeScreen.includes('selectedPastPracticeSection'),
+  'Home practice selection should not render a separate practice info card'
+)
+assert(
+  homeScreen.includes('selectedPastSessionLength'),
+  'Home practice selection should keep length selection available'
 )
 
 console.log('Past grammar multi-answer tests passed.')

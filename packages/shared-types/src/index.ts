@@ -190,6 +190,7 @@ export interface PastQuizQuestion {
   correctPinyin: string
   correctBopomofo?: string
   correctEnglish: string
+  feedbackHint?: string
   correctMeaning: string
   concept: string
   notes: string[]
@@ -209,6 +210,7 @@ export interface PastQuizResult {
   correctPinyin: string
   correctBopomofo?: string
   correctEnglish: string
+  feedbackHint?: string
   correctMeaning: string
   selectedHanzi: string
 }

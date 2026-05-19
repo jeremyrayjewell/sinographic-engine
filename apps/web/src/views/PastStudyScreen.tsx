@@ -41,9 +41,6 @@ export const PastStudyScreen = () => {
     getPastSectionById(selectedPastSectionId),
     language
   )
-  const genericPracticeLabel =
-    language === 'es-419' ? 'Práctica del pasado' : 'Past Practice'
-
   return (
     <ScreenShell>
       <div className="mx-auto grid w-full max-w-5xl gap-4">
@@ -73,14 +70,6 @@ export const PastStudyScreen = () => {
               <p className="text-xs uppercase tracking-[0.18em] text-[#8c2f22]">
                 {currentQuestion.promptPinyin}
               </p>
-              <div className="flex flex-wrap items-center gap-3">
-                <p className="inline-flex border border-[#1f2f44] bg-[#1f2f44] px-2 py-1 text-sm font-semibold tracking-[0.04em] text-[#f7eedf]">
-                  過去
-                </p>
-                <p className="text-[11px] uppercase tracking-[0.28em] text-[#5b6f84]">
-                  {genericPracticeLabel}
-                </p>
-              </div>
               <div className="flex flex-wrap gap-2 pt-2">
                 <SpeakButton
                   label={copy.speakLabel}
@@ -187,9 +176,11 @@ export const PastStudyScreen = () => {
                   <p className="mt-3 text-sm leading-7 text-[#3e352c]">
                     {currentResult.correctEnglish}
                   </p>
-                  <p className="mt-3 text-sm leading-7 text-[#3e352c]">
-                    {currentQuestion.concept}
-                  </p>
+                  {!currentResult.isCorrect && currentResult.feedbackHint ? (
+                    <p className="mt-3 border-l border-[#8c2f22] pl-3 text-sm leading-7 text-[#3e352c]">
+                      {currentResult.feedbackHint}
+                    </p>
+                  ) : null}
                   <div className="mt-4 flex flex-wrap gap-2">
                     <SpeakButton
                       label={`${copy.speakLabel}: ${currentResult.correctHanzi}`}
@@ -205,10 +196,7 @@ export const PastStudyScreen = () => {
                   </div>
                 </div>
 
-                <div className="flex flex-col justify-between gap-5 border-t border-[#30455f] pt-4 lg:border-l lg:border-t-0 lg:pl-5 lg:pt-0">
-                  <p className="text-sm uppercase tracking-[0.12em] text-[#7b4d32]">
-                    {section.meaning}
-                  </p>
+                <div className="flex flex-col justify-end gap-5 pt-2 lg:pt-0">
                   <ActionButton onClick={nextPastQuestion} className="w-full">
                     <span className="flex items-center gap-3">
                       <span>
