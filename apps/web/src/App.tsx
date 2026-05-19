@@ -2,6 +2,10 @@ import { useQuizStore } from './store/quiz-store'
 import { HomeScreen } from './views/HomeScreen'
 import { NumberQuizScreen } from './views/NumberQuizScreen'
 import { NumberResultsScreen } from './views/NumberResultsScreen'
+import { PastResultsScreen } from './views/PastResultsScreen'
+import { PastStudyScreen } from './views/PastStudyScreen'
+import { PeopleQuizScreen } from './views/PeopleQuizScreen'
+import { PeopleResultsScreen } from './views/PeopleResultsScreen'
 import { QuizScreen } from './views/QuizScreen'
 import { ResultsScreen } from './views/ResultsScreen'
 
@@ -10,11 +14,35 @@ const App = () => {
   const activeModule = useQuizStore((state) => state.activeModule)
 
   if (status === 'quiz') {
-    return activeModule === 'numbers' ? <NumberQuizScreen /> : <QuizScreen />
+    if (activeModule === 'numbers') {
+      return <NumberQuizScreen />
+    }
+
+    if (activeModule === 'people') {
+      return <PeopleQuizScreen />
+    }
+
+    if (activeModule === 'past') {
+      return <PastStudyScreen />
+    }
+
+    return <QuizScreen />
   }
 
   if (status === 'results') {
-    return activeModule === 'numbers' ? <NumberResultsScreen /> : <ResultsScreen />
+    if (activeModule === 'numbers') {
+      return <NumberResultsScreen />
+    }
+
+    if (activeModule === 'people') {
+      return <PeopleResultsScreen />
+    }
+
+    if (activeModule === 'past') {
+      return <PastResultsScreen />
+    }
+
+    return <ResultsScreen />
   }
 
   return <HomeScreen />

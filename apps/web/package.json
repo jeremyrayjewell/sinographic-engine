@@ -12,6 +12,8 @@
     "@sinographic-engine/classifier-content": "workspace:*",
     "@sinographic-engine/learning-engine": "workspace:*",
     "@sinographic-engine/number-engine": "workspace:*",
+    "@sinographic-engine/vocabulary-engine": "workspace:*",
+    "@sinographic-engine/vocabulary-content": "workspace:*",
     "@sinographic-engine/speech-engine": "workspace:*",
     "@sinographic-engine/shared-types": "workspace:*",
     "@sinographic-engine/ui": "workspace:*",

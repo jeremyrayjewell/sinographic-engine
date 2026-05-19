@@ -1,5 +1,5 @@
 export type AppLocale = 'en' | 'es-419'
-export type AppModule = 'classifiers' | 'numbers'
+export type AppModule = 'classifiers' | 'numbers' | 'people' | 'past'
 export type NumbersSetId =
   | 'simple-numbers'
   | 'hundreds'
@@ -114,4 +114,99 @@ export interface NumberQuizResult {
   selectedPinyin: string
   selectedBopomofo?: string
   selectedSpeechText?: string
+}
+
+export type VocabularyDeckId =
+  | 'common'
+  | 'conversationally-solid'
+  | 'very-comfortable'
+  | 'all'
+
+export interface VocabularyItem {
+  id: string
+  hanzi: string
+  pinyin: string
+  bopomofo?: string
+  meaning: string
+  meaningTranslations?: Partial<Record<AppLocale, string>>
+  category: 'people' | 'places' | 'objects' | 'ideas'
+  deckIds: VocabularyDeckId[]
+}
+
+export interface VocabularyDeck {
+  id: VocabularyDeckId
+  hanzi: string
+  label: string
+  itemIds: string[]
+}
+
+export interface VocabularyQuizOption {
+  id: string
+  hanzi: string
+  pinyin: string
+  bopomofo?: string
+  meaning: string
+}
+
+export interface VocabularyQuizQuestion {
+  id: string
+  prompt: string
+  correctItemId: string
+  correctHanzi: string
+  correctPinyin: string
+  correctBopomofo?: string
+  options: VocabularyQuizOption[]
+}
+
+export interface VocabularyQuizResult {
+  questionId: string
+  selectedItemId: string
+  correctItemId: string
+  isCorrect: boolean
+  prompt: string
+}
+
+export interface PastQuizOption {
+  id: string
+  hanzi: string
+  pinyin: string
+  bopomofo?: string
+  english: string
+  sectionId: string
+}
+
+export interface PastQuizQuestion {
+  id: string
+  prompt: string
+  promptPinyin: string
+  promptBopomofo?: string
+  sectionId: string
+  sectionHanzi: string
+  sectionLabel: string
+  correctExampleId: string
+  correctAnswerId: string
+  correctHanzi: string
+  correctPinyin: string
+  correctBopomofo?: string
+  correctEnglish: string
+  correctMeaning: string
+  concept: string
+  notes: string[]
+  options: PastQuizOption[]
+}
+
+export interface PastQuizResult {
+  questionId: string
+  selectedExampleId: string
+  selectedAnswerId: string
+  correctExampleId: string
+  correctAnswerId: string
+  isCorrect: boolean
+  prompt: string
+  correctHanzi: string
+  correctPinyin: string
+  correctBopomofo?: string
+  correctEnglish: string
+  correctMeaning: string
+  selectedHanzi: string
 }

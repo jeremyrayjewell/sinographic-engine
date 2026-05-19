@@ -1,14 +1,17 @@
 ﻿import { getLocalizedClassifierDecks } from '@sinographic-engine/classifier-content'
+import { peopleVocabularyDecks } from '@sinographic-engine/vocabulary-content'
 import { useState, type Dispatch, type SetStateAction } from 'react'
 import barImage from '../../../../content/bar.png'
 import { ActionButton, Panel, ScreenShell } from '@sinographic-engine/ui'
 import { LanguageToggle } from '@/components/LanguageToggle'
 import { getAppCopy } from '@/lib/i18n'
+import { pastSections } from '@/lib/past-forms'
 import { useQuizStore, type SessionLengthOption } from '@/store/quiz-store'
 
 export const HomeScreen = () => {
   const [grammarOpen, setGrammarOpen] = useState(false)
   const [vocabularyOpen, setVocabularyOpen] = useState(false)
+  const [pastOpen, setPastOpen] = useState(false)
   const [classifierOpen, setClassifierOpen] = useState(false)
   const [numbersOpen, setNumbersOpen] = useState(false)
   const [peopleOpen, setPeopleOpen] = useState(false)
@@ -21,6 +24,8 @@ export const HomeScreen = () => {
   const decks = getLocalizedClassifierDecks(language)
   const startSession = useQuizStore((state) => state.startSession)
   const startNumbersSession = useQuizStore((state) => state.startNumbersSession)
+  const startPeopleSession = useQuizStore((state) => state.startPeopleSession)
+  const startPastSession = useQuizStore((state) => state.startPastSession)
   const selectedDeckId = useQuizStore((state) => state.selectedDeckId)
   const selectedSessionLength = useQuizStore(
     (state) => state.selectedSessionLength
@@ -29,12 +34,26 @@ export const HomeScreen = () => {
   const selectedNumbersSessionLength = useQuizStore(
     (state) => state.selectedNumbersSessionLength
   )
+  const selectedPeopleDeckId = useQuizStore((state) => state.selectedPeopleDeckId)
+  const selectedPeopleSessionLength = useQuizStore(
+    (state) => state.selectedPeopleSessionLength
+  )
+  const selectedPastSectionId = useQuizStore((state) => state.selectedPastSectionId)
+  const selectedPastSessionLength = useQuizStore(
+    (state) => state.selectedPastSessionLength
+  )
   const setDeck = useQuizStore((state) => state.setDeck)
   const setSessionLength = useQuizStore((state) => state.setSessionLength)
   const setNumbersSet = useQuizStore((state) => state.setNumbersSet)
   const setNumbersSessionLength = useQuizStore(
     (state) => state.setNumbersSessionLength
   )
+  const setPeopleDeck = useQuizStore((state) => state.setPeopleDeck)
+  const setPeopleSessionLength = useQuizStore(
+    (state) => state.setPeopleSessionLength
+  )
+  const setPastSection = useQuizStore((state) => state.setPastSection)
+  const setPastSessionLength = useQuizStore((state) => state.setPastSessionLength)
 
   const sessionLengthOptions: SessionLengthOption[] = [20, 30, 40, 'max']
   const deckHanziLabels: Record<string, string> = {
@@ -82,7 +101,15 @@ export const HomeScreen = () => {
     selectedNumbersSet === 'hundreds' ||
     selectedNumbersSet === 'numbers' ||
     selectedNumbersSet === 'math'
-
+  const localizedPeopleDeckLabels: Record<string, string> =
+    language === 'es-419'
+      ? {
+          common: 'Comunes',
+          'conversationally-solid': 'Conversacionales',
+          'very-comfortable': 'Cómodos',
+          all: 'Todos'
+        }
+      : {}
   const renderVocabularyPlaceholderSection = (
     open: boolean,
     setOpen: Dispatch<SetStateAction<boolean>>,
@@ -165,7 +192,132 @@ export const HomeScreen = () => {
           </button>
 
           {grammarOpen ? (
-            <div className="p-4 sm:p-6">
+            <div className="grid gap-4 p-4 sm:p-6">
+              <div className="overflow-hidden border border-[#30455f]">
+                <button
+                  type="button"
+                  onClick={() => setPastOpen((value) => !value)}
+                  className="flex w-full items-center justify-between border-0 border-b border-[#30455f] bg-[#f7eedf] px-6 py-5 text-left transition hover:bg-[#ead9c1] sm:px-8"
+                >
+                  <div className="flex flex-wrap items-center gap-3">
+                    <h3 className="inline-flex border border-[#1f2f44] bg-[#1f2f44] px-3 py-2 text-2xl font-semibold uppercase tracking-[0.04em] text-[#f7eedf]">
+                      過去
+                    </h3>
+                    <p className="text-[11px] uppercase tracking-[0.35em] text-[#5b6f84]">
+                      Past / Past-related Forms
+                    </p>
+                  </div>
+                  <span className="text-3xl leading-none text-[#7b4d32]">
+                    {pastOpen ? '-' : '+'}
+                  </span>
+                </button>
+
+                {pastOpen ? (
+                  <div className="grid gap-px bg-[#30455f] lg:grid-cols-[1.08fr_0.92fr]">
+                    <div className="bg-[#f7eedf] p-4 sm:p-5 lg:p-6">
+                      <div className="grid gap-px border border-[#30455f] bg-[#30455f]">
+                        {pastSections.map((section, index) => {
+                          const isActive = selectedPastSectionId === section.id
+
+                          return (
+                            <button
+                              key={section.id}
+                              type="button"
+                              onClick={() => setPastSection(section.id)}
+                              className={`px-3 py-3 text-left transition ${
+                                isActive
+                                  ? 'bg-[#24384f] text-[#f5ead9]'
+                                  : 'bg-[#f7eedf] text-[#2b241e] hover:bg-[#ead9c1]'
+                              }`}
+                            >
+                              <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
+                                <div className="flex min-w-0 flex-wrap items-center gap-3">
+                                  <span
+                                    className={`inline-flex border px-2 py-1 text-sm font-semibold tracking-[0.04em] ${
+                                      isActive
+                                        ? 'border-[#f5ead9] bg-[#f5ead9] text-[#24384f]'
+                                        : 'border-[#1f2f44] bg-[#1f2f44] text-[#f7eedf]'
+                                    }`}
+                                  >
+                                    {section.hanzi}
+                                  </span>
+                                  <span
+                                    className={`min-w-0 break-words text-sm uppercase tracking-[0.16em] sm:tracking-[0.22em] ${
+                                      isActive ? 'text-[#d2c4af]' : 'text-[#5b6f84]'
+                                    }`}
+                                  >
+                                    {section.label}
+                                  </span>
+                                </div>
+                                <span
+                                  className={`shrink-0 text-[11px] uppercase tracking-[0.18em] sm:tracking-[0.3em] ${
+                                    isActive ? 'text-[#d2c4af]' : 'text-[#5b6f84]'
+                                  }`}
+                                >
+                                  {String(index + 1).padStart(2, '0')}
+                                </span>
+                              </div>
+                            </button>
+                          )
+                        })}
+                      </div>
+                    </div>
+
+                    <div className="space-y-5 bg-[#f7eedf] p-4 sm:p-5 lg:p-6">
+                      <div className="grid gap-px border border-[#30455f] bg-[#30455f]">
+                        <div className="bg-[#f7eedf] px-3 py-2">
+                          <div className="flex flex-wrap items-center gap-3">
+                            <p className="inline-flex border border-[#1f2f44] bg-[#1f2f44] px-2 py-1 text-sm font-semibold tracking-[0.04em] text-[#f7eedf]">
+                              {copy.lengthLabelHanzi}
+                            </p>
+                            <p className="text-[11px] uppercase tracking-[0.35em] text-[#5b6f84]">
+                              {copy.lengthLabel}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="grid grid-cols-4 gap-px bg-[#30455f]">
+                          {sessionLengthOptions.map((length) => {
+                            const isActive = selectedPastSessionLength === length
+
+                            return (
+                              <button
+                                key={`past-${length}`}
+                                type="button"
+                                onClick={() => setPastSessionLength(length)}
+                                className={`px-3 py-3 text-center transition ${
+                                  isActive
+                                    ? 'bg-[#24384f] text-[#f5ead9]'
+                                    : 'bg-[#f7eedf] text-[#2b241e] hover:bg-[#ead9c1]'
+                                }`}
+                              >
+                                <span
+                                  className={`text-sm uppercase tracking-[0.22em] ${
+                                    isActive ? 'text-[#d2c4af]' : 'text-[#5b6f84]'
+                                  }`}
+                                >
+                                  {length === 'max' ? 'MAX' : length}
+                                </span>
+                              </button>
+                            )
+                          })}
+                        </div>
+                      </div>
+                      <ActionButton
+                        onClick={startPastSession}
+                        className="w-full sm:w-auto"
+                      >
+                        <span className="flex items-center gap-3">
+                          <span>{copy.beginHanzi}</span>
+                          <span className="text-[11px] uppercase tracking-[0.28em]">
+                            {copy.beginLabel}
+                          </span>
+                        </span>
+                      </ActionButton>
+                    </div>
+                  </div>
+                ) : null}
+              </div>
+
               <div className="overflow-hidden border border-[#30455f]">
                 <button
                   type="button"
@@ -438,13 +590,126 @@ export const HomeScreen = () => {
                 ) : null}
               </div>
 
-              {renderVocabularyPlaceholderSection(
-                peopleOpen,
-                setPeopleOpen,
-                copy.peopleMenuHanzi,
-                copy.peopleMenuLabel,
-                copy.peoplePlaceholder
-              )}
+              <div className="overflow-hidden border border-[#30455f]">
+                <button
+                  type="button"
+                  onClick={() => setPeopleOpen((value) => !value)}
+                  className="flex w-full items-center justify-between border-0 border-b border-[#30455f] bg-[#f7eedf] px-6 py-5 text-left transition hover:bg-[#ead9c1] sm:px-8"
+                >
+                  <div className="flex flex-wrap items-center gap-3">
+                    <h3 className="inline-flex border border-[#1f2f44] bg-[#1f2f44] px-3 py-2 text-2xl font-semibold uppercase tracking-[0.04em] text-[#f7eedf]">
+                      {copy.peopleMenuHanzi}
+                    </h3>
+                    <p className="text-[11px] uppercase tracking-[0.35em] text-[#5b6f84]">
+                      {copy.peopleMenuLabel}
+                    </p>
+                  </div>
+                  <span className="text-3xl leading-none text-[#7b4d32]">
+                    {peopleOpen ? '-' : '+'}
+                  </span>
+                </button>
+
+                {peopleOpen ? (
+                  <div className="grid gap-px bg-[#30455f] lg:grid-cols-[1.08fr_0.92fr]">
+                    <div className="bg-[#f7eedf] p-4 sm:p-5 lg:p-6">
+                      <div className="grid gap-px border border-[#30455f] bg-[#30455f]">
+                        {peopleVocabularyDecks.map((deck) => {
+                          const isActive = selectedPeopleDeckId === deck.id
+
+                          return (
+                            <button
+                              key={deck.id}
+                              type="button"
+                              onClick={() => setPeopleDeck(deck.id)}
+                              className={`px-3 py-3 text-left transition ${
+                                isActive
+                                  ? 'bg-[#24384f] text-[#f5ead9]'
+                                  : 'bg-[#f7eedf] text-[#2b241e] hover:bg-[#ead9c1]'
+                              }`}
+                            >
+                              <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
+                                <div className="flex min-w-0 flex-wrap items-center gap-3">
+                                  <span
+                                    className={`inline-flex border px-2 py-1 text-sm font-semibold tracking-[0.04em] ${
+                                      isActive
+                                        ? 'border-[#f5ead9] bg-[#f5ead9] text-[#24384f]'
+                                        : 'border-[#1f2f44] bg-[#1f2f44] text-[#f7eedf]'
+                                    }`}
+                                  >
+                                    {deck.hanzi}
+                                  </span>
+                                  <span
+                                    className={`min-w-0 break-words text-sm uppercase tracking-[0.16em] sm:tracking-[0.22em] ${
+                                      isActive ? 'text-[#d2c4af]' : 'text-[#5b6f84]'
+                                    }`}
+                                  >
+                                    {localizedPeopleDeckLabels[deck.id] ?? deck.label}
+                                  </span>
+                                </div>
+                                <span
+                                  className={`shrink-0 text-[11px] uppercase tracking-[0.18em] sm:tracking-[0.3em] ${
+                                    isActive ? 'text-[#d2c4af]' : 'text-[#5b6f84]'
+                                  }`}
+                                >
+                                  {deck.itemIds.length}
+                                </span>
+                              </div>
+                            </button>
+                          )
+                        })}
+                      </div>
+                    </div>
+                    <div className="space-y-5 bg-[#f7eedf] p-4 sm:p-5 lg:p-6">
+                      <div className="grid gap-px border border-[#30455f] bg-[#30455f]">
+                        <div className="bg-[#f7eedf] px-3 py-2">
+                          <div className="flex flex-wrap items-center gap-3">
+                            <p className="inline-flex border border-[#1f2f44] bg-[#1f2f44] px-2 py-1 text-sm font-semibold tracking-[0.04em] text-[#f7eedf]">
+                              {copy.lengthLabelHanzi}
+                            </p>
+                            <p className="text-[11px] uppercase tracking-[0.35em] text-[#5b6f84]">
+                              {copy.lengthLabel}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="grid grid-cols-4 gap-px bg-[#30455f]">
+                          {sessionLengthOptions.map((length) => {
+                            const isActive = selectedPeopleSessionLength === length
+
+                            return (
+                              <button
+                                key={`people-${length}`}
+                                type="button"
+                                onClick={() => setPeopleSessionLength(length)}
+                                className={`px-3 py-3 text-center transition ${
+                                  isActive
+                                    ? 'bg-[#24384f] text-[#f5ead9]'
+                                    : 'bg-[#f7eedf] text-[#2b241e] hover:bg-[#ead9c1]'
+                                }`}
+                              >
+                                <span
+                                  className={`text-sm uppercase tracking-[0.22em] ${
+                                    isActive ? 'text-[#d2c4af]' : 'text-[#5b6f84]'
+                                  }`}
+                                >
+                                  {length === 'max' ? 'MAX' : length}
+                                </span>
+                              </button>
+                            )
+                          })}
+                        </div>
+                      </div>
+                      <ActionButton onClick={startPeopleSession} className="w-full sm:w-auto">
+                        <span className="flex items-center gap-3">
+                          <span>{copy.beginHanzi}</span>
+                          <span className="text-[11px] uppercase tracking-[0.28em]">
+                            {copy.beginLabel}
+                          </span>
+                        </span>
+                      </ActionButton>
+                    </div>
+                  </div>
+                ) : null}
+              </div>
 
               {renderVocabularyPlaceholderSection(
                 placesOpen,

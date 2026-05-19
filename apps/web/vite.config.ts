@@ -19,9 +19,17 @@ export default defineConfig({
         __dirname,
         '../../packages/number-engine/src/index.ts'
       ),
+      '@sinographic-engine/vocabulary-engine': path.resolve(
+        __dirname,
+        '../../packages/vocabulary-engine/src/index.ts'
+      ),
       '@sinographic-engine/classifier-content': path.resolve(
         __dirname,
         '../../packages/classifier-content/src/index.ts'
+      ),
+      '@sinographic-engine/vocabulary-content': path.resolve(
+        __dirname,
+        '../../packages/vocabulary-content/src/index.ts'
       ),
       '@sinographic-engine/speech-engine': path.resolve(
         __dirname,

@@ -18,6 +18,18 @@ import {
   generateNumberQuestion,
   recordNumberResult
 } from '@sinographic-engine/number-engine'
+import { getPeopleVocabularyForDeck } from '@sinographic-engine/vocabulary-content'
+import {
+  createVocabularySessionState,
+  evaluateVocabularyAnswer,
+  generateVocabularyQuestion,
+  recordVocabularyResult
+} from '@sinographic-engine/vocabulary-engine'
+import {
+  evaluatePastAnswer,
+  generatePastQuestion,
+  getPastQuizExampleCount
+} from '@/lib/past-forms'
 import type {
   AppLocale,
   AppModule,
@@ -25,8 +37,13 @@ import type {
   NumberQuizQuestion,
   NumberQuizResult,
   NumbersSetId,
+  PastQuizQuestion,
+  PastQuizResult,
   QuizQuestion,
-  QuizResult
+  QuizResult,
+  VocabularyDeckId,
+  VocabularyQuizQuestion,
+  VocabularyQuizResult
 } from '@sinographic-engine/shared-types'
 
 type ScreenStatus = 'home' | 'quiz' | 'results'
@@ -41,26 +58,46 @@ interface QuizStore {
   currentResult: QuizResult | null
   currentNumberQuestion: NumberQuizQuestion | null
   currentNumberResult: NumberQuizResult | null
+  currentVocabularyQuestion: VocabularyQuizQuestion | null
+  currentVocabularyResult: VocabularyQuizResult | null
+  currentPastQuestion: PastQuizQuestion | null
+  currentPastResult: PastQuizResult | null
   score: number
   completedQuestions: number
   selectedDeckId: string
   selectedSessionLength: SessionLengthOption
   selectedNumbersSet: NumbersSetId
   selectedNumbersSessionLength: SessionLengthOption
+  selectedPeopleDeckId: VocabularyDeckId
+  selectedPeopleSessionLength: SessionLengthOption
+  selectedPastSectionId: string
+  selectedPastSessionLength: SessionLengthOption
   sessionHistory: QuizResult[]
   numberSessionHistory: NumberQuizResult[]
+  vocabularySessionHistory: VocabularyQuizResult[]
+  pastSessionHistory: PastQuizResult[]
   totalQuestions: number
   setLanguage: (language: AppLocale) => void
   startSession: () => void
   startNumbersSession: () => void
+  startPeopleSession: () => void
+  startPastSession: () => void
   setDeck: (deckId: string) => void
   setSessionLength: (length: SessionLengthOption) => void
   setNumbersSet: (setId: NumbersSetId) => void
   setNumbersSessionLength: (length: SessionLengthOption) => void
+  setPeopleDeck: (deckId: VocabularyDeckId) => void
+  setPeopleSessionLength: (length: SessionLengthOption) => void
+  setPastSection: (sectionId: string) => void
+  setPastSessionLength: (length: SessionLengthOption) => void
   submitAnswer: (classifierId: string) => void
   submitNumberAnswer: (value: NumberQuizAnswerValue) => void
+  submitVocabularyAnswer: (itemId: string) => void
+  submitPastAnswer: (exampleId: string) => void
   nextQuestion: () => void
   nextNumberQuestion: () => void
+  nextVocabularyQuestion: () => void
+  nextPastQuestion: () => void
   resetSession: () => void
 }
 
@@ -179,6 +216,36 @@ const buildNumbersQuestion = (
   })
 }
 
+const buildPeopleQuestion = (
+  deckId: VocabularyDeckId,
+  askedItemIds: string[]
+) =>
+  generateVocabularyQuestion(getPeopleVocabularyForDeck(deckId), {
+    excludeItemIds: askedItemIds
+  })
+
+const resolvePeopleSessionLength = (
+  deckId: VocabularyDeckId,
+  selectedSessionLength: SessionLengthOption
+) => {
+  if (selectedSessionLength !== 'max') {
+    return selectedSessionLength
+  }
+
+  return getPeopleVocabularyForDeck(deckId).length
+}
+
+const resolvePastSessionLength = (
+  sectionId: string,
+  selectedSessionLength: SessionLengthOption
+) => {
+  if (selectedSessionLength !== 'max') {
+    return selectedSessionLength
+  }
+
+  return getPastQuizExampleCount(sectionId)
+}
+
 export const useQuizStore = create<QuizStore>((set, get) => ({
   status: 'home',
   activeModule: 'classifiers',
@@ -187,23 +254,37 @@ export const useQuizStore = create<QuizStore>((set, get) => ({
   currentResult: null,
   currentNumberQuestion: null,
   currentNumberResult: null,
+  currentVocabularyQuestion: null,
+  currentVocabularyResult: null,
+  currentPastQuestion: null,
+  currentPastResult: null,
   score: 0,
   completedQuestions: 0,
   selectedDeckId: 'survival',
   selectedSessionLength: 'max',
   selectedNumbersSet: 'simple-numbers',
   selectedNumbersSessionLength: 20,
+  selectedPeopleDeckId: 'common',
+  selectedPeopleSessionLength: 20,
+  selectedPastSectionId: 'mei',
+  selectedPastSessionLength: 20,
   sessionHistory: [],
   numberSessionHistory: [],
+  vocabularySessionHistory: [],
+  pastSessionHistory: [],
   totalQuestions: 20,
   setLanguage: (language) => {
-    const { currentQuestion } = get()
+    const { currentQuestion, currentPastQuestion, selectedPastSectionId } = get()
 
     set({
       language,
       currentQuestion: currentQuestion
         ? relocalizeQuestion(currentQuestion, language)
-        : null
+        : null,
+      currentPastQuestion:
+        currentPastQuestion && !get().currentPastResult
+          ? generatePastQuestion(selectedPastSectionId, [], language)
+          : currentPastQuestion
     })
   },
   startSession: () => {
@@ -226,10 +307,16 @@ export const useQuizStore = create<QuizStore>((set, get) => ({
       currentResult: null,
       currentNumberQuestion: null,
       currentNumberResult: null,
+      currentVocabularyQuestion: null,
+      currentVocabularyResult: null,
+      currentPastQuestion: null,
+      currentPastResult: null,
       score: 0,
       completedQuestions: 0,
       sessionHistory: [],
       numberSessionHistory: [],
+      vocabularySessionHistory: [],
+      pastSessionHistory: [],
       totalQuestions
     })
   },
@@ -251,10 +338,78 @@ export const useQuizStore = create<QuizStore>((set, get) => ({
         session.askedValues
       ),
       currentNumberResult: null,
+      currentVocabularyQuestion: null,
+      currentVocabularyResult: null,
+      currentPastQuestion: null,
+      currentPastResult: null,
       score: 0,
       completedQuestions: 0,
       sessionHistory: [],
       numberSessionHistory: [],
+      vocabularySessionHistory: [],
+      pastSessionHistory: [],
+      totalQuestions
+    })
+  },
+  startPeopleSession: () => {
+    const session = createVocabularySessionState()
+    const { selectedPeopleDeckId, selectedPeopleSessionLength } = get()
+    const totalQuestions = resolvePeopleSessionLength(
+      selectedPeopleDeckId,
+      selectedPeopleSessionLength
+    )
+
+    set({
+      status: 'quiz',
+      activeModule: 'people',
+      currentQuestion: null,
+      currentResult: null,
+      currentNumberQuestion: null,
+      currentNumberResult: null,
+      currentVocabularyQuestion: buildPeopleQuestion(
+        selectedPeopleDeckId,
+        session.askedItemIds
+      ),
+      currentVocabularyResult: null,
+      currentPastQuestion: null,
+      currentPastResult: null,
+      score: 0,
+      completedQuestions: 0,
+      sessionHistory: [],
+      numberSessionHistory: [],
+      vocabularySessionHistory: [],
+      pastSessionHistory: [],
+      totalQuestions
+    })
+  },
+  startPastSession: () => {
+    const { selectedPastSectionId, selectedPastSessionLength, language } = get()
+    const totalQuestions = resolvePastSessionLength(
+      selectedPastSectionId,
+      selectedPastSessionLength
+    )
+
+    set({
+      status: 'quiz',
+      activeModule: 'past',
+      currentQuestion: null,
+      currentResult: null,
+      currentNumberQuestion: null,
+      currentNumberResult: null,
+      currentVocabularyQuestion: null,
+      currentVocabularyResult: null,
+      currentPastQuestion: generatePastQuestion(
+        selectedPastSectionId,
+        [],
+        language
+      ),
+      currentPastResult: null,
+      score: 0,
+      completedQuestions: 0,
+      sessionHistory: [],
+      numberSessionHistory: [],
+      vocabularySessionHistory: [],
+      pastSessionHistory: [],
       totalQuestions
     })
   },
@@ -283,6 +438,38 @@ export const useQuizStore = create<QuizStore>((set, get) => ({
     set({
       selectedNumbersSessionLength: length,
       totalQuestions: resolveNumbersSessionLength(selectedNumbersSet, length)
+    })
+  },
+  setPeopleDeck: (deckId) => {
+    const { selectedPeopleSessionLength } = get()
+
+    set({
+      selectedPeopleDeckId: deckId,
+      totalQuestions: resolvePeopleSessionLength(deckId, selectedPeopleSessionLength)
+    })
+  },
+  setPeopleSessionLength: (length) => {
+    const { selectedPeopleDeckId } = get()
+
+    set({
+      selectedPeopleSessionLength: length,
+      totalQuestions: resolvePeopleSessionLength(selectedPeopleDeckId, length)
+    })
+  },
+  setPastSection: (sectionId) => {
+    const { selectedPastSessionLength } = get()
+
+    set({
+      selectedPastSectionId: sectionId,
+      totalQuestions: resolvePastSessionLength(sectionId, selectedPastSessionLength)
+    })
+  },
+  setPastSessionLength: (length) => {
+    const { selectedPastSectionId } = get()
+
+    set({
+      selectedPastSessionLength: length,
+      totalQuestions: resolvePastSessionLength(selectedPastSectionId, length)
     })
   },
   submitAnswer: (classifierId) => {
@@ -335,6 +522,49 @@ export const useQuizStore = create<QuizStore>((set, get) => ({
       numberSessionHistory: session.results
     })
   },
+  submitVocabularyAnswer: (itemId) => {
+    const state = get()
+
+    if (!state.currentVocabularyQuestion || state.currentVocabularyResult) {
+      return
+    }
+
+    const result = evaluateVocabularyAnswer(state.currentVocabularyQuestion, itemId)
+    const session = recordVocabularyResult(
+      {
+        askedItemIds: state.vocabularySessionHistory.map(
+          (entry) => entry.correctItemId
+        ),
+        score: state.score,
+        results: state.vocabularySessionHistory
+      },
+      result
+    )
+
+    set({
+      currentVocabularyResult: result,
+      score: session.score,
+      completedQuestions: session.results.length,
+      vocabularySessionHistory: session.results
+    })
+  },
+  submitPastAnswer: (exampleId) => {
+    const state = get()
+
+    if (!state.currentPastQuestion || state.currentPastResult) {
+      return
+    }
+
+    const result = evaluatePastAnswer(state.currentPastQuestion, exampleId)
+    const pastSessionHistory = [...state.pastSessionHistory, result]
+
+    set({
+      currentPastResult: result,
+      score: state.score + (result.isCorrect ? 1 : 0),
+      completedQuestions: pastSessionHistory.length,
+      pastSessionHistory
+    })
+  },
   nextQuestion: () => {
     const state = get()
 
@@ -384,6 +614,55 @@ export const useQuizStore = create<QuizStore>((set, get) => ({
       currentNumberResult: null
     })
   },
+  nextVocabularyQuestion: () => {
+    const state = get()
+
+    if (!state.currentVocabularyQuestion || !state.currentVocabularyResult) {
+      return
+    }
+
+    if (state.completedQuestions >= state.totalQuestions) {
+      set({
+        status: 'results',
+        currentVocabularyQuestion: null,
+        currentVocabularyResult: null
+      })
+      return
+    }
+
+    set({
+      currentVocabularyQuestion: buildPeopleQuestion(
+        state.selectedPeopleDeckId,
+        state.vocabularySessionHistory.map((entry) => entry.correctItemId)
+      ),
+      currentVocabularyResult: null
+    })
+  },
+  nextPastQuestion: () => {
+    const state = get()
+
+    if (!state.currentPastQuestion || !state.currentPastResult) {
+      return
+    }
+
+    if (state.completedQuestions >= state.totalQuestions) {
+      set({
+        status: 'results',
+        currentPastQuestion: null,
+        currentPastResult: null
+      })
+      return
+    }
+
+    set({
+      currentPastQuestion: generatePastQuestion(
+        state.selectedPastSectionId,
+        state.pastSessionHistory.map((entry) => entry.correctExampleId),
+        state.language
+      ),
+      currentPastResult: null
+    })
+  },
   resetSession: () => {
     set({
       status: 'home',
@@ -391,10 +670,16 @@ export const useQuizStore = create<QuizStore>((set, get) => ({
       currentResult: null,
       currentNumberQuestion: null,
       currentNumberResult: null,
+      currentVocabularyQuestion: null,
+      currentVocabularyResult: null,
+      currentPastQuestion: null,
+      currentPastResult: null,
       score: 0,
       completedQuestions: 0,
       sessionHistory: [],
-      numberSessionHistory: []
+      numberSessionHistory: [],
+      vocabularySessionHistory: [],
+      pastSessionHistory: []
     })
   }
 }))
