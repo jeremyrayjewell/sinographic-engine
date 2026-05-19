@@ -71,6 +71,12 @@ importers:
       '@sinographic-engine/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      '@sinographic-engine/vocabulary-content':
+        specifier: workspace:*
+        version: link:../../packages/vocabulary-content
+      '@sinographic-engine/vocabulary-engine':
+        specifier: workspace:*
+        version: link:../../packages/vocabulary-engine
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -119,6 +125,18 @@ importers:
       '@types/react':
         specifier: ^18.3.5
         version: 18.3.28
+
+  packages/vocabulary-content:
+    dependencies:
+      '@sinographic-engine/shared-types':
+        specifier: workspace:*
+        version: link:../shared-types
+
+  packages/vocabulary-engine:
+    dependencies:
+      '@sinographic-engine/shared-types':
+        specifier: workspace:*
+        version: link:../shared-types
 
 packages:
 
