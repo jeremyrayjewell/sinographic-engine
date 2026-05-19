@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+import { preloadVoices } from '@sinographic-engine/speech-engine'
 import { useQuizStore } from './store/quiz-store'
 import { HomeScreen } from './views/HomeScreen'
 import { NumberQuizScreen } from './views/NumberQuizScreen'
@@ -12,6 +14,30 @@ import { ResultsScreen } from './views/ResultsScreen'
 const App = () => {
   const status = useQuizStore((state) => state.status)
   const activeModule = useQuizStore((state) => state.activeModule)
+
+  useEffect(() => {
+    void preloadVoices()
+
+    const preloadAfterInteraction = () => {
+      void preloadVoices()
+    }
+
+    window.addEventListener('pointerdown', preloadAfterInteraction, {
+      once: true,
+      passive: true
+    })
+    window.addEventListener('keydown', preloadAfterInteraction, { once: true })
+    window.addEventListener('touchstart', preloadAfterInteraction, {
+      once: true,
+      passive: true
+    })
+
+    return () => {
+      window.removeEventListener('pointerdown', preloadAfterInteraction)
+      window.removeEventListener('keydown', preloadAfterInteraction)
+      window.removeEventListener('touchstart', preloadAfterInteraction)
+    }
+  }, [])
 
   if (status === 'quiz') {
     if (activeModule === 'numbers') {

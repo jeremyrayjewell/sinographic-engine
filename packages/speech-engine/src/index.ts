@@ -6,11 +6,30 @@ export interface SpeakOptions {
   voiceName?: string
 }
 
+export type SpeechDiagnosticType =
+  | 'speech-start'
+  | 'speech-end'
+  | 'speech-error'
+  | 'speech-cancelled'
+  | 'missing-voice'
+  | 'unsupported-browser'
+  | 'voices-loaded'
+  | 'voices-timeout'
+
+export interface SpeechDiagnostic {
+  type: SpeechDiagnosticType
+  message: string
+  error?: string
+  voiceName?: string
+  voiceLang?: string
+}
+
 export interface SpeechEngine {
   speak(text: string, options?: SpeakOptions): Promise<void>
   stop(): void
   pause(): void
   resume(): void
+  preloadVoices(): Promise<SpeechSynthesisVoice[]>
   getVoices(): Promise<SpeechSynthesisVoice[]>
   getPreferredTaiwanVoice(): Promise<SpeechSynthesisVoice | null>
 }
@@ -32,7 +51,36 @@ const TAIWAN_VOICE_MARKERS = [
   'hsiaoyu'
 ]
 
-const CHINESE_VOICE_MARKERS = ['zh', 'cmn', 'chinese', 'mandarin', '國語', '中文']
+const CHINESE_VOICE_MARKERS = [
+  'zh',
+  'cmn',
+  'chinese',
+  'mandarin',
+  '國語',
+  '中文'
+]
+
+const RECOVERABLE_SPEECH_ERRORS = new Set(['canceled', 'cancelled', 'interrupted'])
+
+const diagnosticListeners = new Set<(diagnostic: SpeechDiagnostic) => void>()
+
+export const subscribeSpeechDiagnostics = (
+  listener: (diagnostic: SpeechDiagnostic) => void
+) => {
+  diagnosticListeners.add(listener)
+
+  return () => {
+    diagnosticListeners.delete(listener)
+  }
+}
+
+const emitDiagnostic = (diagnostic: SpeechDiagnostic) => {
+  diagnosticListeners.forEach((listener) => listener(diagnostic))
+
+  if (diagnostic.type === 'speech-error' || diagnostic.type === 'unsupported-browser') {
+    console.warn(`[speech-engine] ${diagnostic.message}`, diagnostic)
+  }
+}
 
 const isBrowserSpeechSupported = () =>
   typeof window !== 'undefined' &&
@@ -94,9 +142,86 @@ const scoreVoice = (voice: SpeechSynthesisVoice) => {
 
 class BrowserSpeechEngine implements SpeechEngine {
   private currentUtterance: SpeechSynthesisUtterance | null = null
+  private cachedVoices: SpeechSynthesisVoice[] = []
+  private cachedPreferredVoice: SpeechSynthesisVoice | null = null
+  private preloadPromise: Promise<SpeechSynthesisVoice[]> | null = null
+
+  // Cross-platform note:
+  // iOS Safari and Chrome iOS can block playback if speechSynthesis.speak()
+  // happens after awaited voice loading. Android Chrome is more forgiving, while
+  // desktop Safari often loads voices late and may report cancelled utterances as
+  // "interrupted". For reliability, speak() starts immediately with lang=zh-TW
+  // and only applies a preferred voice when one is already cached.
+
+  private updateVoiceCache(voices: SpeechSynthesisVoice[]) {
+    this.cachedVoices = voices
+    this.cachedPreferredVoice = this.selectPreferredVoice(voices)
+
+    emitDiagnostic({
+      type: voices.length > 0 ? 'voices-loaded' : 'voices-timeout',
+      message:
+        voices.length > 0
+          ? `Loaded ${voices.length} speech voice(s).`
+          : 'No speech voices were reported by the browser.',
+      voiceName: this.cachedPreferredVoice?.name,
+      voiceLang: this.cachedPreferredVoice?.lang
+    })
+
+    return voices
+  }
+
+  private selectPreferredVoice(voices: SpeechSynthesisVoice[]) {
+    if (voices.length === 0) {
+      return null
+    }
+
+    const taiwanVoices = voices.filter((voice) => isTaiwanVoice(voice))
+
+    if (taiwanVoices.length > 0) {
+      return taiwanVoices.sort((left, right) => scoreVoice(right) - scoreVoice(left))[0]
+    }
+
+    const zhTwVoices = voices.filter(
+      (voice) => normalize(voice.lang) === 'zh-tw'
+    )
+
+    if (zhTwVoices.length > 0) {
+      return zhTwVoices.sort((left, right) => scoreVoice(right) - scoreVoice(left))[0]
+    }
+
+    const regionalChineseVoices = voices.filter((voice) =>
+      ['zh-hk', 'zh-cn'].includes(normalize(voice.lang))
+    )
+
+    if (regionalChineseVoices.length > 0) {
+      return regionalChineseVoices.sort(
+        (left, right) => scoreVoice(right) - scoreVoice(left)
+      )[0]
+    }
+
+    const chineseVoices = voices.filter((voice) => isChineseVoice(voice))
+
+    if (chineseVoices.length > 0) {
+      return chineseVoices.sort((left, right) => scoreVoice(right) - scoreVoice(left))[0]
+    }
+
+    return voices[0] ?? null
+  }
+
+  private getCachedVoice(voiceName?: string) {
+    if (voiceName !== undefined) {
+      return this.cachedVoices.find((voice) => voice.name === voiceName) ?? null
+    }
+
+    return this.cachedPreferredVoice
+  }
 
   private async waitForVoices(): Promise<SpeechSynthesisVoice[]> {
     if (!isBrowserSpeechSupported()) {
+      emitDiagnostic({
+        type: 'unsupported-browser',
+        message: 'This browser does not support the Web Speech API.'
+      })
       return []
     }
 
@@ -104,11 +229,17 @@ class BrowserSpeechEngine implements SpeechEngine {
     const immediateVoices = synth.getVoices()
 
     if (immediateVoices.length > 0) {
-      return immediateVoices
+      return this.updateVoiceCache(immediateVoices)
     }
 
     return new Promise((resolve) => {
       let settled = false
+
+      const cleanup = () => {
+        synth.removeEventListener('voiceschanged', handleVoiceChange)
+        window.clearInterval(pollInterval)
+        window.clearTimeout(timeout)
+      }
 
       const settle = (voices: SpeechSynthesisVoice[]) => {
         if (settled) {
@@ -117,7 +248,7 @@ class BrowserSpeechEngine implements SpeechEngine {
 
         settled = true
         cleanup()
-        resolve(voices)
+        resolve(this.updateVoiceCache(voices))
       }
 
       const handleVoiceChange = () => {
@@ -140,49 +271,32 @@ class BrowserSpeechEngine implements SpeechEngine {
         settle(synth.getVoices())
       }, 2000)
 
-      const cleanup = () => {
-        synth.removeEventListener('voiceschanged', handleVoiceChange)
-        window.clearInterval(pollInterval)
-        window.clearTimeout(timeout)
-      }
-
       synth.addEventListener('voiceschanged', handleVoiceChange)
       handleVoiceChange()
     })
   }
 
+  async preloadVoices(): Promise<SpeechSynthesisVoice[]> {
+    if (this.cachedVoices.length > 0) {
+      return this.cachedVoices
+    }
+
+    if (!this.preloadPromise) {
+      this.preloadPromise = this.waitForVoices().finally(() => {
+        this.preloadPromise = null
+      })
+    }
+
+    return this.preloadPromise
+  }
+
   async getVoices(): Promise<SpeechSynthesisVoice[]> {
-    return this.waitForVoices()
+    return this.preloadVoices()
   }
 
   async getPreferredTaiwanVoice(): Promise<SpeechSynthesisVoice | null> {
-    const voices = await this.getVoices()
-
-    if (voices.length === 0) {
-      return null
-    }
-
-    const taiwanVoices = voices.filter((voice) => isTaiwanVoice(voice))
-
-    if (taiwanVoices.length > 0) {
-      return taiwanVoices.sort((left, right) => scoreVoice(right) - scoreVoice(left))[0]
-    }
-
-    const zhTwVoices = voices.filter(
-      (voice) => normalize(voice.lang) === 'zh-tw'
-    )
-
-    if (zhTwVoices.length > 0) {
-      return zhTwVoices.sort((left, right) => scoreVoice(right) - scoreVoice(left))[0]
-    }
-
-    const chineseVoices = voices.filter((voice) => isChineseVoice(voice))
-
-    if (chineseVoices.length > 0) {
-      return chineseVoices.sort((left, right) => scoreVoice(right) - scoreVoice(left))[0]
-    }
-
-    return voices[0] ?? null
+    const voices = await this.preloadVoices()
+    return this.selectPreferredVoice(voices)
   }
 
   stop() {
@@ -212,23 +326,26 @@ class BrowserSpeechEngine implements SpeechEngine {
 
   async speak(text: string, options: SpeakOptions = {}): Promise<void> {
     if (!isBrowserSpeechSupported() || text.trim().length === 0) {
+      if (!isBrowserSpeechSupported()) {
+        emitDiagnostic({
+          type: 'unsupported-browser',
+          message: 'Cannot speak because this browser does not support speech synthesis.'
+        })
+      }
+
       return
     }
 
     const synth = window.speechSynthesis
-    const voices = await this.getVoices()
+    const immediateVoices = synth.getVoices()
 
-    let selectedVoice: SpeechSynthesisVoice | null =
-      options.voiceName !== undefined
-        ? voices.find((voice) => voice.name === options.voiceName) ?? null
-        : null
-
-    if (!selectedVoice) {
-      selectedVoice = await this.getPreferredTaiwanVoice()
+    if (immediateVoices.length > 0 && this.cachedVoices.length === 0) {
+      this.updateVoiceCache(immediateVoices)
+    } else {
+      void this.preloadVoices()
     }
 
-    this.stop()
-
+    const selectedVoice = this.getCachedVoice(options.voiceName)
     const utterance = new SpeechSynthesisUtterance(text)
     utterance.lang = selectedVoice?.lang ?? options.lang ?? DEFAULT_OPTIONS.lang
     utterance.rate = options.rate ?? DEFAULT_OPTIONS.rate
@@ -236,15 +353,51 @@ class BrowserSpeechEngine implements SpeechEngine {
     utterance.volume = options.volume ?? DEFAULT_OPTIONS.volume
     utterance.voice = selectedVoice
 
+    if (!selectedVoice) {
+      emitDiagnostic({
+        type: 'missing-voice',
+        message:
+          'Speaking with lang=zh-TW because no cached Chinese/Taiwan voice is available yet.'
+      })
+    }
+
+    this.stop()
     this.currentUtterance = utterance
 
     return new Promise((resolve, reject) => {
+      let settled = false
+
+      const settle = (callback: () => void) => {
+        if (settled) {
+          return
+        }
+
+        settled = true
+        callback()
+      }
+
+      utterance.onstart = () => {
+        emitDiagnostic({
+          type: 'speech-start',
+          message: 'Speech playback started.',
+          voiceName: utterance.voice?.name,
+          voiceLang: utterance.lang
+        })
+      }
+
       utterance.onend = () => {
         if (this.currentUtterance === utterance) {
           this.currentUtterance = null
         }
 
-        resolve()
+        emitDiagnostic({
+          type: 'speech-end',
+          message: 'Speech playback ended.',
+          voiceName: utterance.voice?.name,
+          voiceLang: utterance.lang
+        })
+
+        settle(resolve)
       }
 
       utterance.onerror = (event) => {
@@ -252,10 +405,43 @@ class BrowserSpeechEngine implements SpeechEngine {
           this.currentUtterance = null
         }
 
-        reject(new Error(event.error || 'Speech synthesis failed.'))
+        if (RECOVERABLE_SPEECH_ERRORS.has(event.error)) {
+          emitDiagnostic({
+            type: 'speech-cancelled',
+            message: `Speech playback was ${event.error}.`,
+            error: event.error,
+            voiceName: utterance.voice?.name,
+            voiceLang: utterance.lang
+          })
+
+          settle(resolve)
+          return
+        }
+
+        const error = event.error || 'Speech synthesis failed.'
+
+        emitDiagnostic({
+          type: 'speech-error',
+          message: 'Speech playback failed.',
+          error,
+          voiceName: utterance.voice?.name,
+          voiceLang: utterance.lang
+        })
+
+        settle(() => reject(new Error(error)))
       }
 
-      synth.speak(utterance)
+      try {
+        synth.speak(utterance)
+      } catch (error) {
+        emitDiagnostic({
+          type: 'speech-error',
+          message: 'speechSynthesis.speak() threw before playback could start.',
+          error: error instanceof Error ? error.message : String(error)
+        })
+
+        settle(() => reject(error instanceof Error ? error : new Error(String(error))))
+      }
     })
   }
 }
@@ -270,6 +456,8 @@ export const stop = () => defaultSpeechEngine.stop()
 export const pause = () => defaultSpeechEngine.pause()
 
 export const resume = () => defaultSpeechEngine.resume()
+
+export const preloadVoices = () => defaultSpeechEngine.preloadVoices()
 
 export const getVoices = () => defaultSpeechEngine.getVoices()
 

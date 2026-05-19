@@ -4,9 +4,9 @@ import type {
 } from '@sinographic-engine/speech-engine'
 import {
   getPreferredTaiwanVoice,
-  getVoices,
   isBrowserSpeechSupported,
   pause as pauseSpeech,
+  preloadVoices,
   resume as resumeSpeech,
   speak as speakWithEngine,
   stop as stopSpeech
@@ -36,7 +36,7 @@ export const useSpeech = () => {
     let active = true
 
     const loadVoices = async () => {
-      const availableVoices = await getVoices()
+      const availableVoices = await preloadVoices()
       const preferredVoice = await getPreferredTaiwanVoice()
 
       if (!active) {
@@ -74,6 +74,8 @@ export const useSpeech = () => {
         voiceName: resolvedVoice?.name ?? undefined,
         ...options
       })
+    } catch (error) {
+      console.warn('[speech] Playback failed.', error)
     } finally {
       setIsSpeaking(false)
     }

@@ -41,6 +41,8 @@ export const PastStudyScreen = () => {
     getPastSectionById(selectedPastSectionId),
     language
   )
+  const genericPracticeLabel =
+    language === 'es-419' ? 'Práctica del pasado' : 'Past Practice'
 
   return (
     <ScreenShell>
@@ -73,10 +75,10 @@ export const PastStudyScreen = () => {
               </p>
               <div className="flex flex-wrap items-center gap-3">
                 <p className="inline-flex border border-[#1f2f44] bg-[#1f2f44] px-2 py-1 text-sm font-semibold tracking-[0.04em] text-[#f7eedf]">
-                  {section.hanzi}
+                  過去
                 </p>
                 <p className="text-[11px] uppercase tracking-[0.28em] text-[#5b6f84]">
-                  {section.label}
+                  {genericPracticeLabel}
                 </p>
               </div>
               <div className="flex flex-wrap gap-2 pt-2">
@@ -98,7 +100,7 @@ export const PastStudyScreen = () => {
           <div className="mt-6 grid gap-px border border-[#30455f] bg-[#30455f] sm:grid-cols-2">
             {currentQuestion.options.map((option) => {
               const wasSelected = currentResult?.selectedAnswerId === option.id
-              const isCorrect = currentQuestion.correctAnswerId === option.id
+              const isCorrect = currentQuestion.correctAnswerIds.includes(option.id)
               const showState = currentResult !== null
 
               return (

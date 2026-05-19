@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { getLocalizedClassifierById } from '@sinographic-engine/classifier-content'
 import barImage from '../../../../content/bar.png'
 import { ActionButton, Panel, ScreenShell } from '@sinographic-engine/ui'
@@ -28,7 +28,7 @@ export const QuizScreen = () => {
   const resetSession = useQuizStore((state) => state.resetSession)
   const submitAnswer = useQuizStore((state) => state.submitAnswer)
   const nextQuestion = useQuizStore((state) => state.nextQuestion)
-  const { autoplayEnabled, rate, speak } = useSpeech()
+  const { rate, speak } = useSpeech()
   const slowRate = Math.max(0.6, rate - 0.25)
   const lastReplayRef = useRef<{ key: string; at: number } | null>(null)
 
@@ -41,15 +41,6 @@ export const QuizScreen = () => {
 
     return speak(text, useSlowReplay ? { rate: slowRate } : undefined)
   }
-
-  useEffect(() => {
-    if (!autoplayEnabled || !currentQuestion) {
-      return
-    }
-
-    const maskedPrompt = currentQuestion.prompt.replace('___', '……')
-    void speak(maskedPrompt)
-  }, [autoplayEnabled, currentQuestion, speak])
 
   if (!currentQuestion) {
     return null

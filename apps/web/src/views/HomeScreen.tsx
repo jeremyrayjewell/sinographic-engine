@@ -5,7 +5,7 @@ import barImage from '../../../../content/bar.png'
 import { ActionButton, Panel, ScreenShell } from '@sinographic-engine/ui'
 import { LanguageToggle } from '@/components/LanguageToggle'
 import { getAppCopy } from '@/lib/i18n'
-import { pastSections } from '@/lib/past-forms'
+import { getPastSectionsByKind, localizePastSection } from '@/lib/past-forms'
 import { useQuizStore, type SessionLengthOption } from '@/store/quiz-store'
 
 export const HomeScreen = () => {
@@ -22,6 +22,14 @@ export const HomeScreen = () => {
   const language = useQuizStore((state) => state.language)
   const copy = getAppCopy(language)
   const decks = getLocalizedClassifierDecks(language)
+  const localizedPastLearnSections = getPastSectionsByKind('learn').map((section) =>
+    localizePastSection(section, language)
+  )
+  const localizedPastPracticeSections = getPastSectionsByKind('practice').map((section) =>
+    localizePastSection(section, language)
+  )
+  const pastMenuLabel =
+    language === 'es-419' ? 'Pasado / formas relacionadas' : 'Past / Past-related Forms'
   const startSession = useQuizStore((state) => state.startSession)
   const startNumbersSession = useQuizStore((state) => state.startNumbersSession)
   const startPeopleSession = useQuizStore((state) => state.startPeopleSession)
@@ -146,6 +154,71 @@ export const HomeScreen = () => {
     </div>
   )
 
+  const renderPastSectionGroup = (
+    headingHanzi: string,
+    headingLabel: string,
+    sections: typeof localizedPastLearnSections,
+    indexOffset = 0
+  ) => (
+    <div className="grid gap-px border border-[#30455f] bg-[#30455f]">
+      <div className="bg-[#f7eedf] px-3 py-2">
+        <div className="flex flex-wrap items-center gap-3">
+          <p className="inline-flex border border-[#1f2f44] bg-[#1f2f44] px-2 py-1 text-sm font-semibold tracking-[0.04em] text-[#f7eedf]">
+            {headingHanzi}
+          </p>
+          <p className="text-[11px] uppercase tracking-[0.35em] text-[#5b6f84]">
+            {headingLabel}
+          </p>
+        </div>
+      </div>
+
+      {sections.map((section, index) => {
+        const isActive = selectedPastSectionId === section.id
+
+        return (
+          <button
+            key={section.id}
+            type="button"
+            onClick={() => setPastSection(section.id)}
+            className={`px-3 py-3 text-left transition ${
+              isActive
+                ? 'bg-[#24384f] text-[#f5ead9]'
+                : 'bg-[#f7eedf] text-[#2b241e] hover:bg-[#ead9c1]'
+            }`}
+          >
+            <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
+              <div className="flex min-w-0 flex-wrap items-center gap-3">
+                <span
+                  className={`inline-flex border px-2 py-1 text-sm font-semibold tracking-[0.04em] ${
+                    isActive
+                      ? 'border-[#f5ead9] bg-[#f5ead9] text-[#24384f]'
+                      : 'border-[#1f2f44] bg-[#1f2f44] text-[#f7eedf]'
+                  }`}
+                >
+                  {section.hanzi}
+                </span>
+                <span
+                  className={`min-w-0 break-words text-sm uppercase tracking-[0.16em] sm:tracking-[0.22em] ${
+                    isActive ? 'text-[#d2c4af]' : 'text-[#5b6f84]'
+                  }`}
+                >
+                  {section.label}
+                </span>
+              </div>
+              <span
+                className={`shrink-0 text-[11px] uppercase tracking-[0.18em] sm:tracking-[0.3em] ${
+                  isActive ? 'text-[#d2c4af]' : 'text-[#5b6f84]'
+                }`}
+              >
+                {String(index + 1 + indexOffset).padStart(2, '0')}
+              </span>
+            </div>
+          </button>
+        )
+      })}
+    </div>
+  )
+
   return (
     <ScreenShell className="gap-4">
       <header className="border border-[#30455f] bg-[#f7eedf] p-6 sm:p-8 lg:p-10">
@@ -204,7 +277,7 @@ export const HomeScreen = () => {
                       過去
                     </h3>
                     <p className="text-[11px] uppercase tracking-[0.35em] text-[#5b6f84]">
-                      Past / Past-related Forms
+                      {pastMenuLabel}
                     </p>
                   </div>
                   <span className="text-3xl leading-none text-[#7b4d32]">
@@ -215,51 +288,18 @@ export const HomeScreen = () => {
                 {pastOpen ? (
                   <div className="grid gap-px bg-[#30455f] lg:grid-cols-[1.08fr_0.92fr]">
                     <div className="bg-[#f7eedf] p-4 sm:p-5 lg:p-6">
-                      <div className="grid gap-px border border-[#30455f] bg-[#30455f]">
-                        {pastSections.map((section, index) => {
-                          const isActive = selectedPastSectionId === section.id
-
-                          return (
-                            <button
-                              key={section.id}
-                              type="button"
-                              onClick={() => setPastSection(section.id)}
-                              className={`px-3 py-3 text-left transition ${
-                                isActive
-                                  ? 'bg-[#24384f] text-[#f5ead9]'
-                                  : 'bg-[#f7eedf] text-[#2b241e] hover:bg-[#ead9c1]'
-                              }`}
-                            >
-                              <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
-                                <div className="flex min-w-0 flex-wrap items-center gap-3">
-                                  <span
-                                    className={`inline-flex border px-2 py-1 text-sm font-semibold tracking-[0.04em] ${
-                                      isActive
-                                        ? 'border-[#f5ead9] bg-[#f5ead9] text-[#24384f]'
-                                        : 'border-[#1f2f44] bg-[#1f2f44] text-[#f7eedf]'
-                                    }`}
-                                  >
-                                    {section.hanzi}
-                                  </span>
-                                  <span
-                                    className={`min-w-0 break-words text-sm uppercase tracking-[0.16em] sm:tracking-[0.22em] ${
-                                      isActive ? 'text-[#d2c4af]' : 'text-[#5b6f84]'
-                                    }`}
-                                  >
-                                    {section.label}
-                                  </span>
-                                </div>
-                                <span
-                                  className={`shrink-0 text-[11px] uppercase tracking-[0.18em] sm:tracking-[0.3em] ${
-                                    isActive ? 'text-[#d2c4af]' : 'text-[#5b6f84]'
-                                  }`}
-                                >
-                                  {String(index + 1).padStart(2, '0')}
-                                </span>
-                              </div>
-                            </button>
-                          )
-                        })}
+                      <div className="grid gap-4">
+                        {renderPastSectionGroup(
+                          '學習',
+                          language === 'es-419' ? 'Aprender' : 'Learn',
+                          localizedPastLearnSections
+                        )}
+                        {renderPastSectionGroup(
+                          '練習',
+                          language === 'es-419' ? 'Práctica' : 'Practice',
+                          localizedPastPracticeSections,
+                          localizedPastLearnSections.length
+                        )}
                       </div>
                     </div>
 

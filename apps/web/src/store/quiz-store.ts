@@ -28,7 +28,9 @@ import {
 import {
   evaluatePastAnswer,
   generatePastQuestion,
-  getPastQuizExampleCount
+  getPastQuizExampleCount,
+  localizePastQuestion,
+  localizePastResult
 } from '@/lib/past-forms'
 import type {
   AppLocale,
@@ -274,17 +276,19 @@ export const useQuizStore = create<QuizStore>((set, get) => ({
   pastSessionHistory: [],
   totalQuestions: 20,
   setLanguage: (language) => {
-    const { currentQuestion, currentPastQuestion, selectedPastSectionId } = get()
+    const { currentQuestion, currentPastQuestion, currentPastResult } = get()
 
     set({
       language,
       currentQuestion: currentQuestion
         ? relocalizeQuestion(currentQuestion, language)
         : null,
-      currentPastQuestion:
-        currentPastQuestion && !get().currentPastResult
-          ? generatePastQuestion(selectedPastSectionId, [], language)
-          : currentPastQuestion
+      currentPastQuestion: currentPastQuestion
+        ? localizePastQuestion(currentPastQuestion, language)
+        : null,
+      currentPastResult: currentPastResult
+        ? localizePastResult(currentPastResult, language)
+        : null
     })
   },
   startSession: () => {

@@ -185,6 +185,7 @@ export interface PastQuizQuestion {
   sectionLabel: string
   correctExampleId: string
   correctAnswerId: string
+  correctAnswerIds: string[]
   correctHanzi: string
   correctPinyin: string
   correctBopomofo?: string
@@ -201,6 +202,7 @@ export interface PastQuizResult {
   selectedAnswerId: string
   correctExampleId: string
   correctAnswerId: string
+  correctAnswerIds: string[]
   isCorrect: boolean
   prompt: string
   correctHanzi: string
