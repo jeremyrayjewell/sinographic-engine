@@ -50,6 +50,9 @@ export const QuizScreen = () => {
     currentQuestion.correctClassifierId,
     language
   )
+  const correctPhrase = currentQuestion.sourceSentence.hanzi
+  const correctPhraseBopomofo = currentQuestion.sourceSentence.pinyin.bopomofo
+  const correctPhrasePinyin = currentQuestion.sourceSentence.pinyin.surface
 
   return (
     <ScreenShell>
@@ -225,7 +228,31 @@ export const QuizScreen = () => {
               </div>
               <div className="mt-4 grid gap-5 lg:grid-cols-[1.25fr_0.75fr]">
                 <div>
-                  <p className="text-xl font-medium text-[#1f2f44]">
+                  <div className="flex items-start justify-between gap-3">
+                    <p className="text-2xl font-medium text-[#1f2f44]">
+                      {correctPhrase}
+                    </p>
+                    <SpeakButton
+                      label={`${copy.speakLabel}: ${correctPhrase}`}
+                      icon="speak"
+                      iconOnly
+                      onClick={() =>
+                        void replayText(`correct:${currentQuestion.id}`, correctPhrase)
+                      }
+                    />
+                  </div>
+                  {correctPhraseBopomofo ? (
+                    <p className="mt-2 text-sm tracking-[0.12em] text-[#1f2f44]">
+                      {correctPhraseBopomofo}
+                    </p>
+                  ) : null}
+                  <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-[#8c2f22]">
+                    {correctPhrasePinyin}
+                  </p>
+                  <p className="mt-3 text-sm leading-7 text-[#3e352c]">
+                    {currentQuestion.promptEnglish}
+                  </p>
+                  <p className="mt-4 text-sm leading-7 text-[#3e352c]">
                     {correctClassifier.hanzi}{' '}
                     {correctClassifier.pinyin.bopomofo ? (
                       <>
@@ -244,16 +271,6 @@ export const QuizScreen = () => {
                   <p className="mt-3 text-sm leading-7 text-[#3e352c]">
                     {correctClassifier.usage}
                   </p>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    <SpeakButton
-                      label={`${copy.speakLabel}: ${correctClassifier.hanzi}`}
-                      icon="speak"
-                      iconOnly
-                      onClick={() =>
-                        void replayText(`correct:${correctClassifier.id}`, correctClassifier.hanzi)
-                      }
-                    />
-                  </div>
                 </div>
 
                 <div className="flex flex-col justify-between gap-5 border-t border-[#30455f] pt-4 lg:border-l lg:border-t-0 lg:pl-5 lg:pt-0">

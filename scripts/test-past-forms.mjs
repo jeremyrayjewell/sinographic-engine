@@ -20,6 +20,18 @@ const assertUniqueOptions = (question) => {
   )
 }
 
+const withMockedRandom = (value, callback) => {
+  const originalRandom = Math.random
+
+  Math.random = () => value
+
+  try {
+    return callback()
+  } finally {
+    Math.random = originalRandom
+  }
+}
+
 const legacyQuestion = generatePastQuestion('le', [], 'en')
 const legacyResult = evaluatePastAnswer(legacyQuestion, legacyQuestion.correctAnswerId)
 
@@ -35,12 +47,14 @@ assert.equal(evaluatePastAnswer(multiAnswerQuestion, 'mei').isCorrect, true)
 assert.equal(evaluatePastAnswer(multiAnswerQuestion, 'meiyou').isCorrect, true)
 assertUniqueOptions(multiAnswerQuestion)
 
-for (const answerId of multiAnswerQuestion.correctAnswerIds) {
-  assert(
-    multiAnswerQuestion.options.some((option) => option.id === answerId),
-    `Expected authored correct answer ${answerId} to appear as a valid option`
-  )
-}
+const displayedCorrectAnswerIds = multiAnswerQuestion.options
+  .map((option) => option.id)
+  .filter((answerId) => multiAnswerQuestion.correctAnswerIds.includes(answerId))
+
+assert(
+  displayedCorrectAnswerIds.length >= 1,
+  'Expected at least one authored correct answer to appear as a valid option'
+)
 
 const distractorIds = multiAnswerQuestion.options
   .map((option) => option.id)
@@ -109,6 +123,79 @@ assert(
   'Expected authored 不 vs 沒 distractor to appear'
 )
 assertUniqueOptions(forcedNegationContrastQuestion)
+
+const forcedTravelNegationQuestion = generatePastQuestion(
+  'pitfalls',
+  [
+    'contrast-wo-bu-qu',
+    'contrast-wo-chi-le',
+    'contrast-wo-chi-guo',
+    'contrast-wo-zai-gongzuo'
+  ],
+  'en'
+)
+
+assert.equal(forcedTravelNegationQuestion.correctExampleId, 'contrast-wo-mei-qu')
+assert.deepEqual(
+  [...forcedTravelNegationQuestion.correctAnswerIds].sort(),
+  ['mei', 'meiyou']
+)
+assert.equal(evaluatePastAnswer(forcedTravelNegationQuestion, 'meiyou').isCorrect, true)
+assertUniqueOptions(forcedTravelNegationQuestion)
+
+const formerRestaurantExcludeIds = [
+  'yiqian-wo-yiqian-changchang-lai-dian',
+  'yiqian-wo-yiqian-qu',
+  'yiqian-wo-changchang-qu',
+  'yiqian-wo-yiqian-changchang-qu'
+]
+const forcedFormerRestaurantQuestion = withMockedRandom(0.9, () =>
+  generatePastQuestion('yiqian-changchang', formerRestaurantExcludeIds, 'en')
+)
+
+assert.equal(
+  forcedFormerRestaurantQuestion.correctExampleId,
+  'yiqian-wo-yiqian-changchang-qu-canting'
+)
+assert.deepEqual(
+  [...forcedFormerRestaurantQuestion.correctAnswerIds].sort(),
+  ['yiqian', 'yiqian-changchang']
+)
+assert.equal(
+  evaluatePastAnswer(forcedFormerRestaurantQuestion, 'yiqian').isCorrect,
+  true
+)
+assert.equal(
+  evaluatePastAnswer(forcedFormerRestaurantQuestion, 'yiqian').correctHanzi,
+  '我以前去這家餐廳，現在很少去'
+)
+assert.equal(
+  evaluatePastAnswer(forcedFormerRestaurantQuestion, 'yiqian-changchang').isCorrect,
+  true
+)
+assert.deepEqual(
+  forcedFormerRestaurantQuestion.options
+    .map((option) => option.id)
+    .filter((optionId) =>
+      forcedFormerRestaurantQuestion.correctAnswerIds.includes(optionId)
+    )
+    .sort(),
+  ['yiqian', 'yiqian-changchang']
+)
+assertUniqueOptions(forcedFormerRestaurantQuestion)
+
+const singleDisplayedCorrectQuestion = withMockedRandom(0.1, () =>
+  generatePastQuestion('yiqian-changchang', formerRestaurantExcludeIds, 'en')
+)
+
+assert.equal(singleDisplayedCorrectQuestion.correctAnswerIds.length, 2)
+assert.equal(
+  singleDisplayedCorrectQuestion.options.filter((option) =>
+    singleDisplayedCorrectQuestion.correctAnswerIds.includes(option.id)
+  ).length,
+  1
+)
+assertUniqueOptions(singleDisplayedCorrectQuestion)
 
 const mixedReviewQuestion = generatePastQuestion('mixed-review', [], 'en')
 

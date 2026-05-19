@@ -565,6 +565,7 @@ export const pastSections: PastSection[] = [
         promptBopomofo:
           'ㄨㄛˇ ___ ㄑㄩˋ ㄓㄜˋ ㄐㄧㄚ ㄘㄢ ㄊㄧㄥ ㄒㄧㄢˋ ㄗㄞˋ ㄏㄣˇ ㄕㄠˇ ㄑㄩˋ',
         answerId: 'yiqian-changchang',
+        answerIds: ['yiqian', 'yiqian-changchang'],
         tags: ['habitual-past', 'travel', 'routine', 'before-vs-now']
       },
       {
@@ -579,6 +580,7 @@ export const pastSections: PastSection[] = [
         promptBopomofo:
           'ㄨㄛˇ ___ ㄌㄞˊ ㄓㄜˋ ㄐㄧㄚ ㄉㄧㄢˋ ㄒㄧㄢˋ ㄗㄞˋ ㄏㄣˇ ㄕㄠˇ ㄌㄞˊ',
         answerId: 'yiqian-changchang',
+        answerIds: ['yiqian', 'yiqian-changchang'],
         tags: ['habitual-past', 'routine', 'daily-life', 'before-vs-now']
       },
       {
@@ -615,6 +617,7 @@ export const pastSections: PastSection[] = [
         promptPinyin: 'wǒ ___ qù, xiànzài bú qù le',
         promptBopomofo: 'ㄨㄛˇ ___ ㄑㄩˋ ㄒㄧㄢˋ ㄗㄞˋ ㄅㄨˊ ㄑㄩˋ ㄌㄜ˙',
         answerId: 'yiqian-changchang',
+        answerIds: ['yiqian', 'yiqian-changchang'],
         tags: ['habitual-past', 'routine', 'before-vs-now']
       }
     ],
@@ -909,7 +912,8 @@ export const pastSections: PastSection[] = [
         promptPinyin: 'wǒ ___ qù, xiànzài bú qù le.',
         promptBopomofo: 'ㄨㄛˇ ___ ㄑㄩˋ ㄒㄧㄢˋ ㄗㄞˋ ㄅㄨˊ ㄑㄩˋ ㄌㄜ˙',
         answerId: 'yiqian-changchang',
-        distractorAnswerIds: ['yiqian', 'changchang', 'mei'],
+        answerIds: ['yiqian', 'yiqian-changchang'],
+        distractorAnswerIds: ['changchang', 'mei'],
         feedbackHint: '以前常常 frames an older routine or former habit.',
         tags: ['habitual-past', 'routine', 'before-vs-now']
       }
@@ -1082,6 +1086,7 @@ export const pastSections: PastSection[] = [
         promptPinyin: 'wǒ zuótiān ___ qù',
         promptBopomofo: 'ㄨㄛˇ ㄗㄨㄛˊ ㄊㄧㄢ ___ ㄑㄩˋ',
         answerId: 'mei',
+        answerIds: ['mei', 'meiyou'],
         tags: ['negation', 'travel', 'daily-life']
       },
       {
@@ -1189,6 +1194,17 @@ const getDistractorAnswers = (correct: PastExample, sectionId: string) => {
   return [...shuffle(authoredPool), ...shuffle(fallbackPool)]
 }
 
+const getDisplayedCorrectAnswers = (correctAnswers: PastAnswer[]) => {
+  if (correctAnswers.length <= 1) {
+    return correctAnswers
+  }
+
+  return Math.random() < 0.5 ? shuffle(correctAnswers).slice(0, 1) : correctAnswers
+}
+
+const fillPastBlank = (template: string | undefined, value: string | undefined) =>
+  template && value ? template.replace('___', value) : undefined
+
 export const getPastSectionById = (sectionId: string) =>
   pastSections.find((section) => section.id === sectionId) ?? pastSections[0]
 
@@ -1278,11 +1294,12 @@ export const generatePastQuestion = (
   const correctAnswerIds = getCorrectAnswerIds(correct)
   const correctAnswer = getAnswerById(correct.answerId)
   const correctAnswers = correctAnswerIds.map((answerId) => getAnswerById(answerId))
+  const displayedCorrectAnswers = getDisplayedCorrectAnswers(correctAnswers)
   const distractors = getDistractorAnswers(correct, section.id).slice(
     0,
-    Math.max(0, 4 - correctAnswers.length)
+    Math.max(0, 4 - displayedCorrectAnswers.length)
   )
-  const options = shuffle([...correctAnswers, ...distractors]).map((answer) => ({
+  const options = shuffle([...displayedCorrectAnswers, ...distractors]).map((answer) => ({
     id: answer.id,
     hanzi: answer.hanzi,
     pinyin: answer.pinyin,
@@ -1329,6 +1346,21 @@ export const evaluatePastAnswer = (
     question.correctAnswerIds?.length || !correctExample
       ? question.correctAnswerIds ?? [correctAnswerId]
       : getCorrectAnswerIds(correctExample.example)
+  const isCorrect = correctAnswerIds.includes(selectedAnswerId)
+  const reviewedHanzi =
+    isCorrect && selectedOption
+      ? fillPastBlank(question.prompt, selectedOption.hanzi) ?? question.correctHanzi
+      : question.correctHanzi
+  const reviewedPinyin =
+    isCorrect && selectedOption
+      ? fillPastBlank(question.promptPinyin, selectedOption.pinyin) ??
+        question.correctPinyin
+      : question.correctPinyin
+  const reviewedBopomofo =
+    isCorrect && selectedOption
+      ? fillPastBlank(question.promptBopomofo, selectedOption.bopomofo) ??
+        question.correctBopomofo
+      : question.correctBopomofo
 
   return {
     questionId: question.id,
@@ -1337,11 +1369,11 @@ export const evaluatePastAnswer = (
     correctExampleId: question.correctExampleId,
     correctAnswerId,
     correctAnswerIds,
-    isCorrect: correctAnswerIds.includes(selectedAnswerId),
+    isCorrect,
     prompt: question.prompt,
-    correctHanzi: question.correctHanzi,
-    correctPinyin: question.correctPinyin,
-    correctBopomofo: question.correctBopomofo,
+    correctHanzi: reviewedHanzi,
+    correctPinyin: reviewedPinyin,
+    correctBopomofo: reviewedBopomofo,
     correctEnglish: question.correctEnglish,
     feedbackHint: question.feedbackHint,
     correctMeaning: question.correctMeaning,

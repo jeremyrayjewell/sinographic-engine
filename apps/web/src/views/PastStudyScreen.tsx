@@ -163,15 +163,16 @@ export const PastStudyScreen = () => {
               </div>
               <div className="mt-4 grid gap-5 lg:grid-cols-[1.25fr_0.75fr]">
                 <div>
-                  <p className="text-xl font-medium text-[#1f2f44]">
-                    {currentResult.correctHanzi}{' '}
-                    {currentResult.correctBopomofo ? (
-                      <>
-                        ({currentResult.correctBopomofo} / {currentResult.correctPinyin})
-                      </>
-                    ) : (
-                      <>({currentResult.correctPinyin})</>
-                    )}
+                  <p className="text-2xl font-medium text-[#1f2f44]">
+                    {currentResult.correctHanzi}
+                  </p>
+                  {currentResult.correctBopomofo ? (
+                    <p className="mt-2 text-sm tracking-[0.12em] text-[#1f2f44]">
+                      {currentResult.correctBopomofo}
+                    </p>
+                  ) : null}
+                  <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-[#8c2f22]">
+                    {currentResult.correctPinyin}
                   </p>
                   <p className="mt-3 text-sm leading-7 text-[#3e352c]">
                     {currentResult.correctEnglish}
